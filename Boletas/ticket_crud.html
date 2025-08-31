@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Ticket - INVAES</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1 id="titulo-formulario">Nuevo Ticket</h1>
+  <form id="form-ticket" class="form-ticket">
+    <label>Cliente:</label>
+    <select id="cliente" required></select>
+
+    <label>Tipo de Trabajo:</label>
+    <select id="tipo-trabajo" required>
+      <option value="">Seleccione...</option>
+      <option value="Revisión">Revisión</option>
+      <option value="Mantenimiento">Mantenimiento</option>
+      <option value="Reparación">Reparación</option>
+      <option value="Instalación">Instalación</option>
+    </select>
+
+    <label>Fecha:</label>
+    <input type="date" id="fecha" required>
+
+    <label>Subtareas:</label>
+    <div id="subtareas-lista"></div>
+    <div class="subtarea-nueva">
+      <input type="text" id="nueva-subtarea" placeholder="Descripción de subtarea">
+      <button type="button" onclick="agregarSubtarea()">Agregar</button>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit">Guardar Ticket</button>
+      <button type="button" onclick="window.location='index.html'">Cancelar</button>
+    </div>
+  </form>
+  <script src="main.js"></script>
+  <script>
+    inicializarCRUD();
+  </script>
+</body>
+</html>

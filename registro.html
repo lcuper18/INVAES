@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <!-- Incluir Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 lg:p-12 flex items-center justify-center min-h-screen">
+
+    <!-- Contenedor principal centrado -->
+    <div class="max-w-4xl w-full mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-10 flex flex-col md:flex-row">
+
+        <!-- Sección de Logo / Imagen -->
+        <div class="md:w-1/2 flex items-center justify-center p-4 md:p-8 rounded-lg mb-6 md:mb-0 md:mr-6 flex-shrink-0 overflow-hidden">
+            <!-- Imagen real en lugar del placeholder gris -->
+            <img src="https://www.factorb.es/wp-content/uploads/2024/10/mantenimiento-equipos-de-aire-acondicionado-industrial.jpg" alt="Mantenimiento de equipos de aire acondicionado" class="w-full h-auto object-cover rounded-lg">
+        </div>
+
+        <!-- Sección de Formulario de Registro -->
+        <div class="md:w-1/2 flex-grow">
+            <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 text-gray-800">Registro</h1>
+            <form id="register-form" class="space-y-4">
+                <!-- Campo para el nombre -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" placeholder="test" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+                <!-- Campo para el correo electrónico -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" placeholder="test@mail.com" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+                <!-- Campo para la contraseña -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+                <!-- Campo para confirmar la contraseña -->
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+                <!-- Botón de creación -->
+                <div class="pt-4">
+                    <button type="submit" class="w-full px-4 py-2 text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Create</button>
+                </div>
+            </form>
+
+            <!-- Contenedor para mensajes de confirmación o error -->
+            <div id="message-container" class="mt-4 p-3 hidden rounded-lg text-white font-medium text-center"></div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const registerForm = document.getElementById('register-form');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm-password');
+            const messageContainer = document.getElementById('message-container');
+
+            // Función para mostrar mensajes al usuario
+            const showMessage = (message, type) => {
+                messageContainer.textContent = message;
+                messageContainer.classList.remove('hidden', 'bg-red-500', 'bg-green-500');
+                if (type === 'success') {
+                    messageContainer.classList.add('bg-green-500');
+                } else if (type === 'error') {
+                    messageContainer.classList.add('bg-red-500');
+                }
+                setTimeout(() => {
+                    messageContainer.classList.add('hidden');
+                }, 3000);
+            };
+
+            // Manejar el envío del formulario
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Simulación de validación
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    showMessage('Las contraseñas no coinciden.', 'error');
+                    return;
+                }
+                
+                // Simulación de creación de usuario
+                const userData = {
+                    name: nameInput.value,
+                    email: emailInput.value,
+                    password: passwordInput.value
+                };
+
+                // En un caso real, aquí se haría una llamada a una API
+                console.log('Datos de usuario a enviar:', userData);
+                showMessage('Usuario creado exitosamente. (Simulado)', 'success');
+                
+                // Resetear el formulario después de un envío exitoso
+                registerForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>

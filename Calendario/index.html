@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo Calendario de Asignaciones - INVAES</title>
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Calendario de Asignaciones - Agosto 2025</h1>
+  <div class="container">
+    <aside id="panel-equipos">
+      <h2>Equipos Técnicos</h2>
+      <div id="filtro-equipos">
+        <strong>Filtrar equipos:</strong>
+        <ul id="filtro-lista"></ul>
+      </div>
+      <ul id="lista-equipos"></ul>
+    </aside>
+    <main>
+      <div id="calendar"></div>
+    </main>
+  </div>
+  <!-- Modal para boleta -->
+  <div id="modal-boleta" class="modal">
+    <div class="modal-content">
+      <span class="close" id="cerrar-modal">&times;</span>
+      <h2>Boleta de Servicio</h2>
+      <form id="form-boleta">
+        <label>Cliente:</label>
+        <input type="text" id="cliente" readonly>
+        <label>Dirección:</label>
+        <input type="text" id="direccion" readonly>
+        <label>Teléfono:</label>
+        <input type="text" id="telefono" readonly>
+        <label>Fecha de Servicio:</label>
+        <input type="text" id="fecha-servicio" readonly>
+        <label>Equipo Técnico:</label>
+        <input type="text" id="equipo-tecnico" readonly>
+        <label>Tareas Realizadas:</label>
+        <ul id="tareas-realizadas"></ul>
+      </form>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
+
+

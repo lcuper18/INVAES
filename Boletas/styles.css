@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    text-align: center;
+    margin: 30px 0 10px 0;
+    color: #2c3e50;
+  }
+  .dashboard-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 20px;
+  }
+  .dashboard-header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+    align-items: center;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  th, td {
+    border: 1px solid #e0e0e0;
+    padding: 8px 10px;
+    text-align: left;
+  }
+  th {
+    background: #f7f7f7;
+  }
+  .form-ticket {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .form-ticket label {
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  .form-ticket input, .form-ticket select {
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  .subtarea-nueva {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  #subtareas-lista {
+    margin-bottom: 8px;
+  }
+  .subtarea-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 14px;
+    cursor: pointer;
+  }
+  button[type="button"] {
+    background: #6c757d;
+  }
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  

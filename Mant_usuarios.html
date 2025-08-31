@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento de Usuarios</title>
+    <!-- Incluir Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body class="p-6">
+
+    <!-- Contenedor principal centrado -->
+    <div class="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-8">
+
+        <!-- Título de la pantalla -->
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Mantenimiento de Usuarios</h1>
+
+        <!-- Formulario de Creación/Edición de Usuario -->
+        <div id="user-form-container" class="bg-gray-50 p-6 rounded-xl mb-8 border border-gray-200">
+            <h2 class="text-xl font-semibold mb-4 text-gray-700">Crear/Editar Usuario</h2>
+            <form id="user-form" class="space-y-4">
+                <!-- Campo para el nombre -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
+                    <input type="text" id="name" name="name" placeholder="Ej. Juan Pérez" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+                <!-- Campo para el correo electrónico -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" placeholder="ejemplo@dominio.com" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+                <!-- Campo para la contraseña (solo en modo de creación) -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                    <input type="password" id="password" name="password" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <!-- Campo para el tipo de usuario (select) -->
+                <div>
+                    <label for="user-type" class="block text-sm font-medium text-gray-700">Tipo de Usuario</label>
+                    <select id="user-type" name="user-type" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white" required>
+                        <option value="">Selecciona un tipo</option>
+                        <option value="Técnico">Técnico</option>
+                        <option value="Administrativo">Administrativo</option>
+                        <option value="Admin-tecnico">Admin-técnico</option>
+                    </select>
+                </div>
+                <!-- Botones de acción del formulario -->
+                <div class="flex justify-end space-x-4 pt-2">
+                    <button type="button" id="cancel-button" class="px-4 py-2 text-sm font-medium rounded-lg text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors">Cancelar</button>
+                    <button type="submit" id="save-button" class="px-4 py-2 text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Guardar Usuario</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Sección de listado de usuarios -->
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+            <h2 class="text-xl font-semibold mb-4 text-gray-700">Lista de Usuarios</h2>
+
+            <!-- Botón para agregar un nuevo usuario -->
+            <div class="flex justify-end mb-4">
+                <button id="add-user-button" class="px-4 py-2 text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors">
+                    + Agregar Nuevo Usuario
+                </button>
+            </div>
+
+            <!-- Tabla de usuarios -->
+            <div class="overflow-x-auto rounded-lg shadow-md">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo Electrónico</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body" class="bg-white divide-y divide-gray-200">
+                        <!-- Ejemplo de filas de usuario (se llenarán dinámicamente con JS) -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Juan Pérez</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">juan.perez@empresa.com</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Administrativo</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button class="edit-btn text-indigo-600 hover:text-indigo-900 mr-4 transition-colors">Editar</button>
+                                <button class="delete-btn text-red-600 hover:text-red-900 transition-colors">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">María García</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">maria.garcia@empresa.com</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Técnico</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button class="edit-btn text-indigo-600 hover:text-indigo-900 mr-4 transition-colors">Editar</button>
+                                <button class="delete-btn text-red-600 hover:text-red-900 transition-colors">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Carlos Ruiz</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">carlos.ruiz@empresa.com</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin-técnico</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button class="edit-btn text-indigo-600 hover:text-indigo-900 mr-4 transition-colors">Editar</button>
+                                <button class="delete-btn text-red-600 hover:text-red-900 transition-colors">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Contenedor para mensajes de confirmación o error -->
+            <div id="message-container" class="mt-4 p-3 hidden rounded-lg text-white font-medium"></div>
+
+            <!-- Modal de Confirmación para Eliminar -->
+            <div id="delete-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-50 flex items-center justify-center">
+                <div class="bg-white rounded-lg p-6 max-w-sm mx-auto shadow-xl">
+                    <h3 class="text-lg font-semibold mb-4 text-gray-800">Confirmar Eliminación</h3>
+                    <p class="text-sm text-gray-600 mb-6">¿Estás seguro de que deseas eliminar a este usuario? Esta acción no se puede deshacer.</p>
+                    <div class="flex justify-end space-x-4">
+                        <button id="cancel-delete" class="px-4 py-2 text-sm font-medium rounded-lg text-gray-700 bg-gray-200 hover:bg-gray-300 transition-colors">Cancelar</button>
+                        <button id="confirm-delete" class="px-4 py-2 text-sm font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 transition-colors">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userFormContainer = document.getElementById('user-form-container');
+            const userForm = document.getElementById('user-form');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const userTypeSelect = document.getElementById('user-type');
+            const saveButton = document.getElementById('save-button');
+            const cancelButton = document.getElementById('cancel-button');
+            const addUserButton = document.getElementById('add-user-button');
+            const userTableBody = document.getElementById('user-table-body');
+            const deleteModal = document.getElementById('delete-modal');
+            const confirmDeleteBtn = document.getElementById('confirm-delete');
+            const cancelDeleteBtn = document.getElementById('cancel-delete');
+            const messageContainer = document.getElementById('message-container');
+            
+            let users = [
+                { id: 1, name: 'Juan Pérez', email: 'juan.perez@empresa.com', type: 'Administrativo' },
+                { id: 2, name: 'María García', email: 'maria.garcia@empresa.com', type: 'Técnico' },
+                { id: 3, name: 'Carlos Ruiz', email: 'carlos.ruiz@empresa.com', type: 'Admin-técnico' }
+            ];
+
+            let editingUserId = null;
+
+            // Función para mostrar mensajes al usuario
+            const showMessage = (message, type) => {
+                messageContainer.textContent = message;
+                messageContainer.classList.remove('hidden', 'bg-red-500', 'bg-green-500');
+                if (type === 'success') {
+                    messageContainer.classList.add('bg-green-500');
+                } else if (type === 'error') {
+                    messageContainer.classList.add('bg-red-500');
+                }
+                setTimeout(() => {
+                    messageContainer.classList.add('hidden');
+                }, 3000);
+            };
+
+            // Función para renderizar la tabla de usuarios
+            const renderUsers = () => {
+                userTableBody.innerHTML = '';
+                users.forEach(user => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-gray-50 transition-colors';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${user.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${user.email}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${user.type}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <button data-id="${user.id}" class="edit-btn text-indigo-600 hover:text-indigo-900 mr-4 transition-colors">Editar</button>
+                            <button data-id="${user.id}" class="delete-btn text-red-600 hover:text-red-900 transition-colors">Eliminar</button>
+                        </td>
+                    `;
+                    userTableBody.appendChild(row);
+                });
+            };
+
+            // Función para resetear el formulario
+            const resetForm = () => {
+                userForm.reset();
+                editingUserId = null;
+                saveButton.textContent = 'Guardar Usuario';
+                passwordInput.disabled = false;
+                passwordInput.placeholder = '';
+                userFormContainer.style.display = 'none'; // Ocultar el formulario
+            };
+
+            // Mostrar formulario al hacer clic en "Agregar Nuevo Usuario"
+            addUserButton.addEventListener('click', () => {
+                resetForm();
+                userFormContainer.style.display = 'block';
+            });
+
+            // Manejar el envío del formulario (Crear/Editar)
+            userForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const newUser = {
+                    name: nameInput.value,
+                    email: emailInput.value,
+                    type: userTypeSelect.value
+                };
+
+                if (editingUserId) {
+                    // Editar usuario existente
+                    const userIndex = users.findIndex(u => u.id === editingUserId);
+                    if (userIndex !== -1) {
+                        users[userIndex] = { ...users[userIndex], ...newUser };
+                        showMessage('Usuario actualizado exitosamente.', 'success');
+                    }
+                } else {
+                    // Crear nuevo usuario
+                    newUser.id = Date.now(); // ID simple para el ejemplo
+                    users.push(newUser);
+                    showMessage('Usuario creado exitosamente.', 'success');
+                }
+
+                renderUsers();
+                resetForm();
+            });
+
+            // Manejar clic en botones de la tabla
+            userTableBody.addEventListener('click', (e) => {
+                const target = e.target;
+                const id = parseInt(target.dataset.id);
+
+                if (target.classList.contains('edit-btn')) {
+                    // Lógica para editar
+                    const userToEdit = users.find(u => u.id === id);
+                    if (userToEdit) {
+                        editingUserId = id;
+                        nameInput.value = userToEdit.name;
+                        emailInput.value = userToEdit.email;
+                        userTypeSelect.value = userToEdit.type;
+                        passwordInput.disabled = true;
+                        passwordInput.placeholder = 'No se puede editar la contraseña';
+                        saveButton.textContent = 'Actualizar Usuario';
+                        userFormContainer.style.display = 'block';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                } else if (target.classList.contains('delete-btn')) {
+                    // Lógica para eliminar
+                    deleteModal.style.display = 'flex';
+                    confirmDeleteBtn.dataset.id = id;
+                }
+            });
+
+            // Manejar confirmación de eliminación
+            confirmDeleteBtn.addEventListener('click', () => {
+                const idToDelete = parseInt(confirmDeleteBtn.dataset.id);
+                users = users.filter(u => u.id !== idToDelete);
+                renderUsers();
+                deleteModal.style.display = 'none';
+                showMessage('Usuario eliminado exitosamente.', 'success');
+            });
+
+            // Cancelar eliminación
+            cancelDeleteBtn.addEventListener('click', () => {
+                deleteModal.style.display = 'none';
+            });
+
+            // Cancelar formulario de creación/edición
+            cancelButton.addEventListener('click', () => {
+                resetForm();
+            });
+            
+            // Renderizar la tabla inicial
+            renderUsers();
+            userFormContainer.style.display = 'none'; // Ocultar el formulario al inicio
+        });
+    </script>
+</body>
+</html>

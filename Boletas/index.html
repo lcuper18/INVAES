@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard de Tickets - INVAES</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Dashboard de Tickets</h1>
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <button onclick="window.location='ticket_crud.html'">+ Nuevo Ticket</button>
+      <select id="filtro-cliente">
+        <option value="">Todos los clientes</option>
+      </select>
+      <select id="filtro-tipo">
+        <option value="">Todos los tipos</option>
+        <option value="Revisión">Revisión</option>
+        <option value="Mantenimiento">Mantenimiento</option>
+        <option value="Reparación">Reparación</option>
+        <option value="Instalación">Instalación</option>
+      </select>
+    </div>
+    <table id="tabla-tickets">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Tipo de Trabajo</th>
+          <th>Fecha</th>
+          <th>Subtareas</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Tickets aquí -->
+      </tbody>
+    </table>
+  </div>
+  <script src="main.js"></script>
+  <script>
+    inicializarDashboard();
+  </script>
+</body>
+</html>
+
+
