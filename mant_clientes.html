@@ -7,103 +7,139 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .param-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #e5e7eb; /* Un poco más oscuro para destacar */
-            padding: 0.5rem 1rem;
-            border-radius: 9999px; /* Estilo de píldora */
-            margin-top: 0.5rem;
-            font-size: 0.875rem;
-            color: #1f2937;
-        }
-        .param-item button {
-            margin-left: 0.75rem;
-            color: #ef4444;
-            font-weight: bold;
-        }
-        .param-item button:hover {
-            color: #b91c1c;
-        }
+        .param-item { display: flex; justify-content: space-between; align-items: center; background-color: #e5e7eb; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem; color: #1f2937; }
+        .param-item button { margin-left: 0.75rem; color: #ef4444; font-weight: bold; }
+        .param-item button:hover { color: #b91c1c; }
+        .tab-btn-cliente { padding: 0.5rem 1rem; border-bottom: 2px solid transparent; font-weight: 500; cursor: pointer; }
+        .tab-btn-cliente.active { border-color: #4f46e5; color: #4f46e5; }
+        .tab-content-cliente { display: none; }
+        .tab-content-cliente.active { display: block; }
+        select:disabled { background-color: #f3f4f6; }
     </style>
 </head>
 <body class="bg-gray-50 p-4 sm:p-6 lg:p-8">
 
     <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-10">
-        <h1 class="text-2xl sm:text-3xl font-bold text-center mb-8 text-gray-800">Gestión de Clientes</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 text-gray-800">Gestión de Clientes</h1>
 
-        <form id="cliente-form" class="space-y-6">
-            
-            <!-- Sección de Datos Generales -->
-            <fieldset class="border-t border-gray-200 pt-6">
-                <legend class="text-lg font-semibold text-gray-900 mb-4">Datos Generales</legend>
-                
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Tipo de Cliente</label>
-                    <div class="mt-2 flex items-center gap-x-6">
-                        <label><input type="radio" name="tipo_cliente" value="fisica" class="mr-2" checked> Persona Física</label>
-                        <label><input type="radio" name="tipo_cliente" value="juridica" class="mr-2"> Persona Jurídica</label>
+        <!-- Pestañas de Navegación -->
+        <div class="border-b border-gray-200 mb-6">
+            <nav class="-mb-px flex space-x-4" aria-label="Tabs">
+                <button class="tab-btn-cliente active" data-tab="agregar">Agregar Cliente</button>
+                <button class="tab-btn-cliente" data-tab="lista">Lista de Clientes</button>
+            </nav>
+        </div>
+
+        <!-- Contenido de Pestaña: Agregar Cliente -->
+        <div id="tab-agregar" class="tab-content-cliente active">
+            <form id="cliente-form" class="space-y-6">
+                <fieldset class="border-t border-gray-200 pt-6">
+                    <legend class="text-lg font-semibold text-gray-900 mb-4">Datos Generales</legend>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700">Tipo de Cliente</label>
+                        <div class="mt-2 flex items-center gap-x-6">
+                            <label><input type="radio" name="tipo_cliente" value="fisica" class="mr-2" checked> Persona Física</label>
+                            <label><input type="radio" name="tipo_cliente" value="juridica" class="mr-2"> Persona Jurídica</label>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label id="label-nombre" for="nombre" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
+                            <input type="text" id="nombre" name="nombre" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm" required>
+                        </div>
+                        <div>
+                            <label id="label-id" for="identificacion" class="block text-sm font-medium text-gray-700">Identificación (Cédula)</label>
+                            <input type="text" id="identificacion" name="identificacion" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm" required>
+                        </div>
+                        <div>
+                            <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm">
+                        </div>
+                        <!-- Sección de Dirección Estructurada -->
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Dirección</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div>
+                                    <label for="provincia" class="block text-xs font-medium text-gray-600">Provincia</label>
+                                    <select id="provincia" name="provincia" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm"></select>
+                                </div>
+                                <div>
+                                    <label for="canton" class="block text-xs font-medium text-gray-600">Cantón</label>
+                                    <select id="canton" name="canton" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm" disabled></select>
+                                </div>
+                                <div>
+                                    <label for="distrito" class="block text-xs font-medium text-gray-600">Distrito</label>
+                                    <select id="distrito" name="distrito" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm" disabled></select>
+                                </div>
+                                <div class="sm:col-span-3">
+                                    <label for="direccion-exacta" class="block text-xs font-medium text-gray-600">Señas y otros detalles</label>
+                                    <textarea id="direccion-exacta" name="direccion_exacta" rows="3" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="border-t border-gray-200 pt-6">
+                    <legend class="text-lg font-semibold text-gray-900 mb-4">Parámetros de Servicio</legend>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <select id="parametro-select" class="flex-grow mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm">
+                                <option value="" disabled selected>-- Seleccione un requisito --</option>
+                            </select>
+                            <button type="button" id="btn-agregar-param" class="px-4 py-2 text-sm font-medium rounded-lg text-white bg-indigo-500 hover:bg-indigo-600">Agregar</button>
+                        </div>
+                        <div id="parametros-lista" class="flex flex-wrap gap-2 pt-2"></div>
+                    </div>
+                </fieldset>
+                <div class="pt-6 text-right space-x-4">
+                    <button type="button" class="px-6 py-2 text-sm font-medium rounded-lg text-gray-700 bg-gray-200 hover:bg-gray-300">Cancelar</button>
+                    <button type="submit" class="px-6 py-2 text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700">Guardar Cliente</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Contenido de Pestaña: Lista de Clientes -->
+        <div id="tab-lista" class="tab-content-cliente">
+            <div class="space-y-4">
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <input type="text" id="search-input" placeholder="Buscar cliente por nombre..." class="flex-grow block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm font-medium">Ordenar:</span>
+                        <button id="sort-az" class="px-3 py-1.5 text-sm font-medium rounded-md text-gray-700 bg-gray-200 hover:bg-gray-300">A-Z</button>
+                        <button id="sort-za" class="px-3 py-1.5 text-sm font-medium rounded-md text-gray-700 bg-gray-200 hover:bg-gray-300">Z-A</button>
                     </div>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label id="label-nombre" for="nombre" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
-                        <input type="text" id="nombre" name="nombre" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
-                    </div>
-                    <div>
-                        <label id="label-id" for="identificacion" class="block text-sm font-medium text-gray-700">Identificación (Cédula)</label>
-                        <input type="text" id="identificacion" name="identificacion" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
-                    </div>
-                    <div>
-                        <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                        <input type="tel" id="telefono" name="telefono" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                        <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
-                    <div class="md:col-span-2">
-                        <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección</label>
-                        <textarea id="direccion" name="direccion" rows="3" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- Sección de Parámetros de Servicio -->
-            <fieldset class="border-t border-gray-200 pt-6">
-                <legend class="text-lg font-semibold text-gray-900 mb-4">Parámetros de Servicio</legend>
-                <div class="space-y-4">
-                    <div class="flex items-center gap-4">
-                        <select id="parametro-select" class="flex-grow mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                            <option value="" disabled selected>-- Seleccione un requisito --</option>
-                        </select>
-                        <button type="button" id="btn-agregar-param" class="px-4 py-2 text-sm font-medium rounded-lg text-white bg-indigo-500 hover:bg-indigo-600">Agregar</button>
-                    </div>
-                    <div id="parametros-lista" class="flex flex-wrap gap-2 pt-2">
-                        <!-- Las píldoras de parámetros se agregarán aquí -->
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- Botones de Acción -->
-            <div class="pt-6 text-right space-x-4">
-                <button type="button" class="px-6 py-2 text-sm font-medium rounded-lg text-gray-700 bg-gray-200 hover:bg-gray-300">Cancelar</button>
-                <button type="submit" class="px-6 py-2 text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700">Guardar Cliente</button>
+                <div id="client-list" class="space-y-3 pt-4"></div>
             </div>
-        </form>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- LÓGICA DE DATOS GENERALES ---
+            // --- LÓGICA DE PESTAÑAS ---
+            const tabButtons = document.querySelectorAll('.tab-btn-cliente');
+            const tabContents = document.querySelectorAll('.tab-content-cliente');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`tab-${button.dataset.tab}`).classList.add('active');
+                });
+            });
+
+            // --- LÓGICA PESTAÑA AGREGAR CLIENTE ---
+            
+            // Lógica para tipo de cliente
             const tipoClienteRadios = document.querySelectorAll('input[name="tipo_cliente"]');
             const labelNombre = document.getElementById('label-nombre');
             const labelId = document.getElementById('label-id');
-
             tipoClienteRadios.forEach(radio => {
-                radio.addEventListener('change', (e) => {
+                radio.addEventListener('change', e => {
                     if (e.target.value === 'juridica') {
                         labelNombre.textContent = 'Razón Social';
                         labelId.textContent = 'Cédula Jurídica';
@@ -114,83 +150,140 @@
                 });
             });
 
-            // --- LÓGICA DE PARÁMETROS DE SERVICIO ---
-            const requisitos = [
-                "Inscripción en el Registro de Proveedores del Estado",
-                "Certificación ISO 9001 (Gestión de Calidad)",
-                "Certificación ISO 14001 (Gestión Ambiental)",
-                "Permisos Sanitarios de Funcionamiento",
-                "Hoja de Delincuencia Limpia",
-                "Curso de Manipulación de Alimentos",
-                "Certificaciones Técnicas Específicas",
-                "Acuerdos de Confidencialidad (NDA) firmados",
-                "Identificación y Uniforme en todo momento",
-                "Póliza de Riesgos del Trabajo al día",
-                "Póliza de Responsabilidad Civil Extracontractual",
-                "Uso de Equipo de Protección Personal (EPP) específico",
-                "Plan de Salud y Seguridad Ocupacional",
-                "Horarios de Trabajo Restringidos",
-                "Protocolos de Limpieza Estrictos post-servicio",
-                "Disponibilidad para Atención de Emergencias 24/7",
-                "Uso de Herramientas Antichispa o Especiales",
-                "Emisión de Factura Electrónica",
-                "Condiciones de Pago a 30, 60 o 90 días",
-                "Presentar Referencias Comerciales Comprobables"
-            ];
+            // Lógica para dirección dinámica
+            const provinciaSelect = document.getElementById('provincia');
+            const cantonSelect = document.getElementById('canton');
+            const distritoSelect = document.getElementById('distrito');
+            const geoData = {
+              "San José": {"cantones": {"Acosta":{"distritos":[]},"Alajuelita":{"distritos":[]},"Aserrí":{"distritos":[]},"Curridabat":{"distritos":[]},"Desamparados":{"distritos":[]},"Dota":{"distritos":[]},"Escazú":{"distritos":[]},"Goicoechea":{"distritos":[]},"León Cortés Castro":{"distritos":[]},"Montes de Oca":{"distritos":[]},"Mora":{"distritos":[]},"Moravia":{"distritos":[]},"Pérez Zeledón":{"distritos":[]},"Puriscal":{"distritos":[]},"San José":{"distritos":["Carmen","Merced","Hospital","Catedral","Zapote","San Francisco de Dos Ríos","Uruca","Mata Redonda","Pavas","Hatillo","San Sebastián"]},"Santa Ana":{"distritos":[]},"Tarrazú":{"distritos":[]},"Tibás":{"distritos":[]},"Turrubares":{"distritos":[]},"Vázquez de Coronado":{"distritos":[]}}},
+              "Alajuela": {"cantones": {"Alajuela":{"distritos":[]},"Atenas":{"distritos":[]},"Grecia":{"distritos":[]},"Guatuso":{"distritos":[]},"Los Chiles":{"distritos":[]},"Naranjo":{"distritos":[]},"Orotina":{"distritos":[]},"Palmares":{"distritos":[]},"Poás":{"distritos":[]},"Río Cuarto":{"distritos":[]},"San Carlos":{"distritos":[]},"San Mateo":{"distritos":[]},"San Ramón":{"distritos":[]},"Sarchí":{"distritos":[]},"Upala":{"distritos":[]},"Zarcero":{"distritos":[]}}},
+              "Cartago": {"cantones": {"Alvarado":{"distritos":[]},"Cartago":{"distritos":[]},"El Guarco":{"distritos":[]},"Jiménez":{"distritos":[]},"La Unión":{"distritos":[]},"Oreamuno":{"distritos":[]},"Paraíso":{"distritos":[]},"Turrialba":{"distritos":[]}}},
+              "Heredia": {"cantones": {"Barva":{"distritos":[]},"Belén":{"distritos":[]},"Flores":{"distritos":[]},"Heredia":{"distritos":[]},"San Isidro":{"distritos":[]},"San Pablo":{"distritos":[]},"San Rafael":{"distritos":[]},"Santa Bárbara":{"distritos":[]},"Santo Domingo":{"distritos":[]},"Sarapiquí":{"distritos":[]}}},
+              "Guanacaste": {"cantones": {"Abangares":{"distritos":[]},"Bagaces":{"distritos":[]},"Cañas":{"distritos":[]},"Carrillo":{"distritos":[]},"Hojancha":{"distritos":[]},"La Cruz":{"distritos":[]},"Liberia":{"distritos":[]},"Nandayure":{"distritos":[]},"Nicoya":{"distritos":[]},"Santa Cruz":{"distritos":[]},"Tilarán":{"distritos":[]}}},
+              "Puntarenas": {"cantones": {"Buenos Aires":{"distritos":[]},"Corredores":{"distritos":[]},"Coto Brus":{"distritos":[]},"Esparza":{"distritos":[]},"Garabito":{"distritos":[]},"Golfito":{"distritos":[]},"Montes de Oro":{"distritos":[]},"Monteverde":{"distritos":[]},"Osa":{"distritos":[]},"Parrita":{"distritos":[]},"Puntarenas":{"distritos":[]},"Puerto Jiménez":{"distritos":[]},"Quepos":{"distritos":[]}}},
+              "Limón": {"cantones": {"Guácimo":{"distritos":["Guácimo","Mercedes","Pocora","Río Jiménez","Duacarí"]},"Limón":{"distritos":["Limón","Valle La Estrella","Río Blanco","Matama"]},"Matina":{"distritos":["Matina","Batán","Carrandi"]},"Pococí":{"distritos":["Guápiles","Jiménez","La Rita","Roxana","Cariari","Colorado","La Colonia"]},"Siquirres":{"distritos":["Siquirres","Pacuarito","Florida","Germania","Cairo","Alegría","Reventazón"]},"Talamanca":{"distritos":["Bratsi","Sixaola","Cahuita","Telire"]}}}
+            };
 
+            const populateSelect = (selectElement, items, placeholder) => {
+                selectElement.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
+                items.forEach(item => selectElement.add(new Option(item, item)));
+            };
+
+            populateSelect(provinciaSelect, Object.keys(geoData), "Seleccione Provincia");
+
+            provinciaSelect.addEventListener('change', () => {
+                const selectedProvincia = provinciaSelect.value;
+                distritoSelect.innerHTML = '<option value="" disabled selected>Seleccione Distrito</option>';
+                distritoSelect.disabled = true;
+                if (selectedProvincia) {
+                    const cantones = Object.keys(geoData[selectedProvincia].cantones);
+                    populateSelect(cantonSelect, cantones, "Seleccione Cantón");
+                    cantonSelect.disabled = false;
+                } else {
+                    cantonSelect.innerHTML = '<option value="" disabled selected>Seleccione Cantón</option>';
+                    cantonSelect.disabled = true;
+                }
+            });
+
+            cantonSelect.addEventListener('change', () => {
+                const selectedProvincia = provinciaSelect.value;
+                const selectedCanton = cantonSelect.value;
+                if (selectedCanton) {
+                    const distritos = geoData[selectedProvincia].cantones[selectedCanton].distritos;
+                    if (distritos && distritos.length > 0) {
+                        populateSelect(distritoSelect, distritos, "Seleccione Distrito");
+                        distritoSelect.disabled = false;
+                    } else {
+                        populateSelect(distritoSelect, [], 'No hay distritos');
+                        distritoSelect.disabled = true;
+                    }
+                } else {
+                    distritoSelect.innerHTML = '<option value="" disabled selected>Seleccione Distrito</option>';
+                    distritoSelect.disabled = true;
+                }
+            });
+
+            // Lógica para parámetros de servicio
+            const requisitos = ["Inscripción en Proveedores del Estado", "ISO 9001", "ISO 14001", "Permisos Sanitarios", "Hoja de Delincuencia Limpia", "Manipulación de Alimentos", "Certificaciones Técnicas", "Acuerdos de Confidencialidad", "Póliza de Riesgos del Trabajo", "Póliza de Responsabilidad Civil", "Uso de EPP específico", "Plan de Seguridad Ocupacional", "Horarios Restringidos", "Protocolos de Limpieza", "Emergencias 24/7", "Factura Electrónica", "Pago a 30-90 días"];
             const parametroSelect = document.getElementById('parametro-select');
+            requisitos.forEach(req => parametroSelect.add(new Option(req, req)));
             const btnAgregarParam = document.getElementById('btn-agregar-param');
             const parametrosLista = document.getElementById('parametros-lista');
             let parametrosAgregados = new Set();
 
-            // Poblar el combobox con los requisitos
-            requisitos.forEach(req => {
-                const option = document.createElement('option');
-                option.value = req;
-                option.textContent = req;
-                parametroSelect.appendChild(option);
-            });
-
-            // Función para agregar el parámetro
-            const agregarParametro = () => {
+            btnAgregarParam.addEventListener('click', () => {
                 const parametroTexto = parametroSelect.value;
                 if (parametroTexto && !parametrosAgregados.has(parametroTexto)) {
                     parametrosAgregados.add(parametroTexto);
-
                     const div = document.createElement('div');
                     div.className = 'param-item';
-                    div.innerHTML = `
-                        <span>${parametroTexto}</span>
-                        <button type="button">X</button>
-                    `;
+                    div.innerHTML = `<span>${parametroTexto}</span><button type="button">X</button>`;
                     parametrosLista.appendChild(div);
-                    
-                    // Deshabilitar opción en el select
                     parametroSelect.querySelector(`option[value="${parametroTexto}"]`).disabled = true;
                     parametroSelect.value = "";
-
-                    // Botón para eliminar el parámetro
                     div.querySelector('button').addEventListener('click', () => {
                         parametrosAgregados.delete(parametroTexto);
                         parametroSelect.querySelector(`option[value="${parametroTexto}"]`).disabled = false;
                         div.remove();
                     });
                 }
-            };
+            });
 
-            btnAgregarParam.addEventListener('click', agregarParametro);
-
-            // --- LÓGICA DE GUARDADO ---
-            document.getElementById('cliente-form').addEventListener('submit', (e) => {
+            // Lógica de guardado
+            document.getElementById('cliente-form').addEventListener('submit', e => {
                 e.preventDefault();
                 const formData = new FormData(e.target);
                 const data = Object.fromEntries(formData.entries());
-                
                 data.parametros = Array.from(parametrosAgregados);
-
                 console.log('Datos del cliente a guardar (simulado):', data);
-                alert('Cliente guardado exitosamente (simulado). Revisa la consola para ver los datos.');
+                alert('Cliente guardado exitosamente (simulado). Revisa la consola.');
             });
+
+            // --- LÓGICA PESTAÑA LISTA DE CLIENTES ---
+            const sampleClients = [
+                { nombre: 'Constructora El Sol S.A.', id: '3-101-123456', tel: '2233-4455', email: 'contacto@elsol.com' },
+                { nombre: 'Ana Pérez Jiménez', id: '1-1234-5678', tel: '8877-6655', email: 'ana.perez@email.com' },
+                { nombre: 'Supermercado La Familia', id: '3-101-654321', tel: '2444-5566', email: 'compras@lafamilia.cr' },
+                { nombre: 'Carlos Rodríguez Vargas', id: '9-0123-4567', tel: '8901-2345', email: 'carlos.rodriguez@email.com' },
+                { nombre: 'Ministerio de Salud', id: 'J-123456789', tel: '2500-0000', email: 'proveeduria@misalud.go.cr' }
+            ];
+            const clientListContainer = document.getElementById('client-list');
+            const searchInput = document.getElementById('search-input');
+            const sortAzBtn = document.getElementById('sort-az');
+            const sortZaBtn = document.getElementById('sort-za');
+
+            const renderClients = (clients) => {
+                clientListContainer.innerHTML = '';
+                if (clients.length === 0) {
+                    clientListContainer.innerHTML = '<p class="text-center text-gray-500">No se encontraron clientes.</p>';
+                    return;
+                }
+                clients.forEach(client => {
+                    const clientCard = document.createElement('div');
+                    clientCard.className = 'p-4 border rounded-lg bg-gray-50 hover:bg-gray-100';
+                    clientCard.innerHTML = `<h3 class="font-bold text-indigo-700">${client.nombre}</h3><p class="text-sm text-gray-600">ID: ${client.id}</p><p class="text-sm text-gray-600">Tel: ${client.tel} | Email: ${client.email}</p>`;
+                    clientListContainer.appendChild(clientCard);
+                });
+            };
+
+            searchInput.addEventListener('input', e => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredClients = sampleClients.filter(c => c.nombre.toLowerCase().includes(searchTerm));
+                renderClients(filteredClients);
+            });
+
+            sortAzBtn.addEventListener('click', () => {
+                const sortedClients = [...sampleClients].sort((a, b) => a.nombre.localeCompare(b.nombre));
+                renderClients(sortedClients);
+            });
+
+            sortZaBtn.addEventListener('click', () => {
+                const sortedClients = [...sampleClients].sort((a, b) => b.nombre.localeCompare(a.nombre));
+                renderClients(sortedClients);
+            });
+
+            // Render inicial de la lista
+            renderClients(sampleClients);
         });
     </script>
 

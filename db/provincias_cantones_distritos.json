@@ -1,0 +1,114 @@
+{
+  "San José": {
+    "cantones": {
+      "Acosta": { "distritos": [] },
+      "Alajuelita": { "distritos": [] },
+      "Aserrí": { "distritos": [] },
+      "Curridabat": { "distritos": [] },
+      "Desamparados": { "distritos": [] },
+      "Dota": { "distritos": [] },
+      "Escazú": { "distritos": [] },
+      "Goicoechea": { "distritos": [] },
+      "León Cortés Castro": { "distritos": [] },
+      "Montes de Oca": { "distritos": [] },
+      "Mora": { "distritos": [] },
+      "Moravia": { "distritos": [] },
+      "Pérez Zeledón": { "distritos": [] },
+      "Puriscal": { "distritos": [] },
+      "San José": { "distritos": ["Carmen", "Merced", "Hospital", "Catedral", "Zapote", "San Francisco de Dos Ríos", "Uruca", "Mata Redonda", "Pavas", "Hatillo", "San Sebastián"] },
+      "Santa Ana": { "distritos": [] },
+      "Tarrazú": { "distritos": [] },
+      "Tibás": { "distritos": [] },
+      "Turrubares": { "distritos": [] },
+      "Vázquez de Coronado": { "distritos": [] }
+    }
+  },
+  "Alajuela": {
+    "cantones": {
+      "Alajuela": { "distritos": [] },
+      "Atenas": { "distritos": [] },
+      "Grecia": { "distritos": [] },
+      "Guatuso": { "distritos": [] },
+      "Los Chiles": { "distritos": [] },
+      "Naranjo": { "distritos": [] },
+      "Orotina": { "distritos": [] },
+      "Palmares": { "distritos": [] },
+      "Poás": { "distritos": [] },
+      "Río Cuarto": { "distritos": [] },
+      "San Carlos": { "distritos": [] },
+      "San Mateo": { "distritos": [] },
+      "San Ramón": { "distritos": [] },
+      "Sarchí": { "distritos": [] },
+      "Upala": { "distritos": [] },
+      "Zarcero": { "distritos": [] }
+    }
+  },
+  "Cartago": {
+    "cantones": {
+      "Alvarado": { "distritos": [] },
+      "Cartago": { "distritos": [] },
+      "El Guarco": { "distritos": [] },
+      "Jiménez": { "distritos": [] },
+      "La Unión": { "distritos": [] },
+      "Oreamuno": { "distritos": [] },
+      "Paraíso": { "distritos": [] },
+      "Turrialba": { "distritos": [] }
+    }
+  },
+  "Heredia": {
+    "cantones": {
+      "Barva": { "distritos": [] },
+      "Belén": { "distritos": [] },
+      "Flores": { "distritos": [] },
+      "Heredia": { "distritos": [] },
+      "San Isidro": { "distritos": [] },
+      "San Pablo": { "distritos": [] },
+      "San Rafael": { "distritos": [] },
+      "Santa Bárbara": { "distritos": [] },
+      "Santo Domingo": { "distritos": [] },
+      "Sarapiquí": { "distritos": [] }
+    }
+  },
+  "Guanacaste": {
+    "cantones": {
+      "Abangares": { "distritos": [] },
+      "Bagaces": { "distritos": [] },
+      "Cañas": { "distritos": [] },
+      "Carrillo": { "distritos": [] },
+      "Hojancha": { "distritos": [] },
+      "La Cruz": { "distritos": [] },
+      "Liberia": { "distritos": [] },
+      "Nandayure": { "distritos": [] },
+      "Nicoya": { "distritos": [] },
+      "Santa Cruz": { "distritos": [] },
+      "Tilarán": { "distritos": [] }
+    }
+  },
+  "Puntarenas": {
+    "cantones": {
+      "Buenos Aires": { "distritos": [] },
+      "Corredores": { "distritos": [] },
+      "Coto Brus": { "distritos": [] },
+      "Esparza": { "distritos": [] },
+      "Garabito": { "distritos": [] },
+      "Golfito": { "distritos": [] },
+      "Montes de Oro": { "distritos": [] },
+      "Monteverde": { "distritos": [] },
+      "Osa": { "distritos": [] },
+      "Parrita": { "distritos": [] },
+      "Puntarenas": { "distritos": [] },
+      "Puerto Jiménez": { "distritos": [] },
+      "Quepos": { "distritos": [] }
+    }
+  },
+  "Limón": {
+    "cantones": {
+      "Guácimo": { "distritos": [] },
+      "Limón": { "distritos": [] },
+      "Matina": { "distritos": [] },
+      "Pococí": { "distritos": [] },
+      "Siquirres": { "distritos": [] },
+      "Talamanca": { "distritos": [] }
+    }
+  }
+}
