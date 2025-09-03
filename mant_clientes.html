@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Clientes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .param-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e5e7eb; /* Un poco más oscuro para destacar */
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* Estilo de píldora */
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #1f2937;
+        }
+        .param-item button {
+            margin-left: 0.75rem;
+            color: #ef4444;
+            font-weight: bold;
+        }
+        .param-item button:hover {
+            color: #b91c1c;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-4 sm:p-6 lg:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-10">
+        <h1 class="text-2xl sm:text-3xl font-bold text-center mb-8 text-gray-800">Gestión de Clientes</h1>
+
+        <form id="cliente-form" class="space-y-6">
+            
+            <!-- Sección de Datos Generales -->
+            <fieldset class="border-t border-gray-200 pt-6">
+                <legend class="text-lg font-semibold text-gray-900 mb-4">Datos Generales</legend>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Tipo de Cliente</label>
+                    <div class="mt-2 flex items-center gap-x-6">
+                        <label><input type="radio" name="tipo_cliente" value="fisica" class="mr-2" checked> Persona Física</label>
+                        <label><input type="radio" name="tipo_cliente" value="juridica" class="mr-2"> Persona Jurídica</label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label id="label-nombre" for="nombre" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
+                        <input type="text" id="nombre" name="nombre" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    <div>
+                        <label id="label-id" for="identificacion" class="block text-sm font-medium text-gray-700">Identificación (Cédula)</label>
+                        <input type="text" id="identificacion" name="identificacion" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    <div>
+                        <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección</label>
+                        <textarea id="direccion" name="direccion" rows="3" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Sección de Parámetros de Servicio -->
+            <fieldset class="border-t border-gray-200 pt-6">
+                <legend class="text-lg font-semibold text-gray-900 mb-4">Parámetros de Servicio</legend>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <select id="parametro-select" class="flex-grow mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="" disabled selected>-- Seleccione un requisito --</option>
+                        </select>
+                        <button type="button" id="btn-agregar-param" class="px-4 py-2 text-sm font-medium rounded-lg text-white bg-indigo-500 hover:bg-indigo-600">Agregar</button>
+                    </div>
+                    <div id="parametros-lista" class="flex flex-wrap gap-2 pt-2">
+                        <!-- Las píldoras de parámetros se agregarán aquí -->
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Botones de Acción -->
+            <div class="pt-6 text-right space-x-4">
+                <button type="button" class="px-6 py-2 text-sm font-medium rounded-lg text-gray-700 bg-gray-200 hover:bg-gray-300">Cancelar</button>
+                <button type="submit" class="px-6 py-2 text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700">Guardar Cliente</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- LÓGICA DE DATOS GENERALES ---
+            const tipoClienteRadios = document.querySelectorAll('input[name="tipo_cliente"]');
+            const labelNombre = document.getElementById('label-nombre');
+            const labelId = document.getElementById('label-id');
+
+            tipoClienteRadios.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    if (e.target.value === 'juridica') {
+                        labelNombre.textContent = 'Razón Social';
+                        labelId.textContent = 'Cédula Jurídica';
+                    } else {
+                        labelNombre.textContent = 'Nombre Completo';
+                        labelId.textContent = 'Identificación (Cédula)';
+                    }
+                });
+            });
+
+            // --- LÓGICA DE PARÁMETROS DE SERVICIO ---
+            const requisitos = [
+                "Inscripción en el Registro de Proveedores del Estado",
+                "Certificación ISO 9001 (Gestión de Calidad)",
+                "Certificación ISO 14001 (Gestión Ambiental)",
+                "Permisos Sanitarios de Funcionamiento",
+                "Hoja de Delincuencia Limpia",
+                "Curso de Manipulación de Alimentos",
+                "Certificaciones Técnicas Específicas",
+                "Acuerdos de Confidencialidad (NDA) firmados",
+                "Identificación y Uniforme en todo momento",
+                "Póliza de Riesgos del Trabajo al día",
+                "Póliza de Responsabilidad Civil Extracontractual",
+                "Uso de Equipo de Protección Personal (EPP) específico",
+                "Plan de Salud y Seguridad Ocupacional",
+                "Horarios de Trabajo Restringidos",
+                "Protocolos de Limpieza Estrictos post-servicio",
+                "Disponibilidad para Atención de Emergencias 24/7",
+                "Uso de Herramientas Antichispa o Especiales",
+                "Emisión de Factura Electrónica",
+                "Condiciones de Pago a 30, 60 o 90 días",
+                "Presentar Referencias Comerciales Comprobables"
+            ];
+
+            const parametroSelect = document.getElementById('parametro-select');
+            const btnAgregarParam = document.getElementById('btn-agregar-param');
+            const parametrosLista = document.getElementById('parametros-lista');
+            let parametrosAgregados = new Set();
+
+            // Poblar el combobox con los requisitos
+            requisitos.forEach(req => {
+                const option = document.createElement('option');
+                option.value = req;
+                option.textContent = req;
+                parametroSelect.appendChild(option);
+            });
+
+            // Función para agregar el parámetro
+            const agregarParametro = () => {
+                const parametroTexto = parametroSelect.value;
+                if (parametroTexto && !parametrosAgregados.has(parametroTexto)) {
+                    parametrosAgregados.add(parametroTexto);
+
+                    const div = document.createElement('div');
+                    div.className = 'param-item';
+                    div.innerHTML = `
+                        <span>${parametroTexto}</span>
+                        <button type="button">X</button>
+                    `;
+                    parametrosLista.appendChild(div);
+                    
+                    // Deshabilitar opción en el select
+                    parametroSelect.querySelector(`option[value="${parametroTexto}"]`).disabled = true;
+                    parametroSelect.value = "";
+
+                    // Botón para eliminar el parámetro
+                    div.querySelector('button').addEventListener('click', () => {
+                        parametrosAgregados.delete(parametroTexto);
+                        parametroSelect.querySelector(`option[value="${parametroTexto}"]`).disabled = false;
+                        div.remove();
+                    });
+                }
+            };
+
+            btnAgregarParam.addEventListener('click', agregarParametro);
+
+            // --- LÓGICA DE GUARDADO ---
+            document.getElementById('cliente-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData.entries());
+                
+                data.parametros = Array.from(parametrosAgregados);
+
+                console.log('Datos del cliente a guardar (simulado):', data);
+                alert('Cliente guardado exitosamente (simulado). Revisa la consola para ver los datos.');
+            });
+        });
+    </script>
+
+</body>
+</html>
