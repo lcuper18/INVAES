@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 2px solid #d1d5db;
+            margin-bottom: 1.5rem;
+        }
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+        .tab-btn.active {
+            color: #0d9488;
+            border-bottom-color: #0d9488;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+            text-align: left;
+        }
+        th {
+            background-color: #f9fafb;
+        }
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            margin-right: 0.25rem;
+        }
+        .status-active {
+            color: #10b981;
+            font-weight: bold;
+        }
+        .status-inactive {
+            color: #ef4444;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Pestañas de Navegación -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="personal">Gestión de Personal</button>
+            <button class="tab-btn" data-tab="contratos">Gestión de Contratos</button>
+        </div>
+
+        <!-- Contenido de las Pestañas -->
+
+        <!-- Pestaña 1: Gestión de Personal -->
+        <div id="personal" class="tab-content active">
+            <div class="card">
+                <h3>Listado de Personal</h3>
+                <button class="btn-primary" onclick="alert('Abrir formulario para agregar empleado')">+ Agregar Nuevo Empleado</button>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Puesto</th>
+                                <th>Teléfono</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Juan Mora</td>
+                                <td>Técnico Senior</td>
+                                <td>8888-8888</td>
+                                <td><span class="status-active">Activo</span></td>
+                                <td>
+                                    <button class="btn-secondary btn-sm" onclick="alert('Ver/Editar datos de Juan Mora')">Ver/Editar</button>
+                                    <button class="btn-secondary btn-sm" onclick="alert('Desactivar a Juan Mora')">Desactivar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ana Campos</td>
+                                <td>Técnico A/C</td>
+                                <td>7777-7777</td>
+                                <td><span class="status-active">Activo</span></td>
+                                <td>
+                                    <button class="btn-secondary btn-sm">Ver/Editar</button>
+                                    <button class="btn-secondary btn-sm">Desactivar</button>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>Carlos Rojas</td>
+                                <td>Asistente Técnico</td>
+                                <td>6666-6666</td>
+                                <td><span class="status-inactive">Inactivo</span></td>
+                                <td>
+                                    <button class="btn-secondary btn-sm">Ver/Editar</button>
+                                    <button class="btn-secondary btn-sm">Activar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pestaña 2: Gestión de Contratos -->
+        <div id="contratos" class="tab-content">
+            <div class="card">
+                <h3>Listado de Contratos de Mantenimiento</h3>
+                <button class="btn-primary" onclick="alert('Abrir formulario para crear contrato')">+ Crear Nuevo Contrato</button>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Tipo de Contrato</th>
+                                <th>Fecha de Inicio</th>
+                                <th>Fecha de Fin</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Industrias S.A.</td>
+                                <td>Mantenimiento Preventivo Trimestral</td>
+                                <td>01/01/2024</td>
+                                <td>31/12/2024</td>
+                                <td><span class="status-active">Activo</span></td>
+                                <td>
+                                    <button class="btn-secondary btn-sm">Ver Detalles</button>
+                                    <button class="btn-secondary btn-sm">Renovar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Comercializadora La Central</td>
+                                <td>Servicio Bajo Demanda</td>
+                                <td>15/06/2023</td>
+                                <td>N/A</td>
+                                <td><span class="status-active">Activo</span></td>
+                                <td>
+                                    <button class="btn-secondary btn-sm">Ver Detalles</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Residencial Los Reyes</td>
+                                <td>Mantenimiento Preventivo Anual</td>
+                                <td>01/08/2022</td>
+                                <td>31/07/2023</td>
+                                <td><span class="status-inactive">Vencido</span></td>
+                                <td>
+                                    <button class="btn-secondary btn-sm">Ver Detalles</button>
+                                    <button class="btn-secondary btn-sm">Renovar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Lógica para cambiar de pestañas
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                tabButtons.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(tab => tab.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
