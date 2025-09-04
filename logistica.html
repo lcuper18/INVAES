@@ -5,9 +5,40 @@
     <title>Panel de Logística</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            background-color: #fff; /* Or match the iframe background */
+        /* Estilos para las pestañas, similares a dashboard.html */
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 2px solid #d1d5db;
+            margin-bottom: 1.5rem;
         }
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+        .tab-btn.active {
+            color: #0d9488;
+            border-bottom-color: #0d9488;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Estilos del layout anterior que siguen siendo útiles */
         .logistica-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -27,89 +58,152 @@
             border-radius: 0.5rem;
             background-color: #f8fafc;
         }
-        .list-item:hover {
-            background-color: #f1f5f9;
-        }
-        .grupo-card {
+        .grupo-card, .ticket-card {
             border: 1px solid #e2e8f0;
             border-radius: 0.75rem;
             padding: 1rem;
             margin-bottom: 1rem;
         }
-        /* Minimal styles for buttons if not in main css */
-        .btn-sm {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.875rem;
+        .assign-group {
+            display: flex;
+            align-items: flex-end;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .assign-group .form-group {
+            flex-grow: 1;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logistica-grid">
-            <!-- COLUMNA IZQUIERDA: RECURSOS -->
-            <div class="logistica-col">
-                <div class="card">
-                    <h3>Técnicos Disponibles</h3>
-                    <div id="tecnicos-disponibles">
-                        <!-- Dummy Data -->
-                        <div class="list-item"><span>Juan Mora</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
-                        <div class="list-item"><span>Ana Campos</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
-                        <div class="list-item"><span>Pedro Vargas</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
-                        <div class="list-item"><span>Lucía Jimenez</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
-                        <div class="list-item"><span>Carlos Rojas</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3>Vehículos Disponibles</h3>
-                    <div id="vehiculos-disponibles">
-                        <!-- Dummy Data -->
-                        <div class="list-item"><span>Toyota Hilux (Placa 123456)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
-                        <div class="list-item"><span>Hyundai H1 (Placa 654321)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
-                        <div class="list-item"><span>Suzuki Jimny (Placa 789012)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
-                    </div>
-                </div>
-            </div>
+        <!-- Pestañas de Navegación -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="crear-grupos">Crear Grupos</button>
+            <button class="tab-btn" data-tab="listado-equipos">Listado de Equipos</button>
+            <button class="tab-btn" data-tab="asignar-tickets">Asignar Tickets</button>
+            <button class="tab-btn" data-tab="crear-ticket">Crear Ticket</button>
+        </div>
 
-            <!-- COLUMNA DERECHA: GRUPOS Y RUTAS -->
-            <div class="logistica-col">
-                <div class="card">
-                    <h3>Crear Grupo de Trabajo</h3>
-                    <div class="form-group">
-                        <label for="nombre-grupo">Nombre del Grupo</label>
-                        <input type="text" id="nombre-grupo" class="input" placeholder="Ej: Equipo Alpha">
-                    </div>
-                    <div class="form-group">
-                        <label>Técnicos Seleccionados (Máx. 3)</label>
-                        <div id="tecnicos-seleccionados" style="min-height: 50px; border: 1px dashed #ccc; padding: 10px; border-radius: 0.5rem;"></div>
-                    </div>
-                    <div class="form-group">
-                        <label>Vehículo Asignado</label>
-                        <div id="vehiculo-seleccionado" style="min-height: 30px; border: 1px dashed #ccc; padding: 10px; border-radius: 0.5rem;"></div>
-                    </div>
-                    <button class="btn-primary" onclick="crearGrupo()">Crear Grupo</button>
-                </div>
+        <!-- Contenido de las Pestañas -->
 
-                <div class="card">
-                    <h3>Grupos de Trabajo</h3>
-                    <div id="grupos-trabajo">
-                        <!-- Los grupos creados aparecerán aquí -->
-                         <div class="grupo-card">
-                            <h4>Equipo de Mantenimiento General</h4>
-                            <p><strong>Técnicos:</strong> Juan Mora, Ana Campos</p>
-                            <p><strong>Vehículo:</strong> Toyota Hilux (Placa 123456)</p>
-                            <div class="form-group">
-                                <label>Asignar Ruta/Tarea:</label>
-                                <input type="text" class="input" placeholder="Describa la tarea o ruta...">
-                                <button class="btn-primary" style="margin-top: 10px;">Asignar</button>
-                            </div>
+        <!-- Pestaña 1: Crear Grupos -->
+        <div id="crear-grupos" class="tab-content active">
+            <div class="logistica-grid">
+                <!-- Recursos Disponibles -->
+                <div class="logistica-col">
+                    <div class="card">
+                        <h3>Técnicos Disponibles</h3>
+                        <div id="tecnicos-disponibles">
+                            <div class="list-item"><span>Juan Mora</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
+                            <div class="list-item"><span>Ana Campos</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
+                            <div class="list-item"><span>Pedro Vargas</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
+                            <div class="list-item"><span>Lucía Jimenez</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
+                            <div class="list-item"><span>Carlos Rojas</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Vehículos Disponibles</h3>
+                        <div id="vehiculos-disponibles">
+                            <div class="list-item"><span>Toyota Hilux (Placa 123456)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
+                            <div class="list-item"><span>Hyundai H1 (Placa 654321)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
                         </div>
                     </div>
                 </div>
+                <!-- Formulario para Crear Grupo -->
+                <div class="logistica-col">
+                    <div class="card">
+                        <h3>Crear Grupo de Trabajo</h3>
+                        <div class="form-group">
+                            <label for="nombre-grupo">Nombre del Grupo</label>
+                            <input type="text" id="nombre-grupo" class="input" placeholder="Ej: Equipo Alpha">
+                        </div>
+                        <div class="form-group">
+                            <label>Técnicos Seleccionados (Máx. 3)</label>
+                            <div id="tecnicos-seleccionados" style="min-height: 50px; border: 1px dashed #ccc; padding: 10px; border-radius: 0.5rem;"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Vehículo Asignado</label>
+                            <div id="vehiculo-seleccionado" style="min-height: 30px; border: 1px dashed #ccc; padding: 10px; border-radius: 0.5rem;"></div>
+                        </div>
+                        <button class="btn-primary" onclick="crearGrupo()">Crear Grupo y Ver en Listado</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pestaña 2: Listado de Equipos -->
+        <div id="listado-equipos" class="tab-content">
+            <h3>Grupos de Trabajo Activos</h3>
+            <div id="grupos-trabajo-container">
+                <div class="grupo-card">
+                    <h4>Equipo de Mantenimiento General</h4>
+                    <p><strong>Técnicos:</strong> Juan Mora, Ana Campos</p>
+                    <p><strong>Vehículo:</strong> Toyota Hilux (Placa 123456)</p>
+                    <p><strong>Tareas Asignadas:</strong> 1</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pestaña 3: Asignar Tickets -->
+        <div id="asignar-tickets" class="tab-content">
+            <h3>Asignar Ticket a Equipo</h3>
+            <div class="card">
+                <div class="form-group">
+                    <label>Seleccionar Equipo</label>
+                    <select id="equipos-dropdown" class="input">
+                        <option>Equipo de Mantenimiento General</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Seleccionar Ticket</label>
+                    <select id="tickets-dropdown" class="input">
+                        <option>T-001: Mantenimiento preventivo A/C - Oficinas Centrales</option>
+                        <option>T-002: Instalación sistema de cámaras - Sucursal San Pedro</option>
+                        <option>T-003: Revisión de sistema eléctrico - Bodega Heredia</option>
+                        <option>T-004: Reparación de fuga de agua - Cliente Residencial Escazú</option>
+                        <option>T-005: Diagnóstico de red de datos - Empresa Logística Alajuela</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="alert('Ticket asignado (función demo)')">Asignar Ticket</button>
+            </div>
+        </div>
+
+        <!-- Pestaña 4: Crear Ticket -->
+        <div id="crear-ticket" class="tab-content">
+            <h3>Crear Nuevo Ticket de Trabajo</h3>
+            <div class="card">
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <select class="input">
+                        <option>Cliente A (Industrias S.A.)</option>
+                        <option>Cliente B (Comercializadora La Central)</option>
+                        <option>Cliente C (Residencial Los Reyes)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Descripción de la Tarea</label>
+                    <textarea class="input" rows="4" placeholder="Detalle las tareas a realizar..."></textarea>
+                </div>
+                <button class="btn-primary" onclick="alert('Ticket creado (función demo)')">Crear Ticket</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Lógica para cambiar de pestañas
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                tabButtons.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(tab => tab.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Lógica para crear grupos (modificada)
         let tecnicosSeleccionados = [];
         let vehiculoSeleccionado = null;
 
@@ -120,25 +214,23 @@
             }
             const tecnicoDiv = btn.parentElement;
             const nombreTecnico = tecnicoDiv.querySelector('span').innerText;
-            
             if (tecnicosSeleccionados.includes(nombreTecnico)) {
                 alert("Este técnico ya ha sido seleccionado.");
                 return;
             }
-
             tecnicosSeleccionados.push(nombreTecnico);
-            tecnicoDiv.style.display = 'none'; // Ocultar de la lista de disponibles
+            tecnicoDiv.style.display = 'none';
             actualizarVistaSeleccionados();
         }
 
         function seleccionarVehiculo(btn) {
             if (vehiculoSeleccionado) {
-                alert("Ya hay un vehículo seleccionado. Elimínelo primero para seleccionar otro.");
+                alert("Ya hay un vehículo seleccionado.");
                 return;
             }
             const vehiculoDiv = btn.parentElement;
             vehiculoSeleccionado = vehiculoDiv.querySelector('span').innerText;
-            vehiculoDiv.style.display = 'none'; // Ocultar de la lista
+            vehiculoDiv.style.display = 'none';
             actualizarVistaSeleccionados();
         }
 
@@ -158,7 +250,6 @@
 
         function eliminarTecnico(nombre) {
             tecnicosSeleccionados = tecnicosSeleccionados.filter(t => t !== nombre);
-            // Mostrar de nuevo en la lista de disponibles
             const listaDisponibles = document.getElementById('tecnicos-disponibles');
             Array.from(listaDisponibles.children).forEach(div => {
                 if (div.querySelector('span').innerText === nombre) {
@@ -190,30 +281,30 @@
                 return;
             }
 
-            const containerGrupos = document.getElementById('grupos-trabajo');
+            // Añadir al listado en la otra pestaña
+            const containerGrupos = document.getElementById('grupos-trabajo-container');
             const vehiculoHTML = vehiculoSeleccionado ? `<p><strong>Vehículo:</strong> ${vehiculoSeleccionado}</p>` : '<p><strong>Vehículo:</strong> No asignado</p>';
-            
             const nuevoGrupoHTML = `
                 <div class="grupo-card">
                     <h4>${nombreGrupo}</h4>
                     <p><strong>Técnicos:</strong> ${tecnicosSeleccionados.join(', ')}</p>
                     ${vehiculoHTML}
-                     <div class="form-group">
-                        <label>Asignar Ruta/Tarea:</label>
-                        <input type="text" class="input" placeholder="Describa la tarea o ruta...">
-                        <button class="btn-primary" style="margin-top: 10px;">Asignar</button>
-                    </div>
-                </div>
-            `;
-
+                    <p><strong>Tareas Asignadas:</strong> 0</p>
+                </div>`;
             containerGrupos.insertAdjacentHTML('beforeend', nuevoGrupoHTML);
 
-            // Limpiar selección
+            // Añadir al dropdown de la pestaña de asignación
+            const equiposDropdown = document.getElementById('equipos-dropdown');
+            const nuevaOpcion = new Option(nombreGrupo, nombreGrupo);
+            equiposDropdown.add(nuevaOpcion);
+
+            // Limpiar formulario
             document.getElementById('nombre-grupo').value = '';
             tecnicosSeleccionados = [];
             vehiculoSeleccionado = null;
             actualizarVistaSeleccionados();
-            // For a real implementation, this would be handled with a database.
+            
+            alert(`Grupo "${nombreGrupo}" creado. Puede verlo en la pestaña 'Listado de Equipos'.`);
         }
     </script>
 </body>
