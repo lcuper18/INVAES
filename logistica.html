@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Logística</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #fff; /* Or match the iframe background */
+        }
+        .logistica-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+        .logistica-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            background-color: #f8fafc;
+        }
+        .list-item:hover {
+            background-color: #f1f5f9;
+        }
+        .grupo-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        /* Minimal styles for buttons if not in main css */
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logistica-grid">
+            <!-- COLUMNA IZQUIERDA: RECURSOS -->
+            <div class="logistica-col">
+                <div class="card">
+                    <h3>Técnicos Disponibles</h3>
+                    <div id="tecnicos-disponibles">
+                        <!-- Dummy Data -->
+                        <div class="list-item"><span>Juan Mora</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
+                        <div class="list-item"><span>Ana Campos</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
+                        <div class="list-item"><span>Pedro Vargas</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
+                        <div class="list-item"><span>Lucía Jimenez</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
+                        <div class="list-item"><span>Carlos Rojas</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Vehículos Disponibles</h3>
+                    <div id="vehiculos-disponibles">
+                        <!-- Dummy Data -->
+                        <div class="list-item"><span>Toyota Hilux (Placa 123456)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
+                        <div class="list-item"><span>Hyundai H1 (Placa 654321)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
+                        <div class="list-item"><span>Suzuki Jimny (Placa 789012)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: GRUPOS Y RUTAS -->
+            <div class="logistica-col">
+                <div class="card">
+                    <h3>Crear Grupo de Trabajo</h3>
+                    <div class="form-group">
+                        <label for="nombre-grupo">Nombre del Grupo</label>
+                        <input type="text" id="nombre-grupo" class="input" placeholder="Ej: Equipo Alpha">
+                    </div>
+                    <div class="form-group">
+                        <label>Técnicos Seleccionados (Máx. 3)</label>
+                        <div id="tecnicos-seleccionados" style="min-height: 50px; border: 1px dashed #ccc; padding: 10px; border-radius: 0.5rem;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Vehículo Asignado</label>
+                        <div id="vehiculo-seleccionado" style="min-height: 30px; border: 1px dashed #ccc; padding: 10px; border-radius: 0.5rem;"></div>
+                    </div>
+                    <button class="btn-primary" onclick="crearGrupo()">Crear Grupo</button>
+                </div>
+
+                <div class="card">
+                    <h3>Grupos de Trabajo</h3>
+                    <div id="grupos-trabajo">
+                        <!-- Los grupos creados aparecerán aquí -->
+                         <div class="grupo-card">
+                            <h4>Equipo de Mantenimiento General</h4>
+                            <p><strong>Técnicos:</strong> Juan Mora, Ana Campos</p>
+                            <p><strong>Vehículo:</strong> Toyota Hilux (Placa 123456)</p>
+                            <div class="form-group">
+                                <label>Asignar Ruta/Tarea:</label>
+                                <input type="text" class="input" placeholder="Describa la tarea o ruta...">
+                                <button class="btn-primary" style="margin-top: 10px;">Asignar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tecnicosSeleccionados = [];
+        let vehiculoSeleccionado = null;
+
+        function seleccionarTecnico(btn) {
+            if (tecnicosSeleccionados.length >= 3) {
+                alert("No se pueden seleccionar más de 3 técnicos.");
+                return;
+            }
+            const tecnicoDiv = btn.parentElement;
+            const nombreTecnico = tecnicoDiv.querySelector('span').innerText;
+            
+            if (tecnicosSeleccionados.includes(nombreTecnico)) {
+                alert("Este técnico ya ha sido seleccionado.");
+                return;
+            }
+
+            tecnicosSeleccionados.push(nombreTecnico);
+            tecnicoDiv.style.display = 'none'; // Ocultar de la lista de disponibles
+            actualizarVistaSeleccionados();
+        }
+
+        function seleccionarVehiculo(btn) {
+            if (vehiculoSeleccionado) {
+                alert("Ya hay un vehículo seleccionado. Elimínelo primero para seleccionar otro.");
+                return;
+            }
+            const vehiculoDiv = btn.parentElement;
+            vehiculoSeleccionado = vehiculoDiv.querySelector('span').innerText;
+            vehiculoDiv.style.display = 'none'; // Ocultar de la lista
+            actualizarVistaSeleccionados();
+        }
+
+        function actualizarVistaSeleccionados() {
+            const containerTecnicos = document.getElementById('tecnicos-seleccionados');
+            containerTecnicos.innerHTML = '';
+            tecnicosSeleccionados.forEach(nombre => {
+                containerTecnicos.innerHTML += `<div class="list-item"><span>${nombre}</span><button onclick="eliminarTecnico('''${nombre}''')">X</button></div>`;
+            });
+
+            const containerVehiculo = document.getElementById('vehiculo-seleccionado');
+            containerVehiculo.innerHTML = '';
+            if (vehiculoSeleccionado) {
+                containerVehiculo.innerHTML += `<div class="list-item"><span>${vehiculoSeleccionado}</span><button onclick="eliminarVehiculo()">X</button></div>`;
+            }
+        }
+
+        function eliminarTecnico(nombre) {
+            tecnicosSeleccionados = tecnicosSeleccionados.filter(t => t !== nombre);
+            // Mostrar de nuevo en la lista de disponibles
+            const listaDisponibles = document.getElementById('tecnicos-disponibles');
+            Array.from(listaDisponibles.children).forEach(div => {
+                if (div.querySelector('span').innerText === nombre) {
+                    div.style.display = 'flex';
+                }
+            });
+            actualizarVistaSeleccionados();
+        }
+
+        function eliminarVehiculo() {
+            const listaDisponibles = document.getElementById('vehiculos-disponibles');
+            Array.from(listaDisponibles.children).forEach(div => {
+                if (div.querySelector('span').innerText === vehiculoSeleccionado) {
+                    div.style.display = 'flex';
+                }
+            });
+            vehiculoSeleccionado = null;
+            actualizarVistaSeleccionados();
+        }
+
+        function crearGrupo() {
+            const nombreGrupo = document.getElementById('nombre-grupo').value;
+            if (!nombreGrupo) {
+                alert("Por favor, asigne un nombre al grupo.");
+                return;
+            }
+            if (tecnicosSeleccionados.length === 0) {
+                alert("Debe seleccionar al menos un técnico.");
+                return;
+            }
+
+            const containerGrupos = document.getElementById('grupos-trabajo');
+            const vehiculoHTML = vehiculoSeleccionado ? `<p><strong>Vehículo:</strong> ${vehiculoSeleccionado}</p>` : '<p><strong>Vehículo:</strong> No asignado</p>';
+            
+            const nuevoGrupoHTML = `
+                <div class="grupo-card">
+                    <h4>${nombreGrupo}</h4>
+                    <p><strong>Técnicos:</strong> ${tecnicosSeleccionados.join(', ')}</p>
+                    ${vehiculoHTML}
+                     <div class="form-group">
+                        <label>Asignar Ruta/Tarea:</label>
+                        <input type="text" class="input" placeholder="Describa la tarea o ruta...">
+                        <button class="btn-primary" style="margin-top: 10px;">Asignar</button>
+                    </div>
+                </div>
+            `;
+
+            containerGrupos.insertAdjacentHTML('beforeend', nuevoGrupoHTML);
+
+            // Limpiar selección
+            document.getElementById('nombre-grupo').value = '';
+            tecnicosSeleccionados = [];
+            vehiculoSeleccionado = null;
+            actualizarVistaSeleccionados();
+            // For a real implementation, this would be handled with a database.
+        }
+    </script>
+</body>
+</html>
