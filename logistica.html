@@ -57,6 +57,7 @@
             border: 1px solid #e2e8f0;
             border-radius: 0.5rem;
             background-color: #f8fafc;
+            margin-bottom: 0.5rem;
         }
         .grupo-card, .ticket-card {
             border: 1px solid #e2e8f0;
@@ -64,14 +65,13 @@
             padding: 1rem;
             margin-bottom: 1rem;
         }
-        .assign-group {
-            display: flex;
-            align-items: flex-end;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        .assign-group .form-group {
-            flex-grow: 1;
+        .btn-danger-sm {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -90,7 +90,6 @@
         <!-- Pestaña 1: Crear Grupos -->
         <div id="crear-grupos" class="tab-content active">
             <div class="logistica-grid">
-                <!-- Recursos Disponibles -->
                 <div class="logistica-col">
                     <div class="card">
                         <h3>Técnicos Disponibles</h3>
@@ -98,8 +97,6 @@
                             <div class="list-item"><span>Juan Mora</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
                             <div class="list-item"><span>Ana Campos</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
                             <div class="list-item"><span>Pedro Vargas</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
-                            <div class="list-item"><span>Lucía Jimenez</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
-                            <div class="list-item"><span>Carlos Rojas</span><button class="btn-secondary btn-sm" onclick="seleccionarTecnico(this)">+</button></div>
                         </div>
                     </div>
                     <div class="card">
@@ -107,10 +104,12 @@
                         <div id="vehiculos-disponibles">
                             <div class="list-item"><span>Toyota Hilux (Placa 123456)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
                             <div class="list-item"><span>Hyundai H1 (Placa 654321)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
+                            <div class="list-item"><span>Mitsubishi L200 (Placa 246810)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
+                            <div class="list-item"><span>Nissan Frontier (Placa 135791)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
+                            <div class="list-item"><span>Ford Ranger (Placa 987654)</span><button class="btn-secondary btn-sm" onclick="seleccionarVehiculo(this)">+</button></div>
                         </div>
                     </div>
                 </div>
-                <!-- Formulario para Crear Grupo -->
                 <div class="logistica-col">
                     <div class="card">
                         <h3>Crear Grupo de Trabajo</h3>
@@ -126,7 +125,7 @@
                             <label>Vehículo Asignado</label>
                             <div id="vehiculo-seleccionado" style="min-height: 30px; border: 1px dashed #ccc; padding: 10px; border-radius: 0.5rem;"></div>
                         </div>
-                        <button class="btn-primary" onclick="crearGrupo()">Crear Grupo y Ver en Listado</button>
+                        <button class="btn-primary" onclick="crearGrupo()">Crear Grupo</button>
                     </div>
                 </div>
             </div>
@@ -158,11 +157,8 @@
                 <div class="form-group">
                     <label>Seleccionar Ticket</label>
                     <select id="tickets-dropdown" class="input">
-                        <option>T-001: Mantenimiento preventivo A/C - Oficinas Centrales</option>
-                        <option>T-002: Instalación sistema de cámaras - Sucursal San Pedro</option>
-                        <option>T-003: Revisión de sistema eléctrico - Bodega Heredia</option>
-                        <option>T-004: Reparación de fuga de agua - Cliente Residencial Escazú</option>
-                        <option>T-005: Diagnóstico de red de datos - Empresa Logística Alajuela</option>
+                        <option>T-001: Mantenimiento preventivo A/C</option>
+                        <option>T-002: Instalación sistema de cámaras</option>
                     </select>
                 </div>
                 <button class="btn-primary" onclick="alert('Ticket asignado (función demo)')">Asignar Ticket</button>
@@ -181,11 +177,42 @@
                         <option>Cliente C (Residencial Los Reyes)</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Descripción de la Tarea</label>
-                    <textarea class="input" rows="4" placeholder="Detalle las tareas a realizar..."></textarea>
+                
+                <div class="card" style="background-color: #f8fafc;">
+                    <h4>Añadir Tareas al Ticket</h4>
+                    <div class="form-group">
+                        <label>Tarea Común</label>
+                        <select id="tarea-comun-select" class="input">
+                            <option value="">Seleccione una tarea...</option>
+                            <option>Limpieza de filtros de aire</option>
+                            <option>Revisión y recarga de refrigerante</option>
+                            <option>Limpieza de la unidad interior (evaporador)</option>
+                            <option>Limpieza de la unidad exterior (condensador)</option>
+                            <option>Verificación del drenaje de condensado</option>
+                            <option>Inspección y lubricación de ventiladores</option>
+                            <option>Revisión de conexiones eléctricas</option>
+                            <option>Comprobación de termostatos</option>
+                            <option>Detección y reparación de fugas</option>
+                            <option>Evaluación general del rendimiento</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción Adicional (Opcional)</label>
+                        <input type="text" id="tarea-descripcion" class="input" placeholder="Ej: Filtro de la oficina principal...">
+                    </div>
+                    <button class="btn-secondary" onclick="agregarTareaAlTicket()">+ Agregar Tarea</button>
                 </div>
-                <button class="btn-primary" onclick="alert('Ticket creado (función demo)')">Crear Ticket</button>
+
+                <div class="form-group">
+                    <h4>Tareas en este Ticket</h4>
+                    <div id="lista-tareas-ticket" style="padding: 10px; border: 1px solid #e2e8f0; border-radius: 0.5rem; min-height: 100px;">
+                        <!-- Las tareas agregadas aparecerán aquí -->
+                    </div>
+                </div>
+
+                <hr style="margin: 1.5rem 0;">
+
+                <button class="btn-primary" onclick="crearTicketFinal()">Crear Ticket de Trabajo</button>
             </div>
         </div>
     </div>
@@ -203,7 +230,7 @@
             });
         });
 
-        // Lógica para crear grupos (modificada)
+        // Lógica para crear grupos
         let tecnicosSeleccionados = [];
         let vehiculoSeleccionado = null;
 
@@ -238,13 +265,13 @@
             const containerTecnicos = document.getElementById('tecnicos-seleccionados');
             containerTecnicos.innerHTML = '';
             tecnicosSeleccionados.forEach(nombre => {
-                containerTecnicos.innerHTML += `<div class="list-item"><span>${nombre}</span><button onclick="eliminarTecnico('''${nombre}''')">X</button></div>`;
+                containerTecnicos.innerHTML += `<div class="list-item"><span>${nombre}</span><button class="btn-danger-sm" onclick="eliminarTecnico('''${nombre}''')">X</button></div>`;
             });
 
             const containerVehiculo = document.getElementById('vehiculo-seleccionado');
             containerVehiculo.innerHTML = '';
             if (vehiculoSeleccionado) {
-                containerVehiculo.innerHTML += `<div class="list-item"><span>${vehiculoSeleccionado}</span><button onclick="eliminarVehiculo()">X</button></div>`;
+                containerVehiculo.innerHTML += `<div class="list-item"><span>${vehiculoSeleccionado}</span><button class="btn-danger-sm" onclick="eliminarVehiculo()">X</button></div>`;
             }
         }
 
@@ -281,7 +308,6 @@
                 return;
             }
 
-            // Añadir al listado en la otra pestaña
             const containerGrupos = document.getElementById('grupos-trabajo-container');
             const vehiculoHTML = vehiculoSeleccionado ? `<p><strong>Vehículo:</strong> ${vehiculoSeleccionado}</p>` : '<p><strong>Vehículo:</strong> No asignado</p>';
             const nuevoGrupoHTML = `
@@ -293,18 +319,68 @@
                 </div>`;
             containerGrupos.insertAdjacentHTML('beforeend', nuevoGrupoHTML);
 
-            // Añadir al dropdown de la pestaña de asignación
             const equiposDropdown = document.getElementById('equipos-dropdown');
             const nuevaOpcion = new Option(nombreGrupo, nombreGrupo);
             equiposDropdown.add(nuevaOpcion);
 
-            // Limpiar formulario
             document.getElementById('nombre-grupo').value = '';
             tecnicosSeleccionados = [];
             vehiculoSeleccionado = null;
             actualizarVistaSeleccionados();
             
             alert(`Grupo "${nombreGrupo}" creado. Puede verlo en la pestaña 'Listado de Equipos'.`);
+        }
+
+        // Lógica para la pestaña de Crear Ticket
+        function agregarTareaAlTicket() {
+            const tareaSelect = document.getElementById('tarea-comun-select');
+            const tareaNombre = tareaSelect.value;
+            const tareaDesc = document.getElementById('tarea-descripcion').value;
+
+            if (!tareaNombre) {
+                alert('Por favor, seleccione una tarea de la lista.');
+                return;
+            }
+
+            const lista = document.getElementById('lista-tareas-ticket');
+            const nuevoLi = document.createElement('div');
+            nuevoLi.className = 'list-item';
+            
+            let html = `<span><strong>${tareaNombre}</strong>`;
+            if (tareaDesc) {
+                html += `: ${tareaDesc}`;
+            }
+            html += '</span>';
+            html += `<button onclick="this.parentElement.remove()" class="btn-danger-sm">X</button>`;
+
+            nuevoLi.innerHTML = html;
+            lista.appendChild(nuevoLi);
+
+            tareaSelect.value = '';
+            document.getElementById('tarea-descripcion').value = '';
+        }
+
+        let ticketCounter = 2;
+        function crearTicketFinal() {
+            const lista = document.getElementById('lista-tareas-ticket');
+            if (lista.children.length === 0) {
+                alert('Debe agregar al menos una tarea al ticket.');
+                return;
+            }
+            
+            ticketCounter++;
+            const nuevoTicketId = 'T-' + String(ticketCounter).padStart(3, '0');
+            
+            const ticketsDropdown = document.getElementById('tickets-dropdown');
+            const nuevaOpcion = new Option(`${nuevoTicketId}: Mantenimiento General`, nuevoTicketId);
+            ticketsDropdown.add(nuevaOpcion);
+
+            alert(`Ticket ${nuevoTicketId} creado exitosamente.`);
+            
+            // Limpiar todo
+            lista.innerHTML = '';
+            document.getElementById('tarea-comun-select').value = '';
+            document.getElementById('tarea-descripcion').value = '';
         }
     </script>
 </body>
