@@ -12,6 +12,7 @@
             border-bottom: 2px solid #d1d5db;
             display: flex;
             align-items: center;
+            flex-shrink: 0; /* Evita que la barra se encoja */
         }
         .ribbon-logo {
             font-size: 1.4rem;
@@ -42,6 +43,38 @@
             margin: 0 10px;
             align-self: center;
         }
+
+        /* Estilos para el layout de dashboard */
+        html, .dashboard-body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden; /* Evita el scroll en el body */
+        }
+        .dashboard-body {
+            display: flex;
+            flex-direction: column;
+        }
+        .dashboard-main {
+            flex-grow: 1; /* El contenido principal crece para llenar el espacio */
+            overflow-y: auto; /* Permite scroll en el área de contenido si es necesario */
+            padding: 0; /* Quitamos el padding del contenedor principal */
+        }
+        .container {
+            height: 100%;
+            width: 100%;
+            max-width: none; /* Anulamos el max-width para que ocupe todo */
+            padding: 0; /* Anulamos el padding */
+            margin: 0;
+        }
+        .tab-content {
+            height: 100%;
+        }
+        .content-iframe {
+            border: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         @media (max-width: 600px) {
             .ribbon-bar {
                 flex-direction: column;
@@ -51,10 +84,16 @@
             .tabs {
                 flex-wrap: wrap;
             }
+            html, .dashboard-body {
+                overflow: auto; /* Permitir scroll en móvil */
+            }
+            .dashboard-main {
+                overflow-y: visible;
+            }
         }
     </style>
 </head>
-<body>
+<body class="dashboard-body">
     <div class="ribbon-bar">
         <span class="ribbon-logo">INVAES</span>
         <div class="tabs">
@@ -68,46 +107,42 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="tab-content active" id="calendario">
-            <h2>Calendario</h2>
-            <p>Visualiza y administra eventos de mantenimiento, servicios y turnos.</p>
-            <!-- Aquí irá el calendario o integración futura -->
-            <iframe src="https://calendar.google.com/calendar/embed?src=85b1ceeeef46629f5b827b5727a153d2d5045f7d6c12f244f378650fc8c2ea37%40group.calendar.google.com&ctz=America%2FCosta_Rica" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="tab-content active" id="calendario">
+                <h2>Calendario</h2>
+                <p>Visualiza y administra eventos de mantenimiento, servicios y turnos.</p>
+                <iframe src="https://calendar.google.com/calendar/embed?src=85b1ceeeef46629f5b827b5727a153d2d5045f7d6c12f244f378650fc8c2ea37%40group.calendar.google.com&ctz=America%2FCosta_Rica" class="content-iframe" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div class="tab-content" id="logistica">
+                <h2>Logística</h2>
+                <p>Gestiona la flota de vehículos, asignación de técnicos y rutas.</p>
+                <iframe src="./logistica.html" class="content-iframe" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div class="tab-content" id="administracion">
+                <h2>Administración</h2>
+                <p>Recursos humanos, facturación y gestión general administrativa.</p>
+                <iframe src="./administracion.html" class="content-iframe" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div class="tab-content" id="inventario">
+                <h2>Inventarios</h2>
+                <p>Control de bodegas, materiales, productos, repuestos y demás.</p>
+                <iframe src="./inventario.html" class="content-iframe" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div class="tab-content" id="mantenimientos">
+                <h2>Mantenimientos</h2>
+                <p>Listado y control de mantenimientos preventivos y correctivos.</p>
+            </div>
+            <div class="tab-content" id="configuracion">
+                <h2>Configuración</h2>
+                <p>Parámetros del sistema, usuarios, roles, y preferencias.</p>
+                <iframe src="./Mant_usuarios.html" class="content-iframe" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div class="tab-content" id="clientes">
+                <iframe src="./mant_clientes.html" class="content-iframe" frameborder="0" scrolling="yes"></iframe>
+            </div>
         </div>
-        <div class="tab-content" id="logistica">
-            <h2>Logística</h2>
-            <p>Gestiona la flota de vehículos, asignación de técnicos y rutas.</p>
-            <iframe src="./logistica.html" style="border: 0" width="1100" height="1000" frameborder="0" scrolling="no"></iframe>
-        </div>
-        <div class="tab-content" id="administracion">
-            <h2>Administración</h2>
-            <p>Recursos humanos, facturación y gestión general administrativa.</p>
-            <iframe src="./administracion.html" style="border: 0" width="1100" height="1000" frameborder="0" scrolling="no"></iframe>
-        </div>
-        <div class="tab-content" id="inventario">
-            <h2>Inventarios</h2>
-            <p>Control de bodegas, materiales, productos, repuestos y demás.</p>
-            <!-- Contenido administración -->
-            <iframe src="./inventario.html" style="border: 0" width="1100" height="1400" frameborder="0" scrolling="no"></iframe>
-        </div>
-        <div class="tab-content" id="mantenimientos">
-            <h2>Mantenimientos</h2>
-            <p>Listado y control de mantenimientos preventivos y correctivos.</p>
-            <!-- Contenido mantenimientos -->
-        </div>
-        <div class="tab-content" id="configuracion">
-            <h2>Configuración</h2>
-            <p>Parámetros del sistema, usuarios, roles, y preferencias.</p>
-            <!-- Contenido configuración -->
-            <iframe src="./Mant_usuarios.html" style="border: 0" width="1100" height="600" frameborder="0" scrolling="no"></iframe>
-        </div>
-        <div class="tab-content" id="clientes">
-            <h2>Clientes</h2>
-            <p>Gestión de la cartera de clientes y sus parámetros de servicio.</p>
-            <iframe src="./mant_clientes.html" style="border: 0" width="1100" height="1000" frameborder="0" scrolling="no"></iframe>
-        </div>
-    </div>
+    </main>
 
     <script>
         const buttons = document.querySelectorAll('.tab-btn');

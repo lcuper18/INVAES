@@ -1,0 +1,210 @@
+[
+  {
+    "id_cliente": "CLI001",
+    "nombre_cliente": "Innovatech Solutions",
+    "sedes": [
+      {
+        "nombre_sede": "Oficina Central",
+        "direccion": "San José, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Juan Pérez",
+            "telefonos": ["+506 8888-8888", "+506 2222-2222"],
+            "emails": ["juan.perez@innovatech.com", "contacto@innovatech.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI002",
+    "nombre_cliente": "Quantum Dynamics",
+    "sedes": [
+      {
+        "nombre_sede": "Sede Principal",
+        "direccion": "Heredia, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Ana Gómez",
+            "telefonos": ["+506 7777-7777"],
+            "emails": ["ana.gomez@quantum.com"]
+          },
+          {
+            "nombre_contacto": "Carlos Rojas",
+            "telefonos": ["+506 6666-6666"],
+            "emails": ["carlos.rojas@quantum.com"]
+          }
+        ]
+      },
+      {
+        "nombre_sede": "Centro de Investigación",
+        "direccion": "Cartago, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Laura Torres",
+            "telefonos": ["+506 5555-5555"],
+            "emails": ["laura.torres@quantum.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI003",
+    "nombre_cliente": "Nexus Enterprises",
+    "sedes": [
+      {
+        "nombre_sede": "Oficina Corporativa",
+        "direccion": "Alajuela, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Pedro Morales",
+            "telefonos": ["+506 4444-4444"],
+            "emails": ["pedro.morales@nexus.com", "ventas@nexus.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI004",
+    "nombre_cliente": "Apex Industries",
+    "sedes": [
+      {
+        "nombre_sede": "Planta de Producción",
+        "direccion": "Limón, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Sofía Castro",
+            "telefonos": ["+506 3333-3333"],
+            "emails": ["sofia.castro@apex.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI005",
+    "nombre_cliente": "Stellar Group",
+    "sedes": [
+      {
+        "nombre_sede": "Oficina Principal",
+        "direccion": "Guanacaste, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Diego Jiménez",
+            "telefonos": ["+506 9999-9999", "+506 2345-6789"],
+            "emails": ["diego.jimenez@stellar.com"]
+          }
+        ]
+      },
+      {
+        "nombre_sede": "Sucursal Tamarindo",
+        "direccion": "Tamarindo, Guanacaste, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "María Fernández",
+            "telefonos": ["+506 1111-1111"],
+            "emails": ["maria.fernandez@stellar.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI006",
+    "nombre_cliente": "Meridian Corp",
+    "sedes": [
+      {
+        "nombre_sede": "Sede Central",
+        "direccion": "Puntarenas, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Luis Arias",
+            "telefonos": ["+506 1212-1212"],
+            "emails": ["luis.arias@meridian.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI007",
+    "nombre_cliente": "Vertex Global",
+    "sedes": [
+      {
+        "nombre_sede": "Oficina San José",
+        "direccion": "San José, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Elena Solano",
+            "telefonos": ["+506 3434-3434"],
+            "emails": ["elena.solano@vertex.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI008",
+    "nombre_cliente": "Pinnacle Systems",
+    "sedes": [
+      {
+        "nombre_sede": "Centro de Datos",
+        "direccion": "Heredia, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Andrés Vargas",
+            "telefonos": ["+506 5656-5656", "+506 7878-7878"],
+            "emails": ["andres.vargas@pinnacle.com", "soporte@pinnacle.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI009",
+    "nombre_cliente": "Momentum Logistics",
+    "sedes": [
+      {
+        "nombre_sede": "Bodega Principal",
+        "direccion": "Alajuela, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Gabriela Soto",
+            "telefonos": ["+506 8989-8989"],
+            "emails": ["gabriela.soto@momentum.com"]
+          }
+        ]
+      },
+      {
+        "nombre_sede": "Oficina Administrativa",
+        "direccion": "San José, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Roberto Castillo",
+            "telefonos": ["+506 0000-0000"],
+            "emails": ["roberto.castillo@momentum.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI010",
+    "nombre_cliente": "Synergy Corp",
+    "sedes": [
+      {
+        "nombre_sede": "Oficina Central",
+        "direccion": "Cartago, Costa Rica",
+        "contactos": [
+          {
+            "nombre_contacto": "Valeria Mora",
+            "telefonos": ["+506 2121-2121"],
+            "emails": ["valeria.mora@synergy.com"]
+          }
+        ]
+      }
+    ]
+  }
+]
