@@ -66,6 +66,17 @@
             "emails": ["pedro.morales@nexus.com", "ventas@nexus.com"]
           }
         ]
+      },
+      {
+        "nombre_sede": "Bodega Central",
+        "direccion": "Guanacaste, Liberia",
+        "contactos": [
+          {
+            "nombre_contacto": "Elena Solano",
+            "telefonos": ["+506 3333-3333"],
+            "emails": ["elena.solano@nexus.com", "bodega@nexus.com"]
+          }
+        ]
       }
     ]
   },
