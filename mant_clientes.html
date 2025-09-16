@@ -115,6 +115,9 @@
 
         <!-- Contenido de Pestaña: Lista de Clientes -->
         <div id="tab-lista" class="tab-content-cliente">
+            <div class="mb-4">
+                <input type="text" id="search-input" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm" placeholder="Buscar cliente...">
+            </div>
             <div id="client-list-container" class="space-y-4">
                 <!-- Los clientes se cargarán aquí -->
             </div>
@@ -275,6 +278,20 @@
                         });
                     })
                     .catch(error => console.error('Error al cargar los clientes:', error));
+
+                const searchInput = document.getElementById('search-input');
+                searchInput.addEventListener('keyup', () => {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const clientCards = document.querySelectorAll('.client-card');
+                    clientCards.forEach(card => {
+                        const cardText = card.textContent.toLowerCase();
+                        if (cardText.includes(searchTerm)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
             }
 
             // Función para inicializar toda la lógica de la aplicación
