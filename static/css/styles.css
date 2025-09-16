@@ -112,3 +112,13 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* Styles for the left and right frames */
+.dashboard-main {
+    border-left: 1px solid #d1d5db; /* Light gray border */
+    border-right: 1px solid #d1d5db; /* Light gray border */
+    margin: 0 20px; /* Adjust margin as needed to create space for the frame */
+    padding: 20px; /* Add some padding inside the frame */
+    background-color: #ffffff; /* White background for the content area */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+}
