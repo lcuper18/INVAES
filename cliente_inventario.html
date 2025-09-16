@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario de Clientes</title>
+    <link rel="stylesheet" href="./static/css/styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        h1 {
+            color: #0d9488;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            border-bottom: 2px solid #e0e7ef;
+            padding-bottom: 15px;
+        }
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+            justify-content: center;
+            align-items: center;
+        }
+        .filter-controls label {
+            font-weight: 600;
+            color: #555;
+        }
+        .filter-controls input[type="text"],
+        .filter-controls select {
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 200px;
+            box-sizing: border-box;
+        }
+        .filter-controls button {
+            background-color: #0d9488;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .filter-controls button:hover {
+            background-color: #0a7a6f;
+        }
+        .inventory-table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        .inventory-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .inventory-table th,
+        .inventory-table td {
+            border: 1px solid #e0e7ef;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        .inventory-table th {
+            background-color: #f8fafd;
+            color: #0d9488;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        .inventory-table tr:nth-child(even) {
+            background-color: #fdfdfd;
+        }
+        .inventory-table tr:hover {
+            background-color: #f0f5f8;
+        }
+        .status-operativo {
+            color: #10b981;
+            font-weight: 600;
+        }
+        .status-reparacion {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+        .status-inactivo {
+            color: #ef4444;
+            font-weight: 600;
+        }
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            font-size: 1.1em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Inventario de Clientes</h1>
+
+        <div class="filter-controls">
+            <label for="filter-client">Cliente:</label>
+            <input type="text" id="filter-client" placeholder="Nombre del cliente">
+
+            <label for="filter-equipment">Equipo:</label>
+            <input type="text" id="filter-equipment" placeholder="Tipo de equipo">
+
+            <label for="filter-status">Estado:</label>
+            <select id="filter-status">
+                <option value="">Todos</option>
+                <option value="Operativo">Operativo</option>
+                <option value="Reparación">Reparación</option>
+                <option value="Inactivo">Inactivo</option>
+            </select>
+
+            <button onclick="applyFilters()">Filtrar</button>
+            <button onclick="clearFilters()">Limpiar Filtros</button>
+        </div>
+
+        <div class="inventory-table-container">
+            <table class="inventory-table">
+                <thead>
+                    <tr>
+                        <th>ID Cliente</th>
+                        <th>Cliente</th>
+                        <th>Sede</th>
+                        <th>Equipo</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Capacidad (BTU)</th>
+                        <th>Fecha Instalación</th>
+                        <th>Estado Equipo</th>
+                        <th>Último Mantenimiento</th>
+                    </tr>
+                </thead>
+                <tbody id="inventory-table-body">
+                    <!-- Inventory data will be loaded here -->
+                </tbody>
+            </table>
+            <p id="no-results-message" class="no-results" style="display: none;">No se encontraron resultados.</p>
+        </div>
+    </div>
+
+    <script>
+        let allInventoryData = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('../db/inventario_cliente.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Assuming the JSON is an array of objects, even if it was malformed initially.
+                    // If it's a single object with numeric keys, convert it to an array.
+                    if (!Array.isArray(data)) {
+                        allInventoryData = Object.values(data);
+                    } else {
+                        allInventoryData = data;
+                    }
+                    displayInventory(allInventoryData);
+                })
+                .catch(error => {
+                    console.error('Error fetching or parsing inventory data:', error);
+                    document.getElementById('inventory-table-body').innerHTML = `<tr><td colspan="10" class="no-results">Error al cargar los datos del inventario.</td></tr>`;
+                });
+        });
+
+        function displayInventory(inventoryItems) {
+            const tableBody = document.getElementById('inventory-table-body');
+            tableBody.innerHTML = ''; // Clear existing rows
+            const noResultsMessage = document.getElementById('no-results-message');
+
+            if (inventoryItems.length === 0) {
+                noResultsMessage.style.display = 'block';
+                return;
+            }
+            noResultsMessage.style.display = 'none';
+
+            inventoryItems.forEach(item => {
+                const row = tableBody.insertRow();
+                row.insertCell().textContent = item.id_cliente;
+                row.insertCell().textContent = item.nombre_cliente;
+                row.insertCell().textContent = item.nombre_sede;
+                row.insertCell().textContent = item.equipo;
+                row.insertCell().textContent = item.marca;
+                row.insertCell().textContent = item.modelo;
+                row.insertCell().textContent = item.capacidad_btu || 'N/A';
+                row.insertCell().textContent = item.fecha_instalacion;
+                const statusCell = row.insertCell();
+                statusCell.textContent = item.estado_equipo;
+                statusCell.classList.add(getStatusClass(item.estado_equipo));
+                row.insertCell().textContent = item.ultimo_mantenimiento;
+            });
+        }
+
+        function getStatusClass(status) {
+            switch (status) {
+                case 'Operativo':
+                    return 'status-operativo';
+                case 'Reparación':
+                    return 'status-reparacion';
+                case 'Inactivo':
+                    return 'status-inactivo';
+                default:
+                    return '';
+            }
+        }
+
+        function applyFilters() {
+            const clientFilter = document.getElementById('filter-client').value.toLowerCase();
+            const equipmentFilter = document.getElementById('filter-equipment').value.toLowerCase();
+            const statusFilter = document.getElementById('filter-status').value.toLowerCase();
+
+            const filteredData = allInventoryData.filter(item => {
+                const matchesClient = item.nombre_cliente.toLowerCase().includes(clientFilter);
+                const matchesEquipment = item.equipo.toLowerCase().includes(equipmentFilter);
+                const matchesStatus = statusFilter === '' || item.estado_equipo.toLowerCase() === statusFilter;
+                return matchesClient && matchesEquipment && matchesStatus;
+            });
+
+            displayInventory(filteredData);
+        }
+
+        function clearFilters() {
+            document.getElementById('filter-client').value = '';
+            document.getElementById('filter-equipment').value = '';
+            document.getElementById('filter-status').value = '';
+            displayInventory(allInventoryData);
+        }
+    </script>
+</body>
+</html>
