@@ -5,6 +5,7 @@
     "razon_social": "Innovatech Solutions S.A.",
     "nombre_fantasia": "Innovatech",
     "cedula_juridica": "3-101-123456",
+    "estado": "activo",
     "sedes": [
       {
         "nombre_sede": "Oficina Central",
@@ -25,6 +26,7 @@
     "razon_social": "Quantum Dynamics S.R.L.",
     "nombre_fantasia": "Quantum",
     "cedula_juridica": "3-102-789012",
+    "estado": "activo",
     "sedes": [
       {
         "nombre_sede": "Sede Principal",
@@ -55,6 +57,7 @@
     "razon_social": "Nexus Enterprises S.A.",
     "nombre_fantasia": "Nexus",
     "cedula_juridica": "3-101-345678",
+    "estado": "activo",
     "sedes": [
       {
         "nombre_sede": "Oficina Corporativa",
@@ -87,6 +90,7 @@
     "apellido1": "Rivera",
     "apellido2": "Salas",
     "cedula": "1-1111-1111",
+    "estado": "activo",
     "sedes": [
       {
         "nombre_sede": "Residencia",
@@ -108,6 +112,7 @@
     "apellido1": "Jiménez",
     "apellido2": "Vega",
     "cedula": "2-2222-2222",
+    "estado": "activo",
     "sedes": [
       {
         "nombre_sede": "Oficina personal",
@@ -117,6 +122,71 @@
             "nombre_contacto": "Laura Jiménez",
             "telefonos": ["+506 7777-5678"],
             "emails": ["laura.jimenez@email.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI013",
+    "tipo_persona": "fisica",
+    "nombre": "Ana",
+    "apellido1": "Mora",
+    "apellido2": "Vindas",
+    "cedula": "1-1111-2222",
+    "estado": "inactivo",
+    "sedes": [
+      {
+        "nombre_sede": "Casa",
+        "direccion": "Puntarenas, Esparza",
+        "contactos": [
+          {
+            "nombre_contacto": "Ana Mora",
+            "telefonos": ["+506 8888-3333"],
+            "emails": ["ana.mora@email.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI014",
+    "tipo_persona": "fisica",
+    "nombre": "Juan",
+    "apellido1": "Chaves",
+    "apellido2": "Solis",
+    "cedula": "4-2222-1111",
+    "estado": "inactivo",
+    "sedes": [
+      {
+        "nombre_sede": "Oficina",
+        "direccion": "Limon, Pococí",
+        "contactos": [
+          {
+            "nombre_contacto": "Juan Chaves",
+            "telefonos": ["+506 7777-4444"],
+            "emails": ["juan.chaves@email.com"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_cliente": "CLI015",
+    "tipo_persona": "juridica",
+    "razon_social": "Tech Solutions S.A.",
+    "nombre_fantasia": "TechSol",
+    "cedula_juridica": "3-101-999999",
+    "estado": "inactivo",
+    "sedes": [
+      {
+        "nombre_sede": "Sede San Carlos",
+        "direccion": "Alajuela, San Carlos",
+        "contactos": [
+          {
+            "nombre_contacto": "Sofia Perez",
+            "telefonos": ["+506 6666-7777"],
+            "emails": ["sofia.perez@techsol.com"]
           }
         ]
       }

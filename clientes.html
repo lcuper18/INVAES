@@ -621,7 +621,8 @@
                                 sedeName: sede.nombre_sede,
                                 contactName: contacto.nombre_contacto,
                                 email: contacto.emails[0],
-                                phone: contacto.telefonos[0]
+                                phone: contacto.telefonos[0],
+                                estado: client.estado
                             });
                         });
                     });
@@ -643,6 +644,9 @@
                 const card = document.createElement('div');
                 card.className = 'client-card';
 
+                const statusClass = contact.estado === 'activo' ? 'status-active' : 'status-inactive';
+                const statusText = contact.estado === 'activo' ? 'Activo' : 'Inactivo';
+
                 card.innerHTML = `
                     <div class="client-card-header">
                         <h4 class="client-name">${contact.clientName}</h4>
@@ -655,7 +659,7 @@
                         <p><strong>Teléfono:</strong> ${contact.phone || 'N/A'}</p>
                     </div>
                     <div class="client-card-footer">
-                        <span class="status-active">Activo</span> <!-- Assuming status is always active for now -->
+                        <span class="${statusClass}">${statusText}</span>
                         <div class="actions">
                             <button class="btn-secondary btn-sm edit-client-btn" data-client-id="${contact.id_cliente}">Editar</button>
                             <button class="btn-danger btn-sm delete-client-btn" data-client-id="${contact.id_cliente}">Eliminar</button>
@@ -683,7 +687,8 @@
                     contact.sedeName.toLowerCase().includes(query) ||
                     contact.contactName.toLowerCase().includes(query) ||
                     (contact.email && contact.email.toLowerCase().includes(query)) ||
-                    (contact.phone && contact.phone.toLowerCase().includes(query))
+                    (contact.phone && contact.phone.toLowerCase().includes(query)) ||
+                    contact.estado.toLowerCase().includes(query)
                 );
             });
 
