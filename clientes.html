@@ -435,14 +435,7 @@
             <h3 class="section-title">Búsqueda y Filtros</h3>
             <!-- JS: Lógica para filtrar la tabla de clientes según estos campos -->
             <div class="filter-bar">
-                <input type="text" id="search-name" class="input" placeholder="Buscar por nombre...">
-                <input type="text" id="search-id" class="input" placeholder="Buscar por identificación...">
-                <select id="filter-status" class="input">
-                    <option value="">Todos los estados</option>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                </select>
-                <button class="btn-primary" id="search-btn">Buscar</button>
+                <input type="text" id="search-input" class="input" placeholder="Buscar cliente, contacto, sede, cédula...">
             </div>
         </div>
 
@@ -597,7 +590,7 @@
 
         // --- INICIO: LÓGICA DE CARGA DE CLIENTES ---
 
-        let clientsData = [];
+        let allContacts = [];
 
         async function loadClients() {
             try {
@@ -605,49 +598,67 @@
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                clientsData = await response.json();
-                displayClients(clientsData);
+                const clientsData = await response.json();
+                
+                allContacts = [];
+                clientsData.forEach(client => {
+                    let clientName = '';
+                    let clientId = '';
+                    if (client.tipo_persona === 'juridica') {
+                        clientName = client.razon_social;
+                        clientId = client.cedula_juridica;
+                    } else {
+                        clientName = `${client.nombre} ${client.apellido1} ${client.apellido2}`;
+                        clientId = client.cedula;
+                    }
+
+                    client.sedes.forEach(sede => {
+                        sede.contactos.forEach(contacto => {
+                            allContacts.push({
+                                clientName,
+                                clientId,
+                                id_cliente: client.id_cliente,
+                                sedeName: sede.nombre_sede,
+                                contactName: contacto.nombre_contacto,
+                                email: contacto.emails[0],
+                                phone: contacto.telefonos[0]
+                            });
+                        });
+                    });
+                });
+
+                displayContacts(allContacts);
+
             } catch (error) {
                 console.error("No se pudo cargar el archivo de clientes:", error);
             }
         }
 
-        function displayClients(clients) {
+        function displayContacts(contacts) {
             const container = document.getElementById('client-cards-container');
             if (!container) return;
             container.innerHTML = '';
 
-            clients.forEach(client => {
+            contacts.forEach(contact => {
                 const card = document.createElement('div');
                 card.className = 'client-card';
-                
-                let clientName = '';
-                let clientId = '';
-                if (client.tipo_persona === 'juridica') {
-                    clientName = client.razon_social;
-                    clientId = client.cedula_juridica;
-                } else {
-                    clientName = `${client.nombre} ${client.apellido1} ${client.apellido2}`;
-                    clientId = client.cedula;
-                }
-
-                let mainContact = client.sedes[0]?.contactos[0];
 
                 card.innerHTML = `
                     <div class="client-card-header">
-                        <h4 class="client-name">${clientName}</h4>
-                        <span class="client-id">${clientId}</span>
+                        <h4 class="client-name">${contact.clientName}</h4>
+                        <span class="client-id">${contact.clientId}</span>
                     </div>
                     <div class="client-card-body">
-                        <p><strong>Contacto Principal:</strong> ${mainContact?.nombre_contacto || 'N/A'}</p>
-                        <p><strong>Email:</strong> ${mainContact?.emails[0] || 'N/A'}</p>
-                        <p><strong>Teléfono:</strong> ${mainContact?.telefonos[0] || 'N/A'}</p>
+                        <p><strong>Sede:</strong> ${contact.sedeName}</p>
+                        <p><strong>Contacto:</strong> ${contact.contactName || 'N/A'}</p>
+                        <p><strong>Email:</strong> ${contact.email || 'N/A'}</p>
+                        <p><strong>Teléfono:</strong> ${contact.phone || 'N/A'}</p>
                     </div>
                     <div class="client-card-footer">
                         <span class="status-active">Activo</span> <!-- Assuming status is always active for now -->
                         <div class="actions">
-                            <button class="btn-secondary btn-sm edit-client-btn" data-client-id="${client.id_cliente}">Editar</button>
-                            <button class="btn-danger btn-sm delete-client-btn" data-client-id="${client.id_cliente}">Eliminar</button>
+                            <button class="btn-secondary btn-sm edit-client-btn" data-client-id="${contact.id_cliente}">Editar</button>
+                            <button class="btn-danger btn-sm delete-client-btn" data-client-id="${contact.id_cliente}">Eliminar</button>
                         </div>
                     </div>
                 `;
@@ -660,37 +671,26 @@
         // --- FIN: LÓGICA DE CARGA DE CLIENTES ---
 
         // --- INICIO: LÓGICA DE BÚSQUEDA ---
-        const searchNameInput = document.getElementById('search-name');
-        const searchIdInput = document.getElementById('search-id');
-        const searchBtn = document.getElementById('search-btn');
+        const searchInput = document.getElementById('search-input');
 
         function filterClients() {
-            const nameQuery = searchNameInput.value.toLowerCase();
-            const idQuery = searchIdInput.value.toLowerCase();
+            const query = searchInput.value.toLowerCase();
 
-            const filteredClients = clientsData.filter(client => {
-                let clientName = '';
-                let clientId = '';
-                if (client.tipo_persona === 'juridica') {
-                    clientName = client.razon_social.toLowerCase();
-                    clientId = client.cedula_juridica.toLowerCase();
-                } else {
-                    clientName = `${client.nombre} ${client.apellido1} ${client.apellido2}`.toLowerCase();
-                    clientId = client.cedula.toLowerCase();
-                }
-
-                const nameMatch = clientName.includes(nameQuery);
-                const idMatch = clientId.includes(idQuery);
-
-                return nameMatch && idMatch;
+            const filteredContacts = allContacts.filter(contact => {
+                return (
+                    contact.clientName.toLowerCase().includes(query) ||
+                    contact.clientId.toLowerCase().includes(query) ||
+                    contact.sedeName.toLowerCase().includes(query) ||
+                    contact.contactName.toLowerCase().includes(query) ||
+                    (contact.email && contact.email.toLowerCase().includes(query)) ||
+                    (contact.phone && contact.phone.toLowerCase().includes(query))
+                );
             });
 
-            displayClients(filteredClients);
+            displayContacts(filteredContacts);
         }
 
-        searchBtn.addEventListener('click', filterClients);
-        searchNameInput.addEventListener('keyup', filterClients);
-        searchIdInput.addEventListener('keyup', filterClients);
+        searchInput.addEventListener('keyup', filterClients);
         // --- FIN: LÓGICA DE BÚSQUEDA ---
 
     });
