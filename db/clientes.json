@@ -1,7 +1,10 @@
 [
   {
     "id_cliente": "CLI001",
-    "nombre_cliente": "Innovatech Solutions",
+    "tipo_persona": "juridica",
+    "razon_social": "Innovatech Solutions S.A.",
+    "nombre_fantasia": "Innovatech",
+    "cedula_juridica": "3-101-123456",
     "sedes": [
       {
         "nombre_sede": "Oficina Central",
@@ -18,7 +21,10 @@
   },
   {
     "id_cliente": "CLI002",
-    "nombre_cliente": "Quantum Dynamics",
+    "tipo_persona": "juridica",
+    "razon_social": "Quantum Dynamics S.R.L.",
+    "nombre_fantasia": "Quantum",
+    "cedula_juridica": "3-102-789012",
     "sedes": [
       {
         "nombre_sede": "Sede Principal",
@@ -28,22 +34,6 @@
             "nombre_contacto": "Ana Gómez",
             "telefonos": ["+506 7777-7777"],
             "emails": ["ana.gomez@quantum.com"]
-          },
-          {
-            "nombre_contacto": "Carlos Rojas",
-            "telefonos": ["+506 6666-6666"],
-            "emails": ["carlos.rojas@quantum.com"]
-          }
-        ]
-      },
-      {
-        "nombre_sede": "Centro de Investigación",
-        "direccion": "Cartago, Costa Rica",
-        "contactos": [
-          {
-            "nombre_contacto": "Laura Torres",
-            "telefonos": ["+506 5555-5555"],
-            "emails": ["laura.torres@quantum.com"]
           }
         ]
       }
@@ -51,7 +41,10 @@
   },
   {
     "id_cliente": "CLI003",
-    "nombre_cliente": "Nexus Enterprises",
+    "tipo_persona": "juridica",
+    "razon_social": "Nexus Enterprises S.A.",
+    "nombre_fantasia": "Nexus",
+    "cedula_juridica": "3-101-345678",
     "sedes": [
       {
         "nombre_sede": "Oficina Corporativa",
@@ -67,141 +60,42 @@
     ]
   },
   {
-    "id_cliente": "CLI004",
-    "nombre_cliente": "Apex Industries",
+    "id_cliente": "CLI011",
+    "tipo_persona": "fisica",
+    "nombre": "Carlos",
+    "apellido1": "Rivera",
+    "apellido2": "Salas",
+    "cedula": "1-1111-1111",
     "sedes": [
       {
-        "nombre_sede": "Planta de Producción",
-        "direccion": "Limón, Costa Rica",
+        "nombre_sede": "Residencia",
+        "direccion": "San José, Desamparados",
         "contactos": [
           {
-            "nombre_contacto": "Sofía Castro",
-            "telefonos": ["+506 3333-3333"],
-            "emails": ["sofia.castro@apex.com"]
+            "nombre_contacto": "Carlos Rivera",
+            "telefonos": ["+506 8888-1234"],
+            "emails": ["carlos.rivera@email.com"]
           }
         ]
       }
     ]
   },
   {
-    "id_cliente": "CLI005",
-    "nombre_cliente": "Stellar Group",
+    "id_cliente": "CLI012",
+    "tipo_persona": "fisica",
+    "nombre": "Laura",
+    "apellido1": "Jiménez",
+    "apellido2": "Vega",
+    "cedula": "2-2222-2222",
     "sedes": [
       {
-        "nombre_sede": "Oficina Principal",
-        "direccion": "Guanacaste, Costa Rica",
+        "nombre_sede": "Oficina personal",
+        "direccion": "Cartago, Paraíso",
         "contactos": [
           {
-            "nombre_contacto": "Diego Jiménez",
-            "telefonos": ["+506 9999-9999", "+506 2345-6789"],
-            "emails": ["diego.jimenez@stellar.com"]
-          }
-        ]
-      },
-      {
-        "nombre_sede": "Sucursal Tamarindo",
-        "direccion": "Tamarindo, Guanacaste, Costa Rica",
-        "contactos": [
-          {
-            "nombre_contacto": "María Fernández",
-            "telefonos": ["+506 1111-1111"],
-            "emails": ["maria.fernandez@stellar.com"]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id_cliente": "CLI006",
-    "nombre_cliente": "Meridian Corp",
-    "sedes": [
-      {
-        "nombre_sede": "Sede Central",
-        "direccion": "Puntarenas, Costa Rica",
-        "contactos": [
-          {
-            "nombre_contacto": "Luis Arias",
-            "telefonos": ["+506 1212-1212"],
-            "emails": ["luis.arias@meridian.com"]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id_cliente": "CLI007",
-    "nombre_cliente": "Vertex Global",
-    "sedes": [
-      {
-        "nombre_sede": "Oficina San José",
-        "direccion": "San José, Costa Rica",
-        "contactos": [
-          {
-            "nombre_contacto": "Elena Solano",
-            "telefonos": ["+506 3434-3434"],
-            "emails": ["elena.solano@vertex.com"]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id_cliente": "CLI008",
-    "nombre_cliente": "Pinnacle Systems",
-    "sedes": [
-      {
-        "nombre_sede": "Centro de Datos",
-        "direccion": "Heredia, Costa Rica",
-        "contactos": [
-          {
-            "nombre_contacto": "Andrés Vargas",
-            "telefonos": ["+506 5656-5656", "+506 7878-7878"],
-            "emails": ["andres.vargas@pinnacle.com", "soporte@pinnacle.com"]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id_cliente": "CLI009",
-    "nombre_cliente": "Momentum Logistics",
-    "sedes": [
-      {
-        "nombre_sede": "Bodega Principal",
-        "direccion": "Alajuela, Costa Rica",
-        "contactos": [
-          {
-            "nombre_contacto": "Gabriela Soto",
-            "telefonos": ["+506 8989-8989"],
-            "emails": ["gabriela.soto@momentum.com"]
-          }
-        ]
-      },
-      {
-        "nombre_sede": "Oficina Administrativa",
-        "direccion": "San José, Costa Rica",
-        "contactos": [
-          {
-            "nombre_contacto": "Roberto Castillo",
-            "telefonos": ["+506 0000-0000"],
-            "emails": ["roberto.castillo@momentum.com"]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id_cliente": "CLI010",
-    "nombre_cliente": "Synergy Corp",
-    "sedes": [
-      {
-        "nombre_sede": "Oficina Central",
-        "direccion": "Cartago, Costa Rica",
-        "contactos": [
-          {
-            "nombre_contacto": "Valeria Mora",
-            "telefonos": ["+506 2121-2121"],
-            "emails": ["valeria.mora@synergy.com"]
+            "nombre_contacto": "Laura Jiménez",
+            "telefonos": ["+506 7777-5678"],
+            "emails": ["laura.jimenez@email.com"]
           }
         ]
       }

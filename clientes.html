@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Clientes</title>
+    <!-- Se recomienda enlazar una hoja de estilos general -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos básicos para la funcionalidad y apariencia del panel */
+        body {
+            background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #212529;
+        }
+
+        .customer-panel-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #fff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        /* Pestañas */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #dee2e6;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #495057;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .tab-btn.active {
+            color: #0d9488; /* Color principal de la app */
+            border-bottom-color: #0d9488;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tarjetas y secciones */
+        .section-card {
+            border: 1px solid #e9ecef;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        /* Formularios */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .site-card, .contact-card {
+            border: 1px solid #ced4da;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            background-color: #f8f9fa;
+        }
+
+        .site-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Botones */
+        .btn-add {
+            background-color: #0d9488;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-add:hover {
+            background-color: #0f766e;
+        }
+
+        .btn-remove {
+            background-color: #dc3545;
+            color: white;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Tabla */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9fafb;
+        }
+
+        .status-active { color: #16a34a; font-weight: bold; }
+        .status-inactive { color: #dc2626; font-weight: bold; }
+
+        /* Filtros */
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Clases de utilidad de tu archivo styles.css */
+        .input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+        }
+        .btn-primary, .btn-secondary, .btn-danger {
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            border: none;
+            cursor: pointer;
+            color: white;
+        }
+        .btn-primary { background-color: #0d6efd; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-danger { background-color: #dc3545; }
+        .btn-sm { font-size: 0.875rem; padding: 0.25rem 0.5rem; }
+
+    </style>
+</head>
+<body>
+
+<div class="customer-panel-container">
+    <!-- Pestañas de Navegación -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="form-cliente">Agregar / Editar Cliente</button>
+        <button class="tab-btn" data-tab="lista-clientes">Lista de Clientes</button>
+    </div>
+
+    <!-- Contenido de las Pestañas -->
+
+    <!-- Pestaña 1: Formulario de Cliente -->
+    <div id="form-cliente" class="tab-content active">
+        <form id="client-form">
+            <!-- Sección de Datos Generales -->
+            <div class="section-card">
+                <h3 class="section-title">Datos Generales del Cliente</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="client-name">Nombre / Razón Social</label>
+                        <input type="text" id="client-name" class="input" placeholder="Ej: Innovatech Solutions S.A." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-id">Identificación (Cédula)</label>
+                        <input type="text" id="client-id" class="input" placeholder="Ej: 3-101-123456" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-email">Correo Electrónico Principal</label>
+                        <input type="email" id="client-email" class="input" placeholder="contacto@cliente.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-phone">Teléfono Principal</label>
+                        <input type="tel" id="client-phone" class="input" placeholder="8888-8888">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-status">Estado del Cliente</label>
+                        <select id="client-status" class="input">
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Sedes -->
+            <div class="section-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 class="section-title" style="margin-bottom: 0;">Sedes del Cliente</h3>
+                    <!-- JS: Lógica para agregar una nueva tarjeta de sede -->
+                    <button type="button" class="btn-add" id="add-site-btn">+ Agregar Sede</button>
+                </div>
+                
+                <!-- Contenedor para las sedes agregadas dinámicamente -->
+                <div id="sites-container">
+                    <!-- EJEMPLO DE TARJETA DE SEDE (se generará con JS) -->
+                    <!-- 
+                        La lógica JS creará una estructura como esta por cada sede.
+                        Los selects de ubicación se poblarán desde 'provincias_cantones_distritos.json'.
+                    -->
+                    <div class="site-card" data-site-id="1">
+                        <div class="site-card-header">
+                            <span>Sede 1: (Nombre de Sede)</span>
+                            <!-- JS: Lógica para eliminar esta tarjeta de sede -->
+                            <button type="button" class="btn-remove" onclick="this.closest('.site-card').remove()">Eliminar Sede</button>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Nombre de la Sede</label>
+                                <input type="text" class="input site-name" placeholder="Ej: Oficina Central" required>
+                            </div>
+                            <div class="form-group" style="grid-column: span 2;">
+                                <label>Dirección Exacta</label>
+                                <!-- MODIFICADO: Se cambió input por textarea para más espacio -->
+                                <textarea class="input site-address" placeholder="Señas y detalles de la ubicación de la sede..." rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Provincia</label>
+                                <!-- 
+                                    JS: 
+                                    1. Cargar las llaves principales (nombres de provincias) desde 'provincias_cantones_distritos.json' aquí.
+                                    2. Añadir un 'event listener' (onchange) a este select.
+                                -->
+                                <select class="input site-province" required>
+                                    <option value="">Seleccione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Cantón</label>
+                                <!-- 
+                                    JS: 
+                                    1. Cuando la provincia cambie, poblar este select con los cantones correspondientes.
+                                    2. Habilitar el select y añadirle un 'event listener' (onchange).
+                                -->
+                                <select class="input site-canton" disabled required>
+                                    <option value="">Seleccione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Distrito</label>
+                                <!-- JS: Cuando el cantón cambie, poblar este select con los distritos correspondientes y habilitarlo. -->
+                                <select class="input site-district" disabled required>
+                                    <option value="">Seleccione...</option>
+                                </select>
+                            </div>
+                             <div class="form-group">
+                                <label>Estado de la Sede</label>
+                                <select class="input site-status">
+                                    <option value="activo">Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Sub-sección de Contactos por Sede -->
+                        <div style="margin-top: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <h4 style="font-weight: 500;">Contactos de la Sede</h4>
+                                <!-- JS: Lógica para agregar una tarjeta de contacto a esta sede -->
+                                <button type="button" class="btn-secondary btn-sm add-contact-btn">+ Agregar Contacto</button>
+                            </div>
+                            <!-- Contenedor para contactos de la sede -->
+                            <div class="contacts-container">
+                                <!-- EJEMPLO DE TARJETA DE CONTACTO (se generará con JS) -->
+                                <div class="contact-card">
+                                    <div class="form-grid">
+                                        <div class="form-group"><label>Nombre</label><input type="text" class="input contact-name" placeholder="Nombre completo"></div>
+                                        <div class="form-group"><label>Cargo</label><input type="text" class="input contact-position" placeholder="Ej: Gerente de TI"></div>
+                                        <div class="form-group"><label>Email</label><input type="email" class="input contact-email"></div>
+                                        <div class="form-group"><label>Teléfono</label><input type="tel" class="input contact-phone"></div>
+                                        <div class="form-group">
+                                            <label>Estado</label>
+                                            <select class="input contact-status">
+                                                <option value="activo">Activo</option>
+                                                <option value="inactivo">Inactivo</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" style="display: flex; align-items: flex-end;">
+                                            <!-- JS: Lógica para eliminar esta tarjeta de contacto -->
+                                            <button type="button" class="btn-remove" onclick="this.closest('.contact-card').remove()">Quitar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Acción del Formulario -->
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" id="cancel-btn">Cancelar</button>
+                <button type="button" class="btn-secondary" id="clear-btn">Limpiar Formulario</button>
+                <!-- JS: Lógica para recolectar todos los datos y simular guardado -->
+                <button type="submit" class="btn-primary" id="save-btn">Guardar Cliente</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Pestaña 2: Lista de Clientes -->
+    <div id="lista-clientes" class="tab-content">
+        <div class="section-card">
+            <h3 class="section-title">Búsqueda y Filtros</h3>
+            <!-- JS: Lógica para filtrar la tabla de clientes según estos campos -->
+            <div class="filter-bar">
+                <input type="text" id="search-name" class="input" placeholder="Buscar por nombre...">
+                <input type="text" id="search-id" class="input" placeholder="Buscar por identificación...">
+                <select id="filter-status" class="input">
+                    <option value="">Todos los estados</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+                <button class="btn-primary" id="search-btn">Buscar</button>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h3 class="section-title">Listado de Clientes Registrados</h3>
+            <div class="table-container">
+                <!-- JS: Lógica para cargar clientes desde 'clientes.json' y llenar la tabla -->
+                <table id="clients-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre Cliente</th>
+                            <th>Identificación</th>
+                            <th>Estado</th>
+                            <th>Nº Sedes</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- EJEMPLO DE FILA (se generará con JS a partir de clientes.json) -->
+                        <tr>
+                            <td>Innovatech Solutions S.A.</td>
+                            <td>3-101-123456</td>
+                            <td><span class="status-active">Activo</span></td>
+                            <td>1</td>
+                            <td>
+                                <!-- JS: Cargar datos de este cliente en el formulario de edición -->
+                                <button class="btn-secondary btn-sm edit-client-btn" data-client-id="CLI001">Editar</button>
+                                <!-- JS: Eliminar este cliente (con confirmación) -->
+                                <button class="btn-danger btn-sm delete-client-btn" data-client-id="CLI001">Eliminar</button>
+                            </td>
+                        </tr>
+                        <!-- Las demás filas se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+    No se incluye lógica JS en este archivo según la solicitud.
+    Un archivo .js separado manejaría:
+    - Cambio de pestañas.
+    - Carga de 'clientes.json' para poblar la tabla.
+    - Carga de 'provincias_cantones_distritos.json' para los selects de dirección.
+    - Lógica de los selects dependientes (Provincia -> Cantón -> Distrito).
+    - Funcionalidad para agregar/eliminar dinámicamente sedes y contactos.
+    - Lógica de los botones Editar, Eliminar, Guardar, Limpiar, Cancelar.
+    - Simulación de búsqueda y filtrado en la tabla.
+-->
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- INICIO: LÓGICA DE CARGA DE UBICACIONES (PROVINCIA, CANTÓN, DISTRITO) ---
+
+        let locationData = {};
+
+        // 1. Cargar el JSON de ubicaciones
+        async function loadLocationData() {
+            try {
+                // En un entorno real, la ruta podría ser diferente.
+                // Usamos la ruta relativa al HTML.
+                const response = await fetch('./db/provincias_cantones_distritos.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                locationData = await response.json();
+                
+                // Una vez cargados los datos, poblamos los selects de las sedes existentes.
+                // En este caso, poblamos el ejemplo inicial.
+                document.querySelectorAll('.site-card').forEach(siteCard => {
+                    populateProvinces(siteCard);
+                });
+
+            } catch (error) {
+                console.error("No se pudo cargar el archivo de ubicaciones:", error);
+            }
+        }
+
+        // 2. Poblar el select de Provincias
+        function populateProvinces(siteCard) {
+            const provinceSelect = siteCard.querySelector('.site-province');
+            if (!provinceSelect) return;
+
+            // Limpiar opciones previas (excepto la primera)
+            provinceSelect.innerHTML = '<option value="">Seleccione...</option>';
+
+            // Añadir las provincias del JSON
+            for (const provinceName in locationData) {
+                // Filtramos "Consulado" que no es una provincia geográfica de CR
+                if (provinceName.toLowerCase() !== 'consulado') {
+                    const option = document.createElement('option');
+                    option.value = provinceName;
+                    option.textContent = provinceName;
+                    provinceSelect.appendChild(option);
+                }
+            }
+
+            // Añadir el listener para cuando cambie la provincia
+            provinceSelect.addEventListener('change', () => handleProvinceChange(siteCard));
+        }
+
+        // 3. Manejar el cambio de Provincia para poblar Cantones
+        function handleProvinceChange(siteCard) {
+            const provinceSelect = siteCard.querySelector('.site-province');
+            const cantonSelect = siteCard.querySelector('.site-canton');
+            const districtSelect = siteCard.querySelector('.site-district');
+            const selectedProvince = provinceSelect.value;
+
+            // Limpiar y deshabilitar cantón y distrito
+            cantonSelect.innerHTML = '<option value="">Seleccione...</option>';
+            cantonSelect.disabled = true;
+            districtSelect.innerHTML = '<option value="">Seleccione...</option>';
+            districtSelect.disabled = true;
+
+            if (selectedProvince && locationData[selectedProvince]) {
+                const cantones = locationData[selectedProvince].cantones;
+                // MODIFICADO: Ordenar los cantones alfabéticamente antes de mostrarlos
+                const sortedCantonNames = Object.keys(cantones).sort((a, b) => a.localeCompare(b));
+                for (const cantonName of sortedCantonNames) {
+                    const option = document.createElement('option');
+                    option.value = cantonName;
+                    option.textContent = cantonName;
+                    cantonSelect.appendChild(option);
+                }
+                cantonSelect.disabled = false; // Habilitar select de cantón
+                // Añadir listener para el cambio de cantón
+                cantonSelect.addEventListener('change', () => handleCantonChange(siteCard));
+            }
+        }
+
+        // 4. Manejar el cambio de Cantón para poblar Distritos
+        function handleCantonChange(siteCard) {
+            const provinceSelect = siteCard.querySelector('.site-province');
+            const cantonSelect = siteCard.querySelector('.site-canton');
+            const districtSelect = siteCard.querySelector('.site-district');
+            const selectedProvince = provinceSelect.value;
+            const selectedCanton = cantonSelect.value;
+
+            districtSelect.innerHTML = '<option value="">Seleccione...</option>';
+            districtSelect.disabled = true;
+
+            if (selectedCanton && locationData[selectedProvince]?.cantones[selectedCanton]) {
+                const distritos = locationData[selectedProvince].cantones[selectedCanton].distritos;
+                // MODIFICADO: Ordenar los distritos alfabéticamente antes de mostrarlos
+                distritos.sort((a, b) => a.localeCompare(b)).forEach(districtName => {
+                    const option = document.createElement('option');
+                    option.value = districtName;
+                    option.textContent = districtName;
+                    districtSelect.appendChild(option);
+                });
+                districtSelect.disabled = false; // Habilitar select de distrito
+            }
+        }
+
+        // Iniciar la carga de datos de ubicación
+        loadLocationData();
+
+        // --- FIN: LÓGICA DE CARGA DE UBICACIONES ---
+
+        // Aquí iría el resto de la lógica JS (cambio de pestañas, agregar/quitar sedes, etc.)
+
+    });
+</script>
+
+</body>
+</html>
