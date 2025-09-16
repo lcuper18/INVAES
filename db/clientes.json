@@ -34,6 +34,16 @@
             "nombre_contacto": "Ana Gómez",
             "telefonos": ["+506 7777-7777"],
             "emails": ["ana.gomez@quantum.com"]
+          },
+          {
+            "nombre_contacto": "Maria Rojas",
+            "telefonos": ["+506 6666-6666"],
+            "emails": ["maria.rojas@quantum.com"]
+          },
+          {
+            "nombre_contacto": "Luis Castro",
+            "telefonos": ["+506 5555-5555"],
+            "emails": ["luis.castro@quantum.com"]
           }
         ]
       }

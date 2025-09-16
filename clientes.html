@@ -88,6 +88,12 @@
             gap: 1.5rem;
         }
 
+        .form-grid-2-col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
         .form-grid-sedes {
             display: flex;
             flex-direction: column;
@@ -208,6 +214,61 @@
         .btn-danger { background-color: #dc3545; }
         .btn-sm { font-size: 0.875rem; padding: 0.25rem 0.5rem; }
 
+        /* Estilos para las tarjetas de cliente */
+        .client-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .client-card {
+            border: 1px solid #e9ecef;
+            border-radius: 0.5rem;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .client-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .client-card-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .client-card-header .client-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #343a40;
+            margin: 0;
+        }
+
+        .client-card-header .client-id {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .client-card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .client-card-body p {
+            margin: 0 0 0.5rem 0;
+        }
+
+        .client-card-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9fafb;
+        }
     </style>
 </head>
 <body>
@@ -227,7 +288,7 @@
             <!-- Sección de Datos Generales -->
             <div class="section-card">
                 <h3 class="section-title">Datos Generales del Cliente</h3>
-                <div class="form-grid">
+                <div class="form-grid-2-col">
                     <div class="form-group">
                         <label for="client-name">Nombre / Razón Social</label>
                         <input type="text" id="client-name" class="input" placeholder="Ej: Innovatech Solutions S.A." required>
@@ -326,7 +387,7 @@
                         <!-- Sub-sección de Contactos por Sede -->
                         <div style="margin-top: 1.5rem;">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <h4 style="font-weight: 500;">Contactos de la Sede</h4>
+                                <h4 style="font-weight: bold;">Contactos de la Sede</h4>
                                 <!-- JS: Lógica para agregar una tarjeta de contacto a esta sede -->
                                 <button type="button" class="btn-secondary btn-sm add-contact-btn">+ Agregar Contacto</button>
                             </div>
@@ -334,7 +395,7 @@
                             <div class="contacts-container">
                                 <!-- EJEMPLO DE TARJETA DE CONTACTO (se generará con JS) -->
                                 <div class="contact-card">
-                                    <div class="form-grid">
+                                    <div class="form-grid-2-col">
                                         <div class="form-group"><label>Nombre</label><input type="text" class="input contact-name" placeholder="Nombre completo"></div>
                                         <div class="form-group"><label>Cargo</label><input type="text" class="input contact-position" placeholder="Ej: Gerente de TI"></div>
                                         <div class="form-group"><label>Email</label><input type="email" class="input contact-email"></div>
@@ -387,35 +448,8 @@
 
         <div class="section-card">
             <h3 class="section-title">Listado de Clientes Registrados</h3>
-            <div class="table-container">
-                <!-- JS: Lógica para cargar clientes desde 'clientes.json' y llenar la tabla -->
-                <table id="clients-table">
-                    <thead>
-                        <tr>
-                            <th>Nombre Cliente</th>
-                            <th>Identificación</th>
-                            <th>Estado</th>
-                            <th>Nº Sedes</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- EJEMPLO DE FILA (se generará con JS a partir de clientes.json) -->
-                        <tr>
-                            <td>Innovatech Solutions S.A.</td>
-                            <td>3-101-123456</td>
-                            <td><span class="status-active">Activo</span></td>
-                            <td>1</td>
-                            <td>
-                                <!-- JS: Cargar datos de este cliente en el formulario de edición -->
-                                <button class="btn-secondary btn-sm edit-client-btn" data-client-id="CLI001">Editar</button>
-                                <!-- JS: Eliminar este cliente (con confirmación) -->
-                                <button class="btn-danger btn-sm delete-client-btn" data-client-id="CLI001">Eliminar</button>
-                            </td>
-                        </tr>
-                        <!-- Las demás filas se cargarán aquí dinámicamente -->
-                    </tbody>
-                </table>
+            <div id="client-cards-container" class="client-cards-container">
+                <!-- Las tarjetas de cliente se generarán aquí con JS -->
             </div>
         </div>
     </div>
@@ -435,6 +469,23 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // --- INICIO: LÓGICA DE PESTAÑAS ---
+        const tabs = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+        // --- FIN: LÓGICA DE PESTAÑAS ---
         // --- INICIO: LÓGICA DE CARGA DE UBICACIONES (PROVINCIA, CANTÓN, DISTRITO) ---
 
         let locationData = {};
@@ -543,6 +594,104 @@
         // --- FIN: LÓGICA DE CARGA DE UBICACIONES ---
 
         // Aquí iría el resto de la lógica JS (cambio de pestañas, agregar/quitar sedes, etc.)
+
+        // --- INICIO: LÓGICA DE CARGA DE CLIENTES ---
+
+        let clientsData = [];
+
+        async function loadClients() {
+            try {
+                const response = await fetch('./db/clientes.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                clientsData = await response.json();
+                displayClients(clientsData);
+            } catch (error) {
+                console.error("No se pudo cargar el archivo de clientes:", error);
+            }
+        }
+
+        function displayClients(clients) {
+            const container = document.getElementById('client-cards-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            clients.forEach(client => {
+                const card = document.createElement('div');
+                card.className = 'client-card';
+                
+                let clientName = '';
+                let clientId = '';
+                if (client.tipo_persona === 'juridica') {
+                    clientName = client.razon_social;
+                    clientId = client.cedula_juridica;
+                } else {
+                    clientName = `${client.nombre} ${client.apellido1} ${client.apellido2}`;
+                    clientId = client.cedula;
+                }
+
+                let mainContact = client.sedes[0]?.contactos[0];
+
+                card.innerHTML = `
+                    <div class="client-card-header">
+                        <h4 class="client-name">${clientName}</h4>
+                        <span class="client-id">${clientId}</span>
+                    </div>
+                    <div class="client-card-body">
+                        <p><strong>Contacto Principal:</strong> ${mainContact?.nombre_contacto || 'N/A'}</p>
+                        <p><strong>Email:</strong> ${mainContact?.emails[0] || 'N/A'}</p>
+                        <p><strong>Teléfono:</strong> ${mainContact?.telefonos[0] || 'N/A'}</p>
+                    </div>
+                    <div class="client-card-footer">
+                        <span class="status-active">Activo</span> <!-- Assuming status is always active for now -->
+                        <div class="actions">
+                            <button class="btn-secondary btn-sm edit-client-btn" data-client-id="${client.id_cliente}">Editar</button>
+                            <button class="btn-danger btn-sm delete-client-btn" data-client-id="${client.id_cliente}">Eliminar</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        loadClients();
+
+        // --- FIN: LÓGICA DE CARGA DE CLIENTES ---
+
+        // --- INICIO: LÓGICA DE BÚSQUEDA ---
+        const searchNameInput = document.getElementById('search-name');
+        const searchIdInput = document.getElementById('search-id');
+        const searchBtn = document.getElementById('search-btn');
+
+        function filterClients() {
+            const nameQuery = searchNameInput.value.toLowerCase();
+            const idQuery = searchIdInput.value.toLowerCase();
+
+            const filteredClients = clientsData.filter(client => {
+                let clientName = '';
+                let clientId = '';
+                if (client.tipo_persona === 'juridica') {
+                    clientName = client.razon_social.toLowerCase();
+                    clientId = client.cedula_juridica.toLowerCase();
+                } else {
+                    clientName = `${client.nombre} ${client.apellido1} ${client.apellido2}`.toLowerCase();
+                    clientId = client.cedula.toLowerCase();
+                }
+
+                const nameMatch = clientName.includes(nameQuery);
+                const idMatch = clientId.includes(idQuery);
+
+                return nameMatch && idMatch;
+            });
+
+            displayClients(filteredClients);
+        }
+
+        searchBtn.addEventListener('click', filterClients);
+        searchNameInput.addEventListener('keyup', filterClients);
+        searchIdInput.addEventListener('keyup', filterClients);
+        // --- FIN: LÓGICA DE BÚSQUEDA ---
 
     });
 </script>
