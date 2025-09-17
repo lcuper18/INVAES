@@ -269,6 +269,11 @@
             align-items: center;
             background-color: #f9fafb;
         }
+        .iframe-content {
+            width: 100%;
+            height: 800px; /* Adjust height as needed */
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -279,6 +284,7 @@
         <button class="tab-btn active" data-tab="form-cliente">Agregar / Editar Cliente</button>
         <button class="tab-btn" data-tab="lista-clientes">Lista de Clientes</button>
         <button class="tab-btn" data-tab="contratos">Gestión de Contratos</button>
+        <button class="tab-btn" data-tab="inventario-clientes">Inventario de Clientes</button>
     </div>
 
     <!-- Contenido de las Pestañas -->
@@ -502,6 +508,11 @@
                 </table>
             </div>
         </div>
+    </div>
+
+    <!-- Nueva Pestaña: Inventario de Clientes -->
+    <div id="inventario-clientes" class="tab-content">
+        <iframe src="./cliente_inventario.html" class="iframe-content" scrolling="yes"></iframe>
     </div>
 </div>
 

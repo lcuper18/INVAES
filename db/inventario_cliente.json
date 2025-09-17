@@ -1,4 +1,4 @@
-{
+[
   {
     "id_cliente": "CLI001",
     "nombre_cliente": "Innovatech Solutions S.A.",
@@ -251,4 +251,4 @@
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-05"
   }
-}
+]
