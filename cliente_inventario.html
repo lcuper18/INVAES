@@ -118,10 +118,14 @@
 
         <div class="filter-controls">
             <label for="filter-client">Cliente:</label>
-            <input type="text" id="filter-client" placeholder="Nombre del cliente">
+            <select id="filter-client">
+                <option value="">Todos</option>
+            </select>
 
             <label for="filter-equipment">Equipo:</label>
-            <input type="text" id="filter-equipment" placeholder="Tipo de equipo">
+            <select id="filter-equipment">
+                <option value="">Todos</option>
+            </select>
 
             <label for="filter-status">Estado:</label>
             <select id="filter-status">
@@ -130,6 +134,9 @@
                 <option value="Reparación">Reparación</option>
                 <option value="Inactivo">Inactivo</option>
             </select>
+            <p>
+            <label for="general-search">Buscar:</label>
+            <input type="text" id="general-search" placeholder="Buscar en todo...">
 
             <button onclick="applyFilters()">Filtrar</button>
             <button onclick="clearFilters()">Limpiar Filtros</button>
@@ -163,7 +170,8 @@
         let allInventoryData = [];
 
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('../db/inventario_cliente.json')
+            // Fetch inventory data
+            fetch('./db/inventario_cliente.json')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
@@ -171,20 +179,66 @@
                     return response.json();
                 })
                 .then(data => {
-                    // Assuming the JSON is an array of objects, even if it was malformed initially.
-                    // If it's a single object with numeric keys, convert it to an array.
-                    if (!Array.isArray(data)) {
-                        allInventoryData = Object.values(data);
-                    } else {
-                        allInventoryData = data;
-                    }
+                    allInventoryData = data;
                     displayInventory(allInventoryData);
+                    populateEquipmentFilter(allInventoryData);
                 })
                 .catch(error => {
                     console.error('Error fetching or parsing inventory data:', error);
                     document.getElementById('inventory-table-body').innerHTML = `<tr><td colspan="10" class="no-results">Error al cargar los datos del inventario.</td></tr>`;
                 });
+
+            // Fetch clients data for client filter
+            fetch('./db/clientes.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    populateClientFilter(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching or parsing clients data:', error);
+                });
         });
+
+        function populateClientFilter(clients) {
+            const clientSelect = document.getElementById('filter-client');
+            const clientNames = new Set();
+            clients.forEach(client => {
+                if (client.tipo_persona === 'juridica') {
+                    clientNames.add(client.razon_social);
+                } else {
+                    clientNames.add(`${client.nombre} ${client.apellido1} ${client.apellido2}`);
+                }
+            });
+
+            Array.from(clientNames).sort().forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                clientSelect.appendChild(option);
+            });
+        }
+
+        function populateEquipmentFilter(inventoryItems) {
+            const equipmentSelect = document.getElementById('filter-equipment');
+            const equipmentTypes = new Set();
+            inventoryItems.forEach(item => {
+                if (item.equipo) {
+                    equipmentTypes.add(item.equipo);
+                }
+            });
+
+            Array.from(equipmentTypes).sort().forEach(type => {
+                const option = document.createElement('option');
+                option.value = type;
+                option.textContent = type;
+                equipmentSelect.appendChild(option);
+            });
+        }
 
         function displayInventory(inventoryItems) {
             const tableBody = document.getElementById('inventory-table-body');
@@ -231,12 +285,19 @@
             const clientFilter = document.getElementById('filter-client').value.toLowerCase();
             const equipmentFilter = document.getElementById('filter-equipment').value.toLowerCase();
             const statusFilter = document.getElementById('filter-status').value.toLowerCase();
+            const generalSearch = document.getElementById('general-search').value.toLowerCase();
 
             const filteredData = allInventoryData.filter(item => {
-                const matchesClient = item.nombre_cliente.toLowerCase().includes(clientFilter);
-                const matchesEquipment = item.equipo.toLowerCase().includes(equipmentFilter);
+                const matchesClient = clientFilter === '' || item.nombre_cliente.toLowerCase() === clientFilter;
+                const matchesEquipment = equipmentFilter === '' || item.equipo.toLowerCase() === equipmentFilter;
                 const matchesStatus = statusFilter === '' || item.estado_equipo.toLowerCase() === statusFilter;
-                return matchesClient && matchesEquipment && matchesStatus;
+
+                const matchesGeneralSearch = 
+                    Object.values(item).some(value => 
+                        String(value).toLowerCase().includes(generalSearch)
+                    );
+
+                return matchesClient && matchesEquipment && matchesStatus && matchesGeneralSearch;
             });
 
             displayInventory(filteredData);
@@ -246,6 +307,7 @@
             document.getElementById('filter-client').value = '';
             document.getElementById('filter-equipment').value = '';
             document.getElementById('filter-status').value = '';
+            document.getElementById('general-search').value = '';
             displayInventory(allInventoryData);
         }
     </script>
