@@ -1,0 +1,13 @@
+*Requerimientos importantes:*
+
+*Tareas ligadas a proyectos (como mandados de recolección de materiales). Esto se puede hacer como subtareas
+*Tenga rubro de comisión por proyecto para solamente sacarla por semana desde el sistema. 
+*Los proyectos al ser terminados se trasladan automáticamente al departamento encargado para su debido proceso administrativo
+*Las tareas no finalizadas del día, se trasladan a logística automáticamente para su reasignación
+*Colocar dentro de la asignación diaria proyectos opcionales por si terminan las labores reales
+*En los proyectos esté el espacio para indicar en que bodega están los materiales necesarios
+*Inventario ligado a QB
+*Trabajos adicionales que se hacen en el momento y no están agendados como proyectos. Que el personal técnico pueda crear sus propios proyectos cuando esto suceda
+*Tenemos que llevar lo de retiro de repuestos para reparar o conseguir con muestra
+*El sistema tenga las fechas de los permisos aprobados en el proyecto
+*El sistema debe de tener para documentos adjuntos en los proyector

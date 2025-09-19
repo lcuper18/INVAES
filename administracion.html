@@ -72,6 +72,7 @@
         <!-- Pestañas de Navegación -->
         <div class="tabs">
             <button class="tab-btn active" data-tab="personal">Gestión de Personal</button>
+            <button class="tab-btn" data-tab="comisiones">Comisiones</button>
             
         </div>
 
@@ -130,6 +131,65 @@
             </div>
         </div>
 
+        <!-- Pestaña 2: Calculadora de Comisiones -->
+        <div id="comisiones" class="tab-content">
+            <div class="card">
+                <h3>Calculadora de Comisiones por Proyecto/Tarea</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+                    
+                    <!-- Columna de Formulario -->
+                    <div>
+                        <div class="form-group">
+                            <label for="com-tecnico">Técnico</label>
+                            <select id="com-tecnico" class="input">
+                                <option value="8" data-special-rate="0">Juan Mora (Tasa base 8%)</option>
+                                <option value="8" data-special-rate="0">Ana Campos (Tasa base 8%)</option>
+                                <option value="10" data-special-rate="1">Carlos Rojas (Tasa especial 10%)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="com-cliente">Cliente</label>
+                            <select id="com-cliente" class="input">
+                                <option value="1.5">Cliente A (Industrias S.A.) - Tasa Cliente 1.5%</option>
+                                <option value="1.2">Cliente B (Comercializadora La Central) - Tasa Cliente 1.2%</option>
+                                <option value="1.5">Cliente C (Residencial Los Reyes) - Tasa Cliente 1.5%</option>
+                                <option value="2.0">Cliente D (Contrato Especial) - Tasa Cliente 2.0%</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="com-monto">Monto Facturado de la Tarea/Proyecto (₡)</label>
+                            <input type="number" id="com-monto" class="input" placeholder="Ej: 150000">
+                        </div>
+                        <div class="form-group">
+                            <label for="com-horas">Horas Dedicadas</label>
+                            <input type="number" id="com-horas" class="input" placeholder="Ej: 4">
+                        </div>
+                        <button class="btn-primary" onclick="calcularComision()">Calcular Comisión</button>
+                    </div>
+
+                    <!-- Columna de Resultados -->
+                    <div class="card" style="background-color: #f8fafc;">
+                        <h4>Resultado del Cálculo</h4>
+                        <div id="resultado-comision" style="margin-top: 1rem; padding: 1rem; border: 1px dashed #ccc; border-radius: 0.5rem; min-height: 150px;">
+                            <p><strong>Tasa Base del Técnico:</strong> <span id="res-tasa-tecnico">--</span>%</p>
+                            <p><strong>Tasa Adicional por Cliente:</strong> <span id="res-tasa-cliente">--</span>%</p>
+                            <p><strong>Tasa de Comisión Final Aplicada:</strong> <span id="res-tasa-final">--</span>%</p>
+                            <hr style="margin: 0.5rem 0;">
+                            <p><strong>Monto Base para Comisión:</strong> ₡<span id="res-monto-base">0.00</span></p>
+                            <h4 style="margin-top: 1rem;">Comisión Total: <span style="color: #0d9488;">₡<span id="res-comision-total">0.00</span></span></h4>
+                        </div>
+                        <p style="font-size: 0.8rem; color: #666; margin-top: 1rem;">
+                            <strong>Nota:</strong> La comisión se calcula como: 
+                            <br>
+                            <em>Monto Facturado * (Tasa Técnico + Tasa Cliente)</em>.
+                            <br>
+                            Las horas son informativas para análisis futuros.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         
 
     </div>
@@ -146,6 +206,33 @@
                 document.getElementById(this.dataset.tab).classList.add('active');
             });
         });
+
+        // Lógica para la calculadora de comisiones
+        function calcularComision() {
+            const tecnicoSelect = document.getElementById('com-tecnico');
+            const clienteSelect = document.getElementById('com-cliente');
+            const montoInput = document.getElementById('com-monto');
+            
+            const tasaTecnico = parseFloat(tecnicoSelect.value);
+            const tasaCliente = parseFloat(clienteSelect.value);
+            const montoFacturado = parseFloat(montoInput.value);
+
+            if (isNaN(montoFacturado) || montoFacturado <= 0) {
+                alert("Por favor, ingrese un monto facturado válido.");
+                return;
+            }
+
+            const tasaFinal = tasaTecnico + tasaCliente;
+            const comisionTotal = montoFacturado * (tasaFinal / 100);
+
+            // Mostrar resultados
+            document.getElementById('res-tasa-tecnico').textContent = tasaTecnico.toFixed(2);
+            document.getElementById('res-tasa-cliente').textContent = tasaCliente.toFixed(2);
+            document.getElementById('res-tasa-final').textContent = tasaFinal.toFixed(2);
+            document.getElementById('res-monto-base').textContent = montoFacturado.toLocaleString('es-CR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('res-comision-total').textContent = comisionTotal.toLocaleString('es-CR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
     </script>
 </body>
 </html>
