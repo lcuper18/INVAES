@@ -1,97 +1,166 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Iniciar Sesión</title>
-        <!-- Incluir Tailwind CSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="./static/css/styles.css">
-    </head>
-<body class="p-4 sm:p-6 lg:p-12 flex items-center justify-center min-h-screen">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Control INVAES</title>
+    <link rel="stylesheet" href="./static/css/styles.css">
+    <style>
+        /* Barra superior tipo Office Ribbon */
+        .ribbon-bar {
+            background: #e0e7ef;
+            padding: 0.4rem 2rem 0 2rem;
+            border-bottom: 2px solid #d1d5db;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0; /* Evita que la barra se encoja */
+        }
+        .ribbon-logo {
+            font-size: 1.4rem;
+            color: #0d9488;
+            font-weight: 700;
+            margin-right: 2rem;
+            letter-spacing: 1px;
+        }
+        .tabs {
+            display: flex;
+            gap: 0;
+        }
+        .tab-btn {
+            /* ya definido en tu css */
+            border: none;
+            background: none;
+            margin-right: 3px;
+            border-bottom: 2px solid transparent;
+        }
+        .tab-btn.active {
+            border-bottom: 2.5px solid #0d9488;
+            background: #fff;
+        }
+        .tab-divider {
+            width: 1px;
+            height: 22px;
+            background: #d1d5db;
+            margin: 0 10px;
+            align-self: center;
+        }
 
-    <!-- Título principal del sistema -->
-    <div class="absolute top-6 left-0 w-full flex justify-center">
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-indigo-700 drop-shadow mb-10">Sistema de Gestión INVAES</h2>
+        /* Estilos para el layout de dashboard */
+        html, .dashboard-body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden; /* Evita el scroll en el body */
+        }
+        .dashboard-body {
+            display: flex;
+            flex-direction: column;
+        }
+        .dashboard-main {
+            flex-grow: 1; /* El contenido principal crece para llenar el espacio */
+            overflow-y: auto; /* Permite scroll en el área de contenido si es necesario */
+            padding: 0; /* Quitamos el padding del contenedor principal */
+        }
+        .container {
+            height: 100%;
+            width: 100%;
+            max-width: none; /* Anulamos el max-width para que ocupe todo */
+            padding: 0; /* Anulamos el padding */
+            margin: 0;
+        }
+        .tab-content {
+            height: 100%;
+        }
+
+        .tab-content h2,
+        .tab-content p {
+            text-align: center;
+        }
+        
+        .content-iframe {
+            border: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .ribbon-bar {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.6rem;
+            }
+            .tabs {
+                flex-wrap: wrap;
+            }
+            html, .dashboard-body {
+                overflow: auto; /* Permitir scroll en móvil */
+            }
+            .dashboard-main {
+                overflow-y: visible;
+            }
+        }
+    </style>
+</head>
+<body class="dashboard-body">
+    <div class="ribbon-bar">
+        <span class="ribbon-logo">INVAES</span>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="calendario">Calendario</button>
+            <button class="tab-btn" data-tab="logistica">Logística</button>
+            <button class="tab-btn" data-tab="administracion">Administración</button>
+            <button class="tab-btn" data-tab="clientes">Clientes</button>
+            <button class="tab-btn" data-tab="inventario">Inventario</button>
+            <button class="tab-btn" data-tab="mantenimientos">Mantenimientos</n>
+            <button class="tab-btn" data-tab="configuracion">Configuración</button>
+        </div>
     </div>
 
-    <!-- Contenedor principal centrado -->
-    <div class="max-w-4xl w-full mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-10 flex flex-col md:flex-row">
-        <!-- Sección de Imagen -->
-        <div class="md:w-1/2 flex items-center justify-center p-4 md:p-8 rounded-lg mb-6 md:mb-0 md:mr-6 flex-shrink-0 overflow-hidden">
-            <!-- Imagen en el lado izquierdo -->
-            <img src="https://www.factorb.es/wp-content/uploads/2024/10/mantenimiento-equipos-de-aire-acondicionado-industrial.jpg" alt="Mantenimiento de equipos de aire acondicionado" class="w-full h-auto object-cover rounded-lg">
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="tab-content active" id="calendario">
+                <h2>Calendario</h2>
+                <p>Visualiza y administra eventos de mantenimiento, servicios y turnos.</p>
+                <iframe src="https://calendar.google.com/calendar/embed?src=85b1ceeeef46629f5b827b5727a153d2d5045f7d6c12f244f378650fc8c2ea37%40group.calendar.google.com&ctz=America%2FCosta_Rica" class="content-iframe" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div class="tab-content" id="logistica">
+                <h2>Logística</h2>
+                <p>Gestiona la flota de vehículos, asignación de técnicos y rutas.</p>
+                <iframe src="./logistica.html" class="content-iframe" frameborder="0" scrolling="yes"></iframe>
+            </div>
+            <div class="tab-content" id="administracion">
+                <h2>Administración</h2>
+                <p>Recursos humanos, facturación y gestión general administrativa.</p>
+                <iframe src="./administracion.html" class="content-iframe" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div class="tab-content" id="inventario">
+                <h2>Inventarios</h2>
+                <p>Control de bodegas, materiales, productos, repuestos y demás.</p>
+                <iframe src="./inventario.html" class="content-iframe" frameborder="0" scrolling="yes"></iframe>
+            </div>
+            <div class="tab-content" id="mantenimientos">
+                <h2>Mantenimientos</h2>
+                <p>Listado y control de mantenimientos preventivos y correctivos.</p>
+            </div>
+            <div class="tab-content" id="configuracion">
+                <h2>Configuración</h2>
+                <p>Parámetros del sistema, usuarios, roles, y preferencias.</p>
+                <iframe src="./Mant_usuarios.html" class="content-iframe" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div class="tab-content" id="clientes">
+                <iframe src="./clientes.html" class="content-iframe" frameborder="0" scrolling="yes"></iframe>
+            </div>
         </div>
-
-        <!-- Sección de Formulario de Inicio de Sesión -->
-        <div class="md:w-1/2 flex-grow">
-            <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 text-gray-800">Iniciar Sesión</h1>
-            <form id="login-form" class="space-y-4">
-                <!-- Campo para el correo electrónico -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" placeholder="ejemplo@dominio.com" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
-                </div>
-                <!-- Campo para la contraseña -->
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                    <input type="password" id="password" name="password" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
-                </div>
-                <!-- Enlace de 'Olvidé mi contraseña' -->
-                <div class="text-right">
-                    <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">¿Olvidaste tu contraseña?</a>
-                </div>
-                <!-- Botón de inicio de sesión -->
-                <div class="pt-4">
-                    <button type="submit" class="w-full px-4 py-2 text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Iniciar Sesión</button>
-                </div>
-            </form>
-
-            <!-- Contenedor para mensajes de confirmación o error -->
-            <div id="message-container" class="mt-4 p-3 hidden rounded-lg text-white font-medium text-center"></div>
-        </div>
-
-    </div>
+    </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginForm = document.getElementById('login-form');
-            const emailInput = document.getElementById('email');
-            const passwordInput = document.getElementById('password');
-            const messageContainer = document.getElementById('message-container');
-
-            // Función para mostrar mensajes al usuario
-            const showMessage = (message, type) => {
-                messageContainer.textContent = message;
-                messageContainer.classList.remove('hidden', 'bg-red-500', 'bg-green-500');
-                if (type === 'success') {
-                    messageContainer.classList.add('bg-green-500');
-                } else if (type === 'error') {
-                    messageContainer.classList.add('bg-red-500');
-                }
-                setTimeout(() => {
-                    messageContainer.classList.add('hidden');
-                }, 3000);
-            };
-
-            // Manejar el envío del formulario
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                // Simulación de autenticación
-                const email = emailInput.value;
-                const password = passwordInput.value;
-
-                // En un caso real, aquí se haría una llamada a una API para autenticar al usuario
-                if (email === 'admin@test.com' && password === 'password123') {
-                    showMessage('Inicio de sesión exitoso. (Simulado)', 'success');
-                    // Aquí se redirigiría al usuario a la página principal
-                } else {
-                    showMessage('Correo o contraseña incorrectos.', 'error');
-                }
+        const buttons = document.querySelectorAll('.tab-btn');
+        const contents = document.querySelectorAll('.tab-content');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                buttons.forEach(b => b.classList.remove('active'));
+                contents.forEach(tab => tab.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
             });
         });
     </script>
 </body>
 </html>
-
