@@ -1,0 +1,21 @@
+Reunion 19-09-2025
+Inventario de cliente:
+    Cada equipo mostrar historial: fechas de las intervenciones, técnico que realizo, número de boleta, tipo de trabajo.
+    Número de contrato por cliente.
+    Datos técnicos: Refrigerante, tecnologia, 
+    Quitar dato fecha de instalación.
+    Cambiar nombre: de ultimo mant. a última intervención.
+
+Contácto cliente:
+    Contacto agregar departamento/Oficina.
+
+Comisiones:
+    Asignacion de tareas: Monto es fijo por la tarea.
+    Monto lo fija el encargado de logística.
+    Monto se paga segun el % de las tareas realizadas.
+
+Inventario General de INVAES.
+    Cuando se realizan traslados, se debe tanto crear el movimiento como la aceptación del mismo.
+
+
+    
