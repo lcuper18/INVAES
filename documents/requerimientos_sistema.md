@@ -1,48 +1,46 @@
-# Requerimientos del Sistema
+# Requerimientos importantes:
 
-## Gestión de Proyectos y Tareas
-*   **Subtareas para proyectos:** Las tareas ligadas a proyectos (ej. mandados de recolección de materiales) deben manejarse como subtareas.
-*   **Rubro de comisión:** Implementar un rubro de comisión por proyecto, que pueda ser liquidado semanalmente desde el sistema.
-*   **Flujo de proyectos terminados:** Al finalizar un proyecto, este debe trasladarse automáticamente al departamento encargado para el proceso administrativo.
-*   **Gestión de tareas pendientes:** Las tareas no finalizadas del día se deben trasladar automáticamente a logística para su reasignación.
-*   **Proyectos opcionales:** Incluir proyectos opcionales en la asignación diaria para realizar en caso de terminar las labores principales.
-*   **Ubicación de materiales:** En la ficha del proyecto debe haber un espacio para indicar en qué bodega se encuentran los materiales necesarios.
-*   **Permisos y documentación:**
-    *   Registrar las fechas de los permisos aprobados asociados al proyecto.
-    *   El sistema debe permitir adjuntar documentos a los proyectos.
+## Gestión de Tareas y Proyectos
+*   **Subtareas para proyectos:** Las tareas ligadas a proyectos (como mandados de recolección de materiales) deben poder crearse como subtareas.
+*   **Proyectos opcionales:** Incluir en la asignación diaria proyectos opcionales por si el personal termina las labores principales.
+*   **Tareas pendientes:** Las tareas no finalizadas del día deben trasladarse automáticamente al departamento de logística para su reasignación.
+*   **Trabajos no agendados:** El personal técnico debe poder crear sus propios proyectos para registrar trabajos adicionales que se realicen en el momento y no estén agendados.
 
-## Trabajos Adicionales e Inventario
-*   **Creación de proyectos ad-hoc:** El personal técnico debe poder crear sus propios proyectos para registrar trabajos adicionales no agendados.
-*   **Control de repuestos:** Llevar un registro del retiro de repuestos para reparar o conseguir con muestra.
-*   **Integración de inventario:** El inventario debe estar ligado a QuickBooks (QB).
-*   **Movimientos de inventario:** Al realizar traslados de inventario, es necesario crear el movimiento y que este sea aceptado (doble validación).
+## Información de Proyectos
+*   **Ubicación de materiales:** En la ficha del proyecto, debe haber un espacio para indicar en qué bodega se encuentran los materiales necesarios.
+*   **Permisos:** El sistema debe almacenar las fechas de los permisos aprobados asociados a cada proyecto.
+*   **Documentación:** El sistema debe permitir adjuntar documentos a los proyectos.
 
----
+## Flujo de Proyectos
+*   **Cierre de proyectos:** Los proyectos terminados se deben trasladar automáticamente al departamento encargado para el proceso administrativo.
 
-# Acta de Reunión (19-09-2025)
+## Comisiones e Inventario
+*   **Rubro de comisión:** Implementar un rubro de comisión por proyecto, que pueda ser calculado y extraído por semana desde el sistema.
+*   **Gestión de repuestos:** El sistema debe gestionar el retiro de repuestos para reparar o conseguir con muestra.
 
 ## Inventario del Cliente
-*   **Historial por equipo:** Mostrar por cada equipo:
+*   **Historial de equipos:** Cada equipo debe mostrar un historial que incluya:
     *   Fechas de las intervenciones.
     *   Técnico que realizó el trabajo.
     *   Número de boleta.
     *   Tipo de trabajo realizado.
-*   **Datos del cliente:**
-    *   Número de contrato por cliente.
-*   **Datos técnicos del equipo (mantener):**
+*   **Datos contractuales:** Registrar el número de contrato por cliente.
+*   **Datos técnicos del equipo:** Incluir campos para:
     *   Tipo de refrigerante.
     *   Tecnología.
 *   **Cambios en los datos:**
-    *   **Eliminar:** Quitar el dato "Fecha de instalación".
-    *   **Renombrar:** Cambiar "Último Mant." por "Última Intervención".
+    *   **Eliminar:** Se debe quitar el dato de "fecha de instalación".
+    *   **Renombrar:** Cambiar el nombre del campo "último mant." (mantenimiento) por "última intervención".
 
-## Contacto del Cliente
-*   **Ampliar información:** En los datos de contacto, agregar un campo para "Departamento/Oficina".
+## Información de Contacto del Cliente
+*   **Detalles de contacto:** En la información de contacto del cliente, se debe agregar un campo para "Departamento/Oficina".
 
-## Comisiones
+## Sistema de Comisiones (Detallado)
 *   **Asignación de tareas:** El monto de la comisión por tarea es fijo.
 *   **Definición del monto:** El monto lo fija el encargado de logística.
-*   **Cálculo de pago:** El pago de comisiones se realiza según el porcentaje de tareas realizadas.
+*   **Método de pago:** El pago de la comisión se realiza según el porcentaje de finalización de las tareas asignadas.
 
 ## Inventario General de INVAES
-*   **Control de traslados:** Cuando se realizan traslados internos, el proceso debe incluir tanto la creación del movimiento como la aceptación del mismo por la parte receptora.
+*   **Gestión de traslados:** Cuando se realizan traslados de inventario, el sistema debe gestionar un proceso de dos pasos:
+    *   Creación del movimiento de traslado.
+    *   Aceptación/confirmación del mismo por parte del receptor.
