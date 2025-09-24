@@ -1,9 +1,14 @@
 Reunion 19-09-2025
 Inventario de cliente:
-    Cada equipo mostrar historial: fechas de las intervenciones, técnico que realizo, número de boleta, tipo de trabajo.
+    Cada equipo mostrar historial: fechas de las intervenciones, 
+    técnico que realizo, número de boleta, tipo de trabajo.
+    
     Número de contrato por cliente.
+    
     Datos técnicos: Refrigerante, tecnologia, 
+    
     Quitar dato fecha de instalación.
+    
     Cambiar nombre: de ultimo mant. a última intervención.
 
 Contácto cliente:
