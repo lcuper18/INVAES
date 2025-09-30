@@ -76,8 +76,9 @@
         .inventory-table th,
         .inventory-table td {
             border: 1px solid #e0e7ef;
-            padding: 12px 15px;
+            padding: 9px 12px; /* Reducido para mayor compacidad */
             text-align: left;
+            font-size: 0.95em; /* Letra ligeramente más pequeña */
         }
         .inventory-table th {
             background-color: #f8fafd;
@@ -129,7 +130,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
-            max-width: 900px;
+            max-width: 750px;
             border-radius: 8px;
             position: relative;
             animation: fadeIn 0.3s;
@@ -155,7 +156,7 @@
         }
         .modal-content .inventory-table th,
         .modal-content .inventory-table td {
-            padding: 8px 10px; /* Celdas más compactas */
+            padding: 6px 8px; /* Celdas aún más compactas */
         }
 
     </style>
@@ -325,10 +326,16 @@
                 const historyCell = row.insertCell();
                 if (item.historial_intervenciones && item.historial_intervenciones.length > 0) {
                     const button = document.createElement('button');
-                    button.textContent = 'Ver Historial';
+                    const icon = document.createElement('img');
+                    icon.src = 'https://icon-icons.com/icons2/1111/PNG/512/list_111134.png';
+                    icon.alt = 'Ver Historial';
+                    icon.style.width = '20px';
+                    icon.style.height = '20px';
+                    icon.style.verticalAlign = 'middle';
+                    button.appendChild(icon);
+
                     button.className = 'btn-secondary btn-sm'; // Reutilizando clases existentes si las hay
-                    button.style.padding = '5px 10px';
-                    button.style.fontSize = '0.9em';
+                    button.style.padding = '4px 8px';
                     button.onclick = () => showHistoryModal(item);
                     historyCell.appendChild(button);
                 } else {
