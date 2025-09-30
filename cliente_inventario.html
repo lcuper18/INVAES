@@ -129,7 +129,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
-            max-width: 700px;
+            max-width: 900px;
             border-radius: 8px;
             position: relative;
             animation: fadeIn 0.3s;
@@ -147,6 +147,16 @@
             cursor: pointer;
         }
         @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
+
+        /* Estilos específicos para la tabla dentro del modal */
+        .modal-content .inventory-table {
+            font-size: 0.9em; /* Letra más pequeña */
+            margin-top: 15px;
+        }
+        .modal-content .inventory-table th,
+        .modal-content .inventory-table td {
+            padding: 8px 10px; /* Celdas más compactas */
+        }
 
     </style>
 </head>
