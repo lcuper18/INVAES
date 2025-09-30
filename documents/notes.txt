@@ -22,5 +22,5 @@ Comisiones:
 Inventario General de INVAES.
     Cuando se realizan traslados, se debe tanto crear el movimiento como la aceptación del mismo.
 
-
-    
+Tickets de trabajo
+    Tipos: Mantenimiento, Revisión, Instalación, Reparación.

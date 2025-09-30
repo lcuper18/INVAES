@@ -15,7 +15,30 @@
     "capacidad_btu": "12,000",
     "fecha_instalacion": "2022-03-15",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-05-10"
+    "ultimo_mantenimiento": "2024-05-10",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2022-03-15",
+        "tecnico": "Juan Mora Campos",
+        "numero_boleta": "B-2022-0315-01",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación inicial del equipo."
+      },
+      {
+        "fecha_intervencion": "2023-04-20",
+        "tecnico": "Ana Campos Rojas",
+        "numero_boleta": "B-2023-0420-05",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Mantenimiento preventivo, limpieza de filtros."
+      },
+      {
+        "fecha_intervencion": "2024-05-10",
+        "tecnico": "Juan Mora Campos",
+        "numero_boleta": "B-2024-0510-02",
+        "tipo_trabajo": "Revisión",
+        "descripcion": "Revisión general y comprobación de rendimiento."
+      }
+    ]
   },
   {
     "id_cliente": "CLI001",
@@ -33,7 +56,30 @@
     "capacidad_btu": null,
     "fecha_instalacion": "2023-01-10",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-05-15"
+    "ultimo_mantenimiento": "2024-05-15",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2023-01-10",
+        "tecnico": "Pedro Vargas Solis",
+        "numero_boleta": "B-2023-0110-03",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación de purificador en sala de reuniones."
+      },
+      {
+        "fecha_intervencion": "2024-05-15",
+        "tecnico": "Pedro Vargas Solis",
+        "numero_boleta": "B-2024-0515-08",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Cambio de filtro HEPA y limpieza general."
+      },
+      {
+        "fecha_intervencion": "2024-06-20",
+        "tecnico": "Ana Campos Rojas",
+        "numero_boleta": "B-2024-0620-01",
+        "tipo_trabajo": "Revisión",
+        "descripcion": "Cliente reporta ruido, se ajusta ventilador interno."
+      }
+    ]
   },
   {
     "id_cliente": "CLI002",
@@ -51,7 +97,37 @@
     "capacidad_btu": "18,000",
     "fecha_instalacion": "2021-11-20",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-06-01"
+    "ultimo_mantenimiento": "2024-06-01",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2021-11-20",
+        "tecnico": "Luis Fernández Arias",
+        "numero_boleta": "B-2021-1120-07",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación de unidad en oficina de gerencia."
+      },
+      {
+        "fecha_intervencion": "2022-12-01",
+        "tecnico": "Luis Fernández Arias",
+        "numero_boleta": "B-2022-1201-04",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Mantenimiento preventivo anual."
+      },
+      {
+        "fecha_intervencion": "2023-08-15",
+        "tecnico": "David Guzmán Méndez",
+        "numero_boleta": "B-2023-0815-09",
+        "tipo_trabajo": "Reparación",
+        "descripcion": "Se repara fuga de refrigerante y se realiza recarga."
+      },
+      {
+        "fecha_intervencion": "2024-06-01",
+        "tecnico": "Luis Fernández Arias",
+        "numero_boleta": "B-2024-0601-01",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Mantenimiento preventivo semestral."
+      }
+    ]
   },
   {
     "id_cliente": "CLI002",
@@ -69,7 +145,23 @@
     "capacidad_btu": null,
     "fecha_instalacion": "2022-06-12",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-05-30"
+    "ultimo_mantenimiento": "2024-05-30",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2022-06-12",
+        "tecnico": "José Solis Brenes",
+        "numero_boleta": "B-2022-0612-02",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación en área de producción."
+      },
+      {
+        "fecha_intervencion": "2024-05-30",
+        "tecnico": "José Solis Brenes",
+        "numero_boleta": "B-2024-0530-06",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Limpieza y lubricación de aspas."
+      }
+    ]
   },
   {
     "id_cliente": "CLI002",
@@ -87,7 +179,23 @@
     "capacidad_btu": null,
     "fecha_instalacion": "2021-04-18",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-05-25"
+    "ultimo_mantenimiento": "2024-05-25",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2021-04-18",
+        "tecnico": "Andrés Castro Morales",
+        "numero_boleta": "B-2021-0418-01",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación en bodega de almacenamiento."
+      },
+      {
+        "fecha_intervencion": "2024-05-25",
+        "tecnico": "Andrés Castro Morales",
+        "numero_boleta": "B-2024-0525-03",
+        "tipo_trabajo": "Revisión",
+        "descripcion": "Revisión de funcionamiento y limpieza de depósito."
+      }
+    ]
   },
   {
     "id_cliente": "CLI003",
@@ -105,7 +213,37 @@
     "capacidad_btu": "12,000",
     "fecha_instalacion": "2020-08-05",
     "estado_equipo": "Reparación",
-    "ultimo_mantenimiento": "2024-04-20"
+    "ultimo_mantenimiento": "2024-04-20",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2020-08-05",
+        "tecnico": "Isabel Herrera Chaves",
+        "numero_boleta": "B-2020-0805-08",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación de equipo en oficina."
+      },
+      {
+        "fecha_intervencion": "2022-09-10",
+        "tecnico": "Isabel Herrera Chaves",
+        "numero_boleta": "B-2022-0910-01",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Mantenimiento preventivo."
+      },
+      {
+        "fecha_intervencion": "2023-10-01",
+        "tecnico": "Mario Vega Soto",
+        "numero_boleta": "B-2023-1001-05",
+        "tipo_trabajo": "Reparación",
+        "descripcion": "Cambio de capacitor de arranque."
+      },
+      {
+        "fecha_intervencion": "2024-04-20",
+        "tecnico": "Mario Vega Soto",
+        "numero_boleta": "B-2024-0420-04",
+        "tipo_trabajo": "Reparación",
+        "descripcion": "Equipo no enfría, se detecta compresor dañado. Pendiente de repuesto."
+      }
+    ]
   },
   {
     "id_cliente": "CLI003",
@@ -123,7 +261,30 @@
     "capacidad_btu": "24,000",
     "fecha_instalacion": "2019-12-01",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-06-10"
+    "ultimo_mantenimiento": "2024-06-10",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2019-12-01",
+        "tecnico": "Fernando Cordero Salas",
+        "numero_boleta": "B-2019-1201-03",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación de unidad central."
+      },
+      {
+        "fecha_intervencion": "2022-01-15",
+        "tecnico": "Fernando Cordero Salas",
+        "numero_boleta": "B-2022-0115-06",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Mantenimiento preventivo."
+      },
+      {
+        "fecha_intervencion": "2024-06-10",
+        "tecnico": "Fernando Cordero Salas",
+        "numero_boleta": "B-2024-0610-09",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Mantenimiento preventivo y recarga de gas."
+      }
+    ]
   },
   {
     "id_cliente": "CLI003",
@@ -141,7 +302,23 @@
     "capacidad_btu": "9,000",
     "fecha_instalacion": "2023-07-22",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-06-05"
+    "ultimo_mantenimiento": "2024-06-05",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2023-07-22",
+        "tecnico": "Oscar Ramírez Solis",
+        "numero_boleta": "B-2023-0722-10",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación en oficina de bodega."
+      },
+      {
+        "fecha_intervencion": "2024-06-05",
+        "tecnico": "Oscar Ramírez Solis",
+        "numero_boleta": "B-2024-0605-11",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Primer mantenimiento preventivo."
+      }
+    ]
   },
   {
     "id_cliente": "CLI003",
@@ -159,7 +336,23 @@
     "capacidad_btu": null,
     "fecha_instalacion": "2023-01-10",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-05-15"
+    "ultimo_mantenimiento": "2024-05-15",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2023-01-10",
+        "tecnico": "Beatriz Zamora Vargas",
+        "numero_boleta": "B-2023-0110-12",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación de purificador."
+      },
+      {
+        "fecha_intervencion": "2024-05-15",
+        "tecnico": "Beatriz Zamora Vargas",
+        "numero_boleta": "B-2024-0515-13",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Cambio de filtro."
+      }
+    ]
   },
   {
     "id_cliente": "CLI011",
@@ -177,7 +370,30 @@
     "capacidad_btu": "12,000",
     "fecha_instalacion": "2022-03-15",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-05-10"
+    "ultimo_mantenimiento": "2024-05-10",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2022-03-15",
+        "tecnico": "Diego Soto Hernández",
+        "numero_boleta": "B-2022-0315-14",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación en dormitorio principal."
+      },
+      {
+        "fecha_intervencion": "2023-03-20",
+        "tecnico": "Diego Soto Hernández",
+        "numero_boleta": "B-2023-0320-15",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Mantenimiento preventivo anual."
+      },
+      {
+        "fecha_intervencion": "2024-05-10",
+        "tecnico": "Diego Soto Hernández",
+        "numero_boleta": "B-2024-0510-16",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Mantenimiento preventivo anual."
+      }
+    ]
   },
   {
     "id_cliente": "CLI012",
@@ -195,7 +411,30 @@
     "capacidad_btu": "18,000",
     "fecha_instalacion": "2021-11-20",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-06-01"
+    "ultimo_mantenimiento": "2024-06-01",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2021-11-20",
+        "tecnico": "Raquel Solano Fernández",
+        "numero_boleta": "B-2021-1120-17",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación en oficina."
+      },
+      {
+        "fecha_intervencion": "2023-05-15",
+        "tecnico": "Raquel Solano Fernández",
+        "numero_boleta": "B-2023-0515-18",
+        "tipo_trabajo": "Reparación",
+        "descripcion": "Se repara tarjeta electrónica por sobretensión."
+      },
+      {
+        "fecha_intervencion": "2024-06-01",
+        "tecnico": "Raquel Solano Fernández",
+        "numero_boleta": "B-2024-0601-19",
+        "tipo_trabajo": "Mantenimiento",
+        "descripcion": "Mantenimiento preventivo."
+      }
+    ]
   },
   {
     "id_cliente": "CLI013",
@@ -213,7 +452,23 @@
     "capacidad_btu": "12,000",
     "fecha_instalacion": "2020-08-05",
     "estado_equipo": "Reparación",
-    "ultimo_mantenimiento": "2024-04-20"
+    "ultimo_mantenimiento": "2024-04-20",
+    "historial_intervenciones": [
+      {
+        "fecha_intervencion": "2020-08-05",
+        "tecnico": "Alejandro Quiros García",
+        "numero_boleta": "B-2020-0805-20",
+        "tipo_trabajo": "Instalación",
+        "descripcion": "Instalación en sala de estar."
+      },
+      {
+        "fecha_intervencion": "2024-04-20",
+        "tecnico": "Alejandro Quiros García",
+        "numero_boleta": "B-2024-0420-21",
+        "tipo_trabajo": "Revisión",
+        "descripcion": "Equipo no enciende, se diagnostica falla en compresor."
+      }
+    ]
   },
   {
     "id_cliente": "CLI014",

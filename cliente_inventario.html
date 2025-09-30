@@ -110,6 +110,44 @@
             font-size: 1.1em;
             color: #777;
         }
+
+        /* Estilos para la ventana modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 8px;
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
+
     </style>
 </head>
 <body>
@@ -155,7 +193,7 @@
                         <th>Capacidad (BTU)</th>
                         <th>Fecha Instalación</th>
                         <th>Estado Equipo</th>
-                        <th>Última intervención</th>
+                        <th>Historial</th>
                     </tr>
                 </thead>
                 <tbody id="inventory-table-body">
@@ -163,6 +201,17 @@
                 </tbody>
             </table>
             <p id="no-results-message" class="no-results" style="display: none;">No se encontraron resultados.</p>
+        </div>
+    </div>
+
+    <!-- Ventana Modal para el Historial -->
+    <div id="history-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title">Historial de Intervenciones</h2>
+            <div id="modal-body-content">
+                <!-- El historial se inyectará aquí dinámicamente -->
+            </div>
         </div>
     </div>
 
@@ -264,7 +313,20 @@
                 const statusCell = row.insertCell();
                 statusCell.textContent = item.estado_equipo;
                 statusCell.classList.add(getStatusClass(item.estado_equipo));
-                row.insertCell().textContent = item.ultimo_mantenimiento;
+                
+                const historyCell = row.insertCell();
+                if (item.historial_intervenciones && item.historial_intervenciones.length > 0) {
+                    const button = document.createElement('button');
+                    button.textContent = 'Ver Historial';
+                    button.className = 'btn-secondary btn-sm'; // Reutilizando clases existentes si las hay
+                    button.style.padding = '5px 10px';
+                    button.style.fontSize = '0.9em';
+                    button.onclick = () => showHistoryModal(item);
+                    historyCell.appendChild(button);
+                } else {
+                    historyCell.textContent = 'Sin registros';
+                }
+
             });
         }
 
@@ -309,6 +371,63 @@
             document.getElementById('filter-status').value = '';
             document.getElementById('general-search').value = '';
             displayInventory(allInventoryData);
+        }
+
+        // --- Lógica de la ventana modal ---
+        const modal = document.getElementById('history-modal');
+        const modalCloseButton = document.querySelector('.close-button');
+
+        function showHistoryModal(item) {
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body-content');
+
+            modalTitle.textContent = `Historial para: ${item.equipo} (${item.marca} ${item.modelo})`;
+            modalBody.innerHTML = ''; // Limpiar contenido anterior
+
+            // Obtener las últimas 3 intervenciones, las más recientes primero
+            const lastThreeInterventions = item.historial_intervenciones.slice(-3).reverse();
+
+            if (lastThreeInterventions.length === 0) {
+                modalBody.innerHTML = '<p>No hay intervenciones registradas para este equipo.</p>';
+            } else {
+                const table = document.createElement('table');
+                table.className = 'inventory-table'; // Reutilizar estilos de la tabla principal
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo</th>
+                            <th>Técnico</th>
+                            <th>Boleta</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${lastThreeInterventions.map(intervencion => `
+                            <tr>
+                                <td>${intervencion.fecha_intervencion}</td>
+                                <td>${intervencion.tipo_trabajo}</td>
+                                <td>${intervencion.tecnico}</td>
+                                <td>${intervencion.numero_boleta}</td>
+                                <td>${intervencion.descripcion}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>`;
+                modalBody.appendChild(table);
+            }
+            modal.style.display = 'block';
+        }
+
+        // Cerrar el modal al hacer clic en la 'X'
+        modalCloseButton.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Cerrar el modal al hacer clic fuera del contenido
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
         }
     </script>
 </body>
