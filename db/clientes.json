@@ -6,6 +6,20 @@
     "nombre_fantasia": "Innovatech",
     "cedula_juridica": "3-101-123456",
     "estado": "activo",
+    "contratos": [
+      {
+        "id_contrato": "CON-CLI001-01",
+        "tipo_contrato": "Mantenimiento Preventivo",
+        "fecha_inicio": "2024-01-01",
+        "fecha_fin": "2024-12-31",
+        "estado_contrato": "Vigente",
+        "frecuencia_visitas": "Trimestral",
+        "sedes_cubiertas": [
+          "Oficina Central"
+        ],
+        "descripcion": "Contrato de mantenimiento preventivo para todos los equipos de A/C y purificadores de la oficina central."
+      }
+    ],
     "sedes": [
       {
         "nombre_sede": "Oficina Central",
@@ -27,6 +41,20 @@
     "nombre_fantasia": "Quantum",
     "cedula_juridica": "3-102-789012",
     "estado": "activo",
+    "contratos": [
+      {
+        "id_contrato": "CON-CLI002-01",
+        "tipo_contrato": "Servicio Bajo Demanda",
+        "fecha_inicio": "2023-06-01",
+        "fecha_fin": null,
+        "estado_contrato": "Vigente",
+        "frecuencia_visitas": "Bajo Demanda",
+        "sedes_cubiertas": [
+          "Sede Principal"
+        ],
+        "descripcion": "Acuerdo de servicio para reparaciones y revisiones según se soliciten. Tarifa preferencial en repuestos."
+      }
+    ],
     "sedes": [
       {
         "nombre_sede": "Sede Principal",
@@ -58,6 +86,31 @@
     "nombre_fantasia": "Nexus",
     "cedula_juridica": "3-101-345678",
     "estado": "activo",
+    "contratos": [
+      {
+        "id_contrato": "CON-CLI003-01",
+        "tipo_contrato": "Soporte Integral",
+        "fecha_inicio": "2023-01-01",
+        "fecha_fin": "2024-12-31",
+        "estado_contrato": "Vigente",
+        "frecuencia_visitas": "Mensual",
+        "sedes_cubiertas": [
+          "Oficina Corporativa",
+          "Bodega Central"
+        ],
+        "descripcion": "Contrato full-service que incluye mantenimientos, revisiones y reparaciones para todas las sedes."
+      },
+      {
+        "id_contrato": "CON-CLI003-02",
+        "tipo_contrato": "Mantenimiento Preventivo",
+        "fecha_inicio": "2022-01-01",
+        "fecha_fin": "2022-12-31",
+        "estado_contrato": "Vencido",
+        "frecuencia_visitas": "Semestral",
+        "sedes_cubiertas": ["Oficina Corporativa"],
+        "descripcion": "Contrato anterior que cubría únicamente la oficina corporativa."
+      }
+    ],
     "sedes": [
       {
         "nombre_sede": "Oficina Corporativa",
@@ -91,6 +144,7 @@
     "apellido2": "Salas",
     "cedula": "1-1111-1111",
     "estado": "activo",
+    "contratos": [],
     "sedes": [
       {
         "nombre_sede": "Residencia",
@@ -113,6 +167,20 @@
     "apellido2": "Vega",
     "cedula": "2-2222-2222",
     "estado": "activo",
+    "contratos": [
+      {
+        "id_contrato": "CON-CLI012-01",
+        "tipo_contrato": "Mantenimiento Preventivo Anual",
+        "fecha_inicio": "2024-05-01",
+        "fecha_fin": "2025-04-30",
+        "estado_contrato": "Vigente",
+        "frecuencia_visitas": "Anual",
+        "sedes_cubiertas": [
+          "Oficina personal"
+        ],
+        "descripcion": "Mantenimiento anual para el equipo de A/C de la oficina."
+      }
+    ],
     "sedes": [
       {
         "nombre_sede": "Oficina personal",
@@ -135,6 +203,7 @@
     "apellido2": "Vindas",
     "cedula": "1-1111-2222",
     "estado": "inactivo",
+    "contratos": [],
     "sedes": [
       {
         "nombre_sede": "Casa",
@@ -157,6 +226,7 @@
     "apellido2": "Solis",
     "cedula": "4-2222-1111",
     "estado": "inactivo",
+    "contratos": [],
     "sedes": [
       {
         "nombre_sede": "Oficina",
@@ -178,6 +248,7 @@
     "nombre_fantasia": "TechSol",
     "cedula_juridica": "3-101-999999",
     "estado": "inactivo",
+    "contratos": [],
     "sedes": [
       {
         "nombre_sede": "Sede San Carlos",
