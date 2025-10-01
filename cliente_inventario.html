@@ -76,16 +76,16 @@
         .inventory-table th,
         .inventory-table td {
             border: 1px solid #e0e7ef;
-            padding: 9px 12px; /* Reducido para mayor compacidad */
+            padding: 5px 8px; /* Reducido para mayor compacidad */
             text-align: left;
-            font-size: 0.95em; /* Letra ligeramente más pequeña */
+            font-size: 0.9em; /* Letra ligeramente más pequeña */
         }
         .inventory-table th {
             background-color: #f8fafd;
             color: #0d9488;
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.9em;
+            font-size: 0.85em;
         }
         .inventory-table tr:nth-child(even) {
             background-color: #fdfdfd;
@@ -202,6 +202,8 @@
                         <th>Marca</th>
                         <th>Modelo</th>
                         <th>Capacidad (BTU)</th>
+                        <th>Tecnología</th>
+                        <th>Refrigerante</th>
                         <th>Estado Equipo</th>
                         <th>Historial</th>
                     </tr>
@@ -244,7 +246,7 @@
                 })
                 .catch(error => {
                     console.error('Error fetching or parsing inventory data:', error);
-                    document.getElementById('inventory-table-body').innerHTML = `<tr><td colspan="9" class="no-results">Error al cargar los datos del inventario.</td></tr>`;
+                    document.getElementById('inventory-table-body').innerHTML = `<tr><td colspan="11" class="no-results">Error al cargar los datos del inventario.</td></tr>`;
                 });
 
             // Fetch clients data for client filter
@@ -319,6 +321,8 @@
                 row.insertCell().textContent = item.marca;
                 row.insertCell().textContent = item.modelo;
                 row.insertCell().textContent = item.capacidad_btu || 'N/A';
+                row.insertCell().textContent = item.tipo_tecnologia || 'N/A';
+                row.insertCell().textContent = item.tipo_refrigerante || 'N/A';
                 const statusCell = row.insertCell();
                 statusCell.textContent = item.estado_equipo;
                 statusCell.classList.add(getStatusClass(item.estado_equipo));

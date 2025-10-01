@@ -7,12 +7,20 @@
     "nombre_sede": "Oficina Central",
     "direccion": "San José, Costa Rica",
     "nombre_contacto": "Juan Pérez",
-    "telefonos": ["+506 8888-8888", "+506 2222-2222"],
-    "emails": ["juan.perez@innovatech.com", "contacto@innovatech.com"],
+    "telefonos": [
+      "+506 8888-8888",
+      "+506 2222-2222"
+    ],
+    "emails": [
+      "juan.perez@innovatech.com",
+      "contacto@innovatech.com"
+    ],
     "equipo": "Aire Acondicionado",
     "marca": "LG",
     "modelo": "S12EQ",
     "capacidad_btu": "12,000",
+    "tipo_tecnologia": "Inverter",
+    "tipo_refrigerante": "R32",
     "fecha_instalacion": "2022-03-15",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-10",
@@ -48,12 +56,20 @@
     "nombre_sede": "Oficina Central",
     "direccion": "San José, Costa Rica",
     "nombre_contacto": "Juan Pérez",
-    "telefonos": ["+506 8888-8888", "+506 2222-2222"],
-    "emails": ["juan.perez@innovatech.com", "contacto@innovatech.com"],
+    "telefonos": [
+      "+506 8888-8888",
+      "+506 2222-2222"
+    ],
+    "emails": [
+      "juan.perez@innovatech.com",
+      "contacto@innovatech.com"
+    ],
     "equipo": "Purificador de Aire",
     "marca": "Philips",
     "modelo": "AC2887",
     "capacidad_btu": null,
+    "tipo_tecnologia": null,
+    "tipo_refrigerante": null,
     "fecha_instalacion": "2023-01-10",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-15",
@@ -89,12 +105,18 @@
     "nombre_sede": "Sede Principal",
     "direccion": "Heredia, Costa Rica",
     "nombre_contacto": "Ana Gómez",
-    "telefonos": ["+506 7777-7777"],
-    "emails": ["ana.gomez@quantum.com"],
+    "telefonos": [
+      "+506 7777-7777"
+    ],
+    "emails": [
+      "ana.gomez@quantum.com"
+    ],
     "equipo": "Aire Acondicionado",
     "marca": "Samsung",
     "modelo": "AR18TS",
     "capacidad_btu": "18,000",
+    "tipo_tecnologia": "Inverter",
+    "tipo_refrigerante": "R410A",
     "fecha_instalacion": "2021-11-20",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-01",
@@ -137,12 +159,18 @@
     "nombre_sede": "Sede Principal",
     "direccion": "Heredia, Costa Rica",
     "nombre_contacto": "Maria Rojas",
-    "telefonos": ["+506 6666-6666"],
-    "emails": ["maria.rojas@quantum.com"],
+    "telefonos": [
+      "+506 6666-6666"
+    ],
+    "emails": [
+      "maria.rojas@quantum.com"
+    ],
     "equipo": "Ventilador Industrial",
     "marca": "Honeywell",
     "modelo": "HT-900",
     "capacidad_btu": null,
+    "tipo_tecnologia": null,
+    "tipo_refrigerante": null,
     "fecha_instalacion": "2022-06-12",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-30",
@@ -171,12 +199,18 @@
     "nombre_sede": "Sede Principal",
     "direccion": "Heredia, Costa Rica",
     "nombre_contacto": "Luis Castro",
-    "telefonos": ["+506 5555-5555"],
-    "emails": ["luis.castro@quantum.com"],
+    "telefonos": [
+      "+506 5555-5555"
+    ],
+    "emails": [
+      "luis.castro@quantum.com"
+    ],
     "equipo": "Deshumidificador",
     "marca": "Whirlpool",
     "modelo": "WHAD40PCW",
     "capacidad_btu": null,
+    "tipo_tecnologia": null,
+    "tipo_refrigerante": null,
     "fecha_instalacion": "2021-04-18",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-25",
@@ -205,12 +239,18 @@
     "nombre_sede": "Oficina Corporativa",
     "direccion": "Alajuela, Costa Rica",
     "nombre_contacto": "Pedro Morales",
-    "telefonos": ["+506 4444-4444"],
-    "emails": ["pedro.morales@nexus.com"],
+    "telefonos": [
+      "+506 4444-4444"
+    ],
+    "emails": [
+      "pedro.morales@nexus.com"
+    ],
     "equipo": "Aire Acondicionado",
     "marca": "Mabe",
     "modelo": "MMI12CDBWCCC8",
     "capacidad_btu": "12,000",
+    "tipo_tecnologia": "Inverter",
+    "tipo_refrigerante": "R410A",
     "fecha_instalacion": "2020-08-05",
     "estado_equipo": "Reparación",
     "ultimo_mantenimiento": "2024-04-20",
@@ -253,12 +293,18 @@
     "nombre_sede": "Oficina Corporativa",
     "direccion": "Alajuela, Costa Rica",
     "nombre_contacto": "Pedro Morales",
-    "telefonos": ["+506 4444-4444"],
-    "emails": ["ventas@nexus.com"],
+    "telefonos": [
+      "+506 4444-4444"
+    ],
+    "emails": [
+      "ventas@nexus.com"
+    ],
     "equipo": "Aire Acondicionado",
     "marca": "Daikin",
     "modelo": "FTKF50TV",
     "capacidad_btu": "24,000",
+    "tipo_tecnologia": "Inverter",
+    "tipo_refrigerante": "R32",
     "fecha_instalacion": "2019-12-01",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-10",
@@ -294,12 +340,18 @@
     "nombre_sede": "Bodega Central",
     "direccion": "Guanacaste, Liberia",
     "nombre_contacto": "Elena Solano",
-    "telefonos": ["+506 3333-3333"],
-    "emails": ["elena.solano@nexus.com"],
+    "telefonos": [
+      "+506 3333-3333"
+    ],
+    "emails": [
+      "elena.solano@nexus.com"
+    ],
     "equipo": "Aire Acondicionado",
     "marca": "Panasonic",
     "modelo": "CS-PN9UKY",
     "capacidad_btu": "9,000",
+    "tipo_tecnologia": "Inverter",
+    "tipo_refrigerante": "R32",
     "fecha_instalacion": "2023-07-22",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-05",
@@ -328,12 +380,18 @@
     "nombre_sede": "Bodega Central",
     "direccion": "Guanacaste, Liberia",
     "nombre_contacto": "Elena Solano",
-    "telefonos": ["+506 3333-3333"],
-    "emails": ["bodega@nexus.com"],
+    "telefonos": [
+      "+506 3333-3333"
+    ],
+    "emails": [
+      "bodega@nexus.com"
+    ],
     "equipo": "Purificador de Aire",
     "marca": "Philips",
     "modelo": "AC2887",
     "capacidad_btu": null,
+    "tipo_tecnologia": null,
+    "tipo_refrigerante": null,
     "fecha_instalacion": "2023-01-10",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-15",
@@ -362,12 +420,18 @@
     "nombre_sede": "Residencia",
     "direccion": "San José, Desamparados",
     "nombre_contacto": "Carlos Rivera",
-    "telefonos": ["+506 8888-1234"],
-    "emails": ["carlos.rivera@email.com"],
+    "telefonos": [
+      "+506 8888-1234"
+    ],
+    "emails": [
+      "carlos.rivera@email.com"
+    ],
     "equipo": "Aire Acondicionado",
     "marca": "LG",
     "modelo": "S12EQ",
     "capacidad_btu": "12,000",
+    "tipo_tecnologia": "Inverter",
+    "tipo_refrigerante": "R32",
     "fecha_instalacion": "2022-03-15",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-10",
@@ -403,12 +467,18 @@
     "nombre_sede": "Oficina personal",
     "direccion": "Cartago, Paraíso",
     "nombre_contacto": "Laura Jiménez",
-    "telefonos": ["+506 7777-5678"],
-    "emails": ["laura.jimenez@email.com"],
+    "telefonos": [
+      "+506 7777-5678"
+    ],
+    "emails": [
+      "laura.jimenez@email.com"
+    ],
     "equipo": "Aire Acondicionado",
     "marca": "Samsung",
     "modelo": "AR18TS",
     "capacidad_btu": "18,000",
+    "tipo_tecnologia": "Inverter",
+    "tipo_refrigerante": "R410A",
     "fecha_instalacion": "2021-11-20",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-01",
@@ -444,12 +514,18 @@
     "nombre_sede": "Casa",
     "direccion": "Puntarenas, Esparza",
     "nombre_contacto": "Ana Mora",
-    "telefonos": ["+506 8888-3333"],
-    "emails": ["ana.mora@email.com"],
+    "telefonos": [
+      "+506 8888-3333"
+    ],
+    "emails": [
+      "ana.mora@email.com"
+    ],
     "equipo": "Aire Acondicionado",
     "marca": "Mabe",
     "modelo": "MMI12CDBWCCC8",
     "capacidad_btu": "12,000",
+    "tipo_tecnologia": "Inverter",
+    "tipo_refrigerante": "R410A",
     "fecha_instalacion": "2020-08-05",
     "estado_equipo": "Reparación",
     "ultimo_mantenimiento": "2024-04-20",
@@ -478,12 +554,18 @@
     "nombre_sede": "Oficina",
     "direccion": "Limon, Pococí",
     "nombre_contacto": "Juan Chaves",
-    "telefonos": ["+506 7777-4444"],
-    "emails": ["juan.chaves@email.com"],
+    "telefonos": [
+      "+506 7777-4444"
+    ],
+    "emails": [
+      "juan.chaves@email.com"
+    ],
     "equipo": "Aire Acondicionado",
     "marca": "Daikin",
     "modelo": "FTKF50TV",
     "capacidad_btu": "24,000",
+    "tipo_tecnologia": "Inverter",
+    "tipo_refrigerante": "R32",
     "fecha_instalacion": "2019-12-01",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-10"
@@ -496,12 +578,18 @@
     "nombre_sede": "Sede San Carlos",
     "direccion": "Alajuela, San Carlos",
     "nombre_contacto": "Sofia Perez",
-    "telefonos": ["+506 6666-7777"],
-    "emails": ["sofia.perez@techsol.com"],
+    "telefonos": [
+      "+506 6666-7777"
+    ],
+    "emails": [
+      "sofia.perez@techsol.com"
+    ],
     "equipo": "Aire Acondicionado",
     "marca": "Panasonic",
     "modelo": "CS-PN9UKY",
     "capacidad_btu": "9,000",
+    "tipo_tecnologia": "Inverter",
+    "tipo_refrigerante": "R32",
     "fecha_instalacion": "2023-07-22",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-05"

@@ -4,12 +4,14 @@ Inventario de cliente:
     técnico que realizo, número de boleta, tipo de trabajo.
 
     Quitar dato fecha de instalación.
+
+    Cambiar nombre: de ultimo mant. a última intervención.
     
     Número de contrato por cliente.
     
     Datos técnicos: Refrigerante, tecnologia, 
     
-    Cambiar nombre: de ultimo mant. a última intervención.
+
 
 Contácto cliente:
     Contacto agregar departamento/Oficina.
