@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Proyecto SG INVAES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-arrow::after {
+            content: '▼';
+            font-size: 2rem;
+            color: #ff7c43;
+            line-height: 1;
+            margin: 0.5rem 0;
+        }
+        .flow-arrow-horizontal::after {
+            content: '►';
+            font-size: 2rem;
+            color: #ff7c43;
+            line-height: 1;
+            margin: 0 1rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#003f5c] mb-2">Transformando la Gestión de Mantenimiento</h1>
+            <p class="text-xl text-[#2f4b7c]">La solución de INVAES para empresas de climatización.</p>
+        </header>
+
+        <section id="problemas" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-[#003f5c] mb-2">El Desafío Operativo Actual</h2>
+            <p class="text-lg text-center text-gray-600 mb-8 max-w-3xl mx-auto">Las operaciones manuales y descentralizadas generan ineficiencias críticas que impactan la rentabilidad y el servicio al cliente. Identificamos los principales puntos de fricción que su empresa enfrenta a diario.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <span class="text-4xl">📋</span>
+                    <h3 class="text-xl font-semibold text-[#665191] mt-2 mb-2">Pérdida de Información</h3>
+                    <p class="text-gray-600">Tareas no finalizadas o trabajos urgentes no agendados se pierden, resultando en retrasos y clientes insatisfechos.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <span class="text-4xl">📦</span>
+                    <h3 class="text-xl font-semibold text-[#a05195] mt-2 mb-2">Gestión de Inventario</h3>
+                    <p class="text-gray-600">La falta de visibilidad sobre la ubicación de repuestos y los traslados no confirmados generan pérdidas y robos.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <span class="text-4xl">💸</span>
+                    <h3 class="text-xl font-semibold text-[#d45087] mt-2 mb-2">Procesos Manuales</h3>
+                    <p class="text-gray-600">El cálculo de comisiones y los cierres administrativos son lentos, propensos a errores y consumen tiempo valioso.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <span class="text-4xl">🔍</span>
+                    <h3 class="text-xl font-semibold text-[#f95d6a] mt-2 mb-2">Falta de Trazabilidad</h3>
+                    <p class="text-gray-600">Sin un historial técnico por equipo, es imposible auditar trabajos, gestionar garantías o dar seguimiento efectivo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solucion" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-[#003f5c] mb-2">Nuestra Solución: Automatización y Control Total</h2>
+            <p class="text-lg text-center text-gray-600 mb-8 max-w-3xl mx-auto">Implementamos flujos de trabajo inteligentes que automatizan tareas repetitivas, aseguran la integridad de los datos y conectan a sus equipos en tiempo real.</p>
+            <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h3 class="text-2xl font-semibold text-[#2f4b7c] text-center mb-6">Flujo de Cierre y Reasignación Automatizada</h3>
+                <div class="flex flex-col md:flex-row justify-around items-center text-center">
+                    <div class="flex flex-col items-center w-full md:w-auto mb-6 md:mb-0">
+                        <div class="p-4 bg-blue-100 border-2 border-blue-300 rounded-lg shadow">
+                            <p class="font-bold text-blue-800">Técnico finaliza proyecto</p>
+                        </div>
+                        <div class="flow-arrow-horizontal hidden md:block"></div>
+                        <div class="flow-arrow md:hidden"></div>
+                    </div>
+                    <div class="flex flex-col items-center w-full md:w-auto mb-6 md:mb-0">
+                        <div class="p-4 bg-purple-100 border-2 border-purple-300 rounded-lg shadow">
+                            <p class="font-bold text-purple-800">Sistema notifica a Administración</p>
+                        </div>
+                         <div class="flow-arrow-horizontal hidden md:block"></div>
+                         <div class="flow-arrow md:hidden"></div>
+                    </div>
+                    <div class="flex flex-col items-center w-full md:w-auto">
+                        <div class="p-4 bg-green-100 border-2 border-green-300 rounded-lg shadow">
+                            <p class="font-bold text-green-800">Facturación y archivo iniciados</p>
+                        </div>
+                    </div>
+                </div>
+                 <hr class="my-8 border-gray-300">
+                 <div class="flex flex-col md:flex-row justify-around items-center text-center">
+                    <div class="flex flex-col items-center w-full md:w-auto mb-6 md:mb-0">
+                        <div class="p-4 bg-red-100 border-2 border-red-300 rounded-lg shadow">
+                            <p class="font-bold text-red-800">Tarea no finalizada</p>
+                        </div>
+                        <div class="flow-arrow-horizontal hidden md:block"></div>
+                        <div class="flow-arrow md:hidden"></div>
+                    </div>
+                    <div class="flex flex-col items-center w-full md:w-auto mb-6 md:mb-0">
+                        <div class="p-4 bg-yellow-100 border-2 border-yellow-300 rounded-lg shadow">
+                            <p class="font-bold text-yellow-800">Sistema notifica a Logística</p>
+                        </div>
+                         <div class="flow-arrow-horizontal hidden md:block"></div>
+                         <div class="flow-arrow md:hidden"></div>
+                    </div>
+                    <div class="flex flex-col items-center w-full md:w-auto">
+                        <div class="p-4 bg-indigo-100 border-2 border-indigo-300 rounded-lg shadow">
+                            <p class="font-bold text-indigo-800">Reasignación para el día siguiente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="beneficios" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-[#003f5c] mb-2">El Impacto Directo en su Operación</h2>
+            <p class="text-lg text-center text-gray-600 mb-8 max-w-3xl mx-auto">La centralización y automatización no solo optimizan procesos, sino que liberan a su equipo para que se enfoque en tareas de mayor valor, impulsando la productividad y la rentabilidad.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold text-center text-[#2f4b7c] mb-4">Reducción de Carga Administrativa</h3>
+                     <div class="chart-container h-80 md:h-96">
+                        <canvas id="adminWorkloadChart"></canvas>
+                    </div>
+                </div>
+                <div class="text-left">
+                    <h3 class="text-2xl font-semibold text-[#2f4b7c] mb-4">Beneficios Cuantificables</h3>
+                     <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                        <p class="text-5xl font-bold text-[#ff7c43]">~40%</p>
+                        <p class="text-lg text-gray-700">Menos tiempo dedicado a tareas administrativas manuales, permitiendo un enfoque en estrategia y crecimiento.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <p class="text-5xl font-bold text-[#ffa600]">100%</p>
+                        <p class="text-lg text-gray-700">De visibilidad sobre el historial y estado de cada equipo, mejorando el servicio al cliente y la toma de decisiones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="kpis" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-[#003f5c] mb-2">Midiendo el Éxito: KPIs Clave</h2>
+            <p class="text-lg text-center text-gray-600 mb-8 max-w-3xl mx-auto">Nuestro sistema proporciona datos para medir el rendimiento y demostrar el retorno de la inversión. A continuación, se muestra una proyección del impacto esperado en los indicadores más importantes.</p>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                 <h3 class="text-2xl font-semibold text-center text-[#2f4b7c] mb-4">Mejora Proyectada de Indicadores</h3>
+                <div class="chart-container h-96">
+                    <canvas id="kpiImprovementChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="seguridad" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-[#003f5c] mb-2">Seguridad y Control de Acceso</h2>
+             <p class="text-lg text-center text-gray-600 mb-8 max-w-3xl mx-auto">Garantizamos la integridad de sus datos con un sistema de roles y permisos que define quién puede ver y modificar la información crítica, como los montos de las comisiones.</p>
+            <div class="bg-white rounded-lg shadow-lg p-6 overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b-2 border-gray-300">
+                            <th class="p-3 font-semibold text-[#003f5c]">Rol</th>
+                            <th class="p-3 font-semibold text-[#003f5c] text-center">Ver Tareas</th>
+                            <th class="p-3 font-semibold text-[#003f5c] text-center">Gestionar Inventario</th>
+                            <th class="p-3 font-semibold text-[#003f5c] text-center">Cerrar Proyectos</th>
+                            <th class="p-3 font-semibold text-[#003f5c] text-center">Editar Comisiones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 font-medium">Técnico</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✓</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✓</td>
+                            <td class="p-3 text-center text-red-500 font-bold">✗</td>
+                            <td class="p-3 text-center text-red-500 font-bold">✗</td>
+                        </tr>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <td class="p-3 font-medium">Logística</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✓</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✓</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✓</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium">Administrativo</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✓</td>
+                            <td class="p-3 text-center text-red-500 font-bold">✗</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✓</td>
+                            <td class="p-3 text-center text-red-500 font-bold">✗</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer class="text-center pt-8 border-t border-gray-300">
+            <h2 class="text-3xl font-bold text-[#003f5c] mb-2">Propuesta de Valor</h2>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto">Con SG INVAES, su empresa gana control operativo inmediato. Menos pérdidas, comisiones transparentes y un historial técnico sólido para respaldar cada intervención. Optimice sus recursos y libere a su equipo para tareas de alto valor.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const FONT_COLOR = '#1f2937';
+            const GRID_COLOR = '#e5e7eb';
+            const PALETTE = ['#003f5c', '#665191', '#d45087', '#ff7c43', '#ffa600'];
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+
+            const defaultChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: FONT_COLOR
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: FONT_COLOR },
+                        grid: { color: GRID_COLOR }
+                    },
+                    x: {
+                        ticks: { color: FONT_COLOR },
+                        grid: { color: 'transparent' }
+                    }
+                }
+            };
+
+            function wrapLabel(label, maxLength = 16) {
+                if (label.length <= maxLength) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + word).length > maxLength) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += word + ' ';
+                }
+                lines.push(currentLine.trim());
+                return lines;
+            }
+
+            if (document.getElementById('adminWorkloadChart')) {
+                new Chart(document.getElementById('adminWorkloadChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Cálculos Manuales', 'Cierre de Proyectos', 'Gestión de Papel', 'Tareas de Valor'],
+                        datasets: [{
+                            label: 'Antes',
+                            data: [35, 30, 20, 15],
+                            backgroundColor: PALETTE.slice(0, 4),
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }, {
+                            label: 'Después',
+                            data: [5, 10, 5, 80],
+                            backgroundColor: PALETTE.slice(0, 4),
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                           legend: {
+                                position: 'bottom',
+                                labels: { color: FONT_COLOR }
+                           },
+                           tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        label += context.parsed + '%';
+                                        return label;
+                                    }
+                                }
+                           },
+                           title: {
+                                display: false
+                           }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById('kpiImprovementChart')) {
+                const rawLabels = [
+                    '% Tareas finalizadas en plazo',
+                    'Reducción de tareas no finalizadas',
+                    'Tiempo promedio de procesamiento administrativo (días)',
+                    'Exactitud del inventario'
+                ];
+                const wrappedLabels = rawLabels.map(label => wrapLabel(label));
+
+                new Chart(document.getElementById('kpiImprovementChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: wrappedLabels,
+                        datasets: [
+                            {
+                                label: 'Antes',
+                                data: [75, 20, 5, 85],
+                                backgroundColor: '#a05195',
+                                borderRadius: 4
+                            },
+                            {
+                                label: 'Después (Proyectado)',
+                                data: [95, 5, 1, 99],
+                                backgroundColor: '#ff7c43',
+                                borderRadius: 4
+                            }
+                        ]
+                    },
+                    options: defaultChartOptions
+                });
+            }
+        });
+    </script>
+</body>
+</html>
