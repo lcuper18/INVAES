@@ -26,3 +26,21 @@ Inventario General de INVAES.
 
 Tickets de trabajo
     Tipos: Mantenimiento, Revisión, Instalación, Reparación.
+
+Reunión 01-10-2025
+    Inventario cliente  
+        **Añadir número de inventario del cliente.
+        **Ubicación: Departamento/ Oficina dato suministrado por cliente o por 
+            técnico cuando se realiza el trabajo.
+        
+        **Historial completo en reporte, quitar restricción de maximo 3 intervenciones.
+    
+    Contrato cliente
+        Datos necesarios: 
+            **Datos de cliente.
+            **Número de contratación.
+            **Tipos de contratación: Segun demanda, frecuencia establecida, cantidad de equipos,
+                equipos especificos.
+            **Link referencia a carpeta DROPBOX.
+            **Frecuencia de mantenimiento: Ejemplo Tristre, Cuatrimestre, etc.
+            **Tarea de Ticket en logística puede estar amarrado a un contrato de cliente.
