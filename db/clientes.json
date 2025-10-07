@@ -27,8 +27,14 @@
         "contactos": [
           {
             "nombre_contacto": "Juan Pérez",
-            "telefonos": ["+506 8888-8888", "+506 2222-2222"],
-            "emails": ["juan.perez@innovatech.com", "contacto@innovatech.com"]
+            "telefonos": [
+              "+506 8888-8888",
+              "+506 2222-2222"
+            ],
+            "emails": [
+              "juan.perez@innovatech.com",
+              "contacto@innovatech.com"
+            ]
           }
         ]
       }
@@ -62,18 +68,30 @@
         "contactos": [
           {
             "nombre_contacto": "Ana Gómez",
-            "telefonos": ["+506 7777-7777"],
-            "emails": ["ana.gomez@quantum.com"]
+            "telefonos": [
+              "+506 7777-7777"
+            ],
+            "emails": [
+              "ana.gomez@quantum.com"
+            ]
           },
           {
             "nombre_contacto": "Maria Rojas",
-            "telefonos": ["+506 6666-6666"],
-            "emails": ["maria.rojas@quantum.com"]
+            "telefonos": [
+              "+506 6666-6666"
+            ],
+            "emails": [
+              "maria.rojas@quantum.com"
+            ]
           },
           {
             "nombre_contacto": "Luis Castro",
-            "telefonos": ["+506 5555-5555"],
-            "emails": ["luis.castro@quantum.com"]
+            "telefonos": [
+              "+506 5555-5555"
+            ],
+            "emails": [
+              "luis.castro@quantum.com"
+            ]
           }
         ]
       }
@@ -107,7 +125,9 @@
         "fecha_fin": "2022-12-31",
         "estado_contrato": "Vencido",
         "frecuencia_visitas": "Semestral",
-        "sedes_cubiertas": ["Oficina Corporativa"],
+        "sedes_cubiertas": [
+          "Oficina Corporativa"
+        ],
         "descripcion": "Contrato anterior que cubría únicamente la oficina corporativa."
       }
     ],
@@ -118,8 +138,13 @@
         "contactos": [
           {
             "nombre_contacto": "Pedro Morales",
-            "telefonos": ["+506 4444-4444"],
-            "emails": ["pedro.morales@nexus.com", "ventas@nexus.com"]
+            "telefonos": [
+              "+506 4444-4444"
+            ],
+            "emails": [
+              "pedro.morales@nexus.com",
+              "ventas@nexus.com"
+            ]
           }
         ]
       },
@@ -129,8 +154,13 @@
         "contactos": [
           {
             "nombre_contacto": "Elena Solano",
-            "telefonos": ["+506 3333-3333"],
-            "emails": ["elena.solano@nexus.com", "bodega@nexus.com"]
+            "telefonos": [
+              "+506 3333-3333"
+            ],
+            "emails": [
+              "elena.solano@nexus.com",
+              "bodega@nexus.com"
+            ]
           }
         ]
       }
@@ -152,8 +182,12 @@
         "contactos": [
           {
             "nombre_contacto": "Carlos Rivera",
-            "telefonos": ["+506 8888-1234"],
-            "emails": ["carlos.rivera@email.com"]
+            "telefonos": [
+              "+506 8888-1234"
+            ],
+            "emails": [
+              "carlos.rivera@email.com"
+            ]
           }
         ]
       }
@@ -188,8 +222,12 @@
         "contactos": [
           {
             "nombre_contacto": "Laura Jiménez",
-            "telefonos": ["+506 7777-5678"],
-            "emails": ["laura.jimenez@email.com"]
+            "telefonos": [
+              "+506 7777-5678"
+            ],
+            "emails": [
+              "laura.jimenez@email.com"
+            ]
           }
         ]
       }
@@ -211,8 +249,12 @@
         "contactos": [
           {
             "nombre_contacto": "Ana Mora",
-            "telefonos": ["+506 8888-3333"],
-            "emails": ["ana.mora@email.com"]
+            "telefonos": [
+              "+506 8888-3333"
+            ],
+            "emails": [
+              "ana.mora@email.com"
+            ]
           }
         ]
       }
@@ -234,8 +276,12 @@
         "contactos": [
           {
             "nombre_contacto": "Juan Chaves",
-            "telefonos": ["+506 7777-4444"],
-            "emails": ["juan.chaves@email.com"]
+            "telefonos": [
+              "+506 7777-4444"
+            ],
+            "emails": [
+              "juan.chaves@email.com"
+            ]
           }
         ]
       }
@@ -256,8 +302,12 @@
         "contactos": [
           {
             "nombre_contacto": "Sofia Perez",
-            "telefonos": ["+506 6666-7777"],
-            "emails": ["sofia.perez@techsol.com"]
+            "telefonos": [
+              "+506 6666-7777"
+            ],
+            "emails": [
+              "sofia.perez@techsol.com"
+            ]
           }
         ]
       }

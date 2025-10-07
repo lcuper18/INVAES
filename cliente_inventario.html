@@ -198,6 +198,7 @@
                         <th>ID Cliente</th>
                         <th>Cliente</th>
                         <th>Sede</th>
+                        <th>N° Inventario Cliente</th>
                         <th>Equipo</th>
                         <th>Marca</th>
                         <th>Modelo</th>
@@ -240,13 +241,14 @@
                     return response.json();
                 })
                 .then(data => {
-                    allInventoryData = data;
+                    // Aseguramos que todos los campos, incluido el nuevo, se pasen
+                    allInventoryData = data.map(item => ({ ...item }));
                     displayInventory(allInventoryData);
                     populateEquipmentFilter(allInventoryData);
                 })
                 .catch(error => {
                     console.error('Error fetching or parsing inventory data:', error);
-                    document.getElementById('inventory-table-body').innerHTML = `<tr><td colspan="11" class="no-results">Error al cargar los datos del inventario.</td></tr>`;
+                    document.getElementById('inventory-table-body').innerHTML = `<tr><td colspan="12" class="no-results">Error al cargar los datos del inventario.</td></tr>`;
                 });
 
             // Fetch clients data for client filter
@@ -317,6 +319,7 @@
                 row.insertCell().textContent = item.id_cliente;
                 row.insertCell().textContent = item.nombre_cliente;
                 row.insertCell().textContent = item.nombre_sede;
+                row.insertCell().textContent = item.codigo_inventario_cliente || 'N/A';
                 row.insertCell().textContent = item.equipo;
                 row.insertCell().textContent = item.marca;
                 row.insertCell().textContent = item.modelo;

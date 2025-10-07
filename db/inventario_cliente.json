@@ -24,6 +24,7 @@
     "fecha_instalacion": "2022-03-15",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-10",
+    "codigo_inventario_cliente": "ABC123789",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2022-03-15",
@@ -73,6 +74,7 @@
     "fecha_instalacion": "2023-01-10",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-15",
+    "codigo_inventario_cliente": "INV-CLI001-43765",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2023-01-10",
@@ -120,6 +122,7 @@
     "fecha_instalacion": "2021-11-20",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-01",
+    "codigo_inventario_cliente": "INV-CLI002-19876",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2021-11-20",
@@ -174,6 +177,7 @@
     "fecha_instalacion": "2022-06-12",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-30",
+    "codigo_inventario_cliente": "INV-CLI002-54321",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2022-06-12",
@@ -214,6 +218,7 @@
     "fecha_instalacion": "2021-04-18",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-25",
+    "codigo_inventario_cliente": "INV-CLI002-98765",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2021-04-18",
@@ -254,6 +259,7 @@
     "fecha_instalacion": "2020-08-05",
     "estado_equipo": "Reparación",
     "ultimo_mantenimiento": "2024-04-20",
+    "codigo_inventario_cliente": "INV-CLI003-11223",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2020-08-05",
@@ -308,6 +314,7 @@
     "fecha_instalacion": "2019-12-01",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-10",
+    "codigo_inventario_cliente": "INV-CLI003-44556",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2019-12-01",
@@ -355,6 +362,7 @@
     "fecha_instalacion": "2023-07-22",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-05",
+    "codigo_inventario_cliente": "INV-CLI003-77889",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2023-07-22",
@@ -395,6 +403,7 @@
     "fecha_instalacion": "2023-01-10",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-15",
+    "codigo_inventario_cliente": "INV-CLI003-99001",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2023-01-10",
@@ -435,6 +444,7 @@
     "fecha_instalacion": "2022-03-15",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-10",
+    "codigo_inventario_cliente": "INV-CLI011-12345",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2022-03-15",
@@ -482,6 +492,7 @@
     "fecha_instalacion": "2021-11-20",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-01",
+    "codigo_inventario_cliente": "INV-CLI012-67890",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2021-11-20",
@@ -529,6 +540,7 @@
     "fecha_instalacion": "2020-08-05",
     "estado_equipo": "Reparación",
     "ultimo_mantenimiento": "2024-04-20",
+    "codigo_inventario_cliente": "INV-CLI013-24680",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2020-08-05",
@@ -568,7 +580,8 @@
     "tipo_refrigerante": "R32",
     "fecha_instalacion": "2019-12-01",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-06-10"
+    "ultimo_mantenimiento": "2024-06-10",
+    "codigo_inventario_cliente": "INV-CLI014-13579"
   },
   {
     "id_cliente": "CLI015",
@@ -592,6 +605,7 @@
     "tipo_refrigerante": "R32",
     "fecha_instalacion": "2023-07-22",
     "estado_equipo": "Operativo",
-    "ultimo_mantenimiento": "2024-06-05"
+    "ultimo_mantenimiento": "2024-06-05",
+    "codigo_inventario_cliente": "INV-CLI015-86420"
   }
 ]
