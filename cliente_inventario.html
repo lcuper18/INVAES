@@ -14,7 +14,8 @@
             padding: 20px;
         }
         .container {
-            max-width: 1200px;
+            width: 95%;
+            max-width: 1800px; /* Ajustado para pantallas más grandes */
             margin: 20px auto;
             background: #fff;
             padding: 30px;
@@ -79,6 +80,7 @@
             padding: 5px 8px; /* Reducido para mayor compacidad */
             text-align: left;
             font-size: 0.9em; /* Letra ligeramente más pequeña */
+            word-break: break-word; /* Permite que el texto largo se ajuste */
         }
         .inventory-table th {
             background-color: #f8fafd;
@@ -316,7 +318,6 @@
 
             inventoryItems.forEach(item => {
                 const row = tableBody.insertRow();
-                row.insertCell().textContent = item.id_cliente;
                 row.insertCell().textContent = item.nombre_cliente;
                 row.insertCell().textContent = item.nombre_sede;
                 row.insertCell().textContent = item.codigo_inventario_cliente || 'N/A';
@@ -450,6 +451,12 @@
             if (event.target == modal) {
                 modal.style.display = 'none';
             }
+        }
+    </script>
+</body>
+</html>ipt>
+</body>
+</html>   }
         }
     </script>
 </body>
