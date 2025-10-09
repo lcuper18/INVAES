@@ -25,6 +25,7 @@
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-10",
     "codigo_inventario_cliente": "ABC123789",
+    "ubicacion": "Sala de Servidores",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2022-03-15",
@@ -75,6 +76,7 @@
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-15",
     "codigo_inventario_cliente": "INV-CLI001-43765",
+    "ubicacion": "Sala de Reuniones Principal",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2023-01-10",
@@ -123,6 +125,7 @@
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-01",
     "codigo_inventario_cliente": "INV-CLI002-19876",
+    "ubicacion": "Oficina de Gerencia",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2021-11-20",
@@ -178,6 +181,7 @@
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-30",
     "codigo_inventario_cliente": "INV-CLI002-54321",
+    "ubicacion": "Área de Producción Oeste",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2022-06-12",
@@ -219,6 +223,7 @@
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-25",
     "codigo_inventario_cliente": "INV-CLI002-98765",
+    "ubicacion": "Bodega de Electrónicos",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2021-04-18",
@@ -260,6 +265,7 @@
     "estado_equipo": "Reparación",
     "ultimo_mantenimiento": "2024-04-20",
     "codigo_inventario_cliente": "INV-CLI003-11223",
+    "ubicacion": "Oficina de Contabilidad",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2020-08-05",
@@ -315,6 +321,7 @@
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-10",
     "codigo_inventario_cliente": "INV-CLI003-44556",
+    "ubicacion": "Sala de Juntas",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2019-12-01",
@@ -363,6 +370,7 @@
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-05",
     "codigo_inventario_cliente": "INV-CLI003-77889",
+    "ubicacion": "Oficina de Bodega",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2023-07-22",
@@ -404,6 +412,7 @@
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-15",
     "codigo_inventario_cliente": "INV-CLI003-99001",
+    "ubicacion": "Área de Recepción",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2023-01-10",
@@ -445,6 +454,7 @@
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-05-10",
     "codigo_inventario_cliente": "INV-CLI011-12345",
+    "ubicacion": "Dormitorio Principal",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2022-03-15",
@@ -493,6 +503,7 @@
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-01",
     "codigo_inventario_cliente": "INV-CLI012-67890",
+    "ubicacion": "Oficina en Casa",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2021-11-20",
@@ -541,6 +552,7 @@
     "estado_equipo": "Reparación",
     "ultimo_mantenimiento": "2024-04-20",
     "codigo_inventario_cliente": "INV-CLI013-24680",
+    "ubicacion": "Sala de Estar",
     "historial_intervenciones": [
       {
         "fecha_intervencion": "2020-08-05",
@@ -581,7 +593,8 @@
     "fecha_instalacion": "2019-12-01",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-10",
-    "codigo_inventario_cliente": "INV-CLI014-13579"
+    "codigo_inventario_cliente": "INV-CLI014-13579",
+    "ubicacion": "Oficina Principal"
   },
   {
     "id_cliente": "CLI015",
@@ -606,6 +619,7 @@
     "fecha_instalacion": "2023-07-22",
     "estado_equipo": "Operativo",
     "ultimo_mantenimiento": "2024-06-05",
-    "codigo_inventario_cliente": "INV-CLI015-86420"
+    "codigo_inventario_cliente": "INV-CLI015-86420",
+    "ubicacion": "Sala de Capacitaciones"
   }
 ]
