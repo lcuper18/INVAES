@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -48,22 +49,19 @@
             background: #fff;
             color: #0d9488;
         }
-        .tab-divider {
-            width: 1px;
-            height: 22px;
-            background: #d1d5db;
-            margin: 0 10px;
-            align-self: center;
+        .user-session {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #4b5563;
+            font-size: 0.9em;
         }
-        @media (max-width: 600px) {
-            .ribbon-bar {
-                flex-direction: column;
-                padding: 1rem;
-                gap: 0.6rem;
-            }
-            .tabs {
-                flex-wrap: wrap;
-            }
+        .user-session select {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: white;
         }
 
         /* Estilos generales del contenedor */
@@ -106,13 +104,17 @@
         tr:nth-child(even) {
             background-color: #f2f6fa;
         }
-        tr.selected {
-            background-color: #cce0ff;
+        .form-row button, .action-btn {
+            background-color: #0d9488;
+            color: white;
             cursor: pointer;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9em;
         }
-        tr:hover {
-            background-color: #e0e9f5;
-            cursor: pointer;
+        .form-row button:hover, .action-btn:hover {
+            background-color: #0a7d70;
         }
         .form-row {
             margin-bottom: 10px;
@@ -122,20 +124,12 @@
             margin-bottom: 5px;
             font-weight: bold;
         }
-        .form-row select, .form-row input, .form-row button {
+        .form-row select, .form-row input {
             width: 100%;
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
-            font-size: 0.9em;
-        }
-        .form-row button {
-            background-color: #0d9488;
-            color: white;
-            cursor: pointer;
-            border: none;
-            margin-top: 10px;
         }
         #item-details, #new-warehouse-form {
             display: none;
@@ -146,20 +140,12 @@
             color: #777;
             font-size: 0.8em;
         }
-        /* Estilos específicos de la sección de inventario */
         .inventory-panels {
             display: flex;
             gap: 20px;
         }
-        .inventory-panels > .section-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .inventory-panels > .section-panel:nth-child(2) {
-            flex: 0.7; /* El panel de movimientos es un poco más pequeño */
-        }
-        /* Estilos específicos de la sección de informes */
+        .inventory-panels > .section-panel { flex: 1; display: flex; flex-direction: column; }
+        .inventory-panels > .section-panel:nth-child(2) { flex: 0.7; }
         .reports-menu {
             border: 1px solid #ccc;
             padding: 10px;
@@ -174,16 +160,9 @@
             margin: 5px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 0.9em;
         }
-        .reports-menu button:hover {
-            background-color: #e6f0ff;
-        }
-        .report-content {
-            border: 1px solid #d1d5db;
-            padding: 15px;
-            background-color: #f9f9f9;
-        }
+        .reports-menu button:hover { background-color: #e6f0ff; }
+        .report-content { border: 1px solid #d1d5db; padding: 15px; background-color: #f9f9f9; }
     </style>
 </head>
 <body>
@@ -191,30 +170,28 @@
 <div class="ribbon-bar">
     <div class="ribbon-logo">Gestión de Inventario</div>
     <div class="tabs">
-        <button class="tab-btn active" onclick="showView('inventory')">Inventario</button>
+        <button class="tab-btn" onclick="showView('inventory')">Inventario</button>
+        <button class="tab-btn" onclick="showView('pending-transfers')">Traslados Pendientes</button>
         <button class="tab-btn" onclick="showView('warehouses')">Gestión de Bodegas</button>
         <button class="tab-btn" onclick="showView('reports')">Informes</button>
+    </div>
+    <div class="user-session">
+        <label for="user-select">Usuario Activo:</label>
+        <select id="user-select"></select>
     </div>
 </div>
 
 <div class="container">
-    <div id="inventory-view" style="display: flex; flex-direction: column; gap: 20px;">
+    <!-- Vista de Inventario -->
+    <div id="inventory-view" style="display: none; flex-direction: column; gap: 20px;">
         <div class="inventory-panels">
             <div class="section-panel" id="master-panel">
                 <div class="section-header">Artículos</div>
-                <p>Seleccione un artículo para ver su detalle.</p>
                 <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Artículo</th>
-                            <th>Cantidad Total</th>
-                        </tr>
-                    </thead>
+                    <thead><tr><th>ID</th><th>Artículo</th><th>Cantidad Total</th></tr></thead>
                     <tbody id="master-inventory-list"></tbody>
                 </table>
             </div>
-
             <div class="section-panel" style="flex: 0.7;">
                 <div class="section-header">Registrar Movimiento</div>
                 <div class="form-row">
@@ -241,81 +218,77 @@
                     <label for="movement-quantity">Cantidad:</label>
                     <input type="number" id="movement-quantity" value="1" min="1">
                 </div>
-                <button onclick="registerMovement()">Registrar Movimiento</button>
+                <div class="form-row">
+                    <button onclick="registerMovement()">Registrar Movimiento</button>
+                </div>
             </div>
         </div>
-        
         <div id="item-details" class="section-panel">
             <div class="section-header">Detalle del Artículo: <span id="selected-item-name"></span></div>
             <table id="item-locations-table">
-                <thead>
-                    <tr>
-                        <th>Ubicación</th>
-                        <th>Cantidad</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Ubicación</th><th>Cantidad</th></tr></thead>
                 <tbody></tbody>
             </table>
             <br>
             <div class="section-header">Historial de Movimientos</div>
             <ul id="item-history-list"></ul>
         </div>
-        
         <div class="section-panel">
             <div class="section-header">Historial Global de Movimientos</div>
             <ul id="global-history-list"></ul>
         </div>
     </div>
 
-    <div id="warehouses-view" style="display: none; flex-direction: column;">
-        <div class="section-panel" style="flex: 1;">
-            <div class="section-header">Bodegas del Sistema</div>
-            <p>
-                <button onclick="toggleNewWarehouseForm()">Crear Nueva Bodega</button>
-            </p>
-            <div id="new-warehouse-form" class="section-panel">
-                <div class="section-header">Crear Nueva Bodega</div>
-                <div class="form-row">
-                    <label for="warehouse-name">Nombre de la Bodega:</label>
-                    <input type="text" id="warehouse-name" required>
-                </div>
-                <div class="form-row">
-                    <label for="warehouse-type">Tipo de Bodega:</label>
-                    <select id="warehouse-type">
-                        <option value="main">Principal</option>
-                        <option value="mobile">Móvil</option>
-                    </select>
-                </div>
-                <div class="form-row" id="placa-container" style="display: none;">
-                    <label for="placa">Placa del Vehículo:</label>
-                    <input type="text" id="placa">
-                </div>
-                <div class="form-row">
-                    <label for="encargado">Encargado:</label>
-                    <select id="encargado-select"></select>
-                </div>
-                <button onclick="createNewWarehouse()">Crear</button>
-            </div>
-
+    <!-- Vista de Traslados Pendientes -->
+    <div id="pending-transfers-view" style="display: none; flex-direction: column;">
+        <div class="section-panel">
+            <div class="section-header">Traslados Pendientes de Aceptar</div>
+            <p>Estos son los traslados de material que han sido enviados a bodegas que usted gestiona y están pendientes de su aceptación.</p>
             <table style="margin-top: 20px;">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Placa</th>
-                        <th>Encargado</th>
+                        <th>ID Movimiento</th>
+                        <th>Artículo</th>
+                        <th>Cantidad</th>
+                        <th>Bodega Origen</th>
+                        <th>Enviado por</th>
+                        <th>Fecha de Envío</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
+                <tbody id="pending-transfers-list"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Vista de Bodegas -->
+    <div id="warehouses-view" style="display: none; flex-direction: column;">
+        <div class="section-panel" style="flex: 1;">
+            <div class="section-header">Bodegas del Sistema</div>
+            <p><button class="action-btn" onclick="toggleNewWarehouseForm()">Crear Nueva Bodega</button></p>
+            <div id="new-warehouse-form" class="section-panel">
+                <div class="section-header">Crear Nueva Bodega</div>
+                <div class="form-row"><label for="warehouse-name">Nombre:</label><input type="text" id="warehouse-name" required></div>
+                <div class="form-row">
+                    <label for="warehouse-type">Tipo:</label>
+                    <select id="warehouse-type"><option value="principal">Principal</option><option value="movil">Móvil</option></select>
+                </div>
+                <div class="form-row" id="placa-container" style="display: none;"><label for="placa">Placa:</label><input type="text" id="placa"></div>
+                <div class="form-row"><label for="encargado-select">Encargado:</label><select id="encargado-select"></select></div>
+                <div class="form-row"><button onclick="createNewWarehouse()">Crear</button></div>
+            </div>
+            <table style="margin-top: 20px;">
+                <thead><tr><th>ID</th><th>Nombre</th><th>Tipo</th><th>Placa</th><th>Encargado</th></tr></thead>
                 <tbody id="warehouses-list"></tbody>
             </table>
         </div>
     </div>
     
+    <!-- Vista de Informes -->
     <div id="reports-view" style="display: none; flex-direction: column;">
         <div class="reports-menu">
-            <button onclick="showReport('stock')">Stock Actual por Bodega</button>
-            <button onclick="showReport('movements')">Historial de Movimientos</button>
+            <button onclick="showReport('stock')">Stock Actual</button>
+            <button onclick="showReport('movements')">Historial Movimientos</button>
             <button onclick="showReport('consumption')">Consumo por Técnico</button>
             <button onclick="showReport('reorder')">Puntos de Reorden</button>
             <button onclick="showReport('value')">Valor del Inventario</button>
@@ -328,444 +301,10 @@
 </div>
 
 <div class="footer">
-    <p>Este es un demo completo de un sistema de inventario. Los datos son temporales y se reinician al recargar la página.</p>
+    <p>Este es un demo. Los datos se reinician al recargar la página. La persistencia de datos requiere un backend.</p>
 </div>
 
-<script>
-    let inventories = {
-        'main-warehouse': {
-            id: 'main-warehouse',
-            name: 'Bodega Principal',
-            type: 'main',
-            placa: 'N/A',
-            encargado: 'Juan Pérez',
-            items: [
-                { id: 1, name: 'Compresor 12K BTU', quantity: 15 },
-                { id: 2, name: 'Refrigerante R410A (galón)', quantity: 8 },
-                { id: 3, name: 'Filtro de aire 24x24', quantity: 50 },
-                { id: 4, name: 'Capacitor 40/5 MFD', quantity: 35 }
-            ]
-        },
-        'mobile-unit-1': {
-            id: 'mobile-unit-1',
-            name: 'Unidad Móvil 1',
-            type: 'mobile',
-            placa: 'ABC-123',
-            encargado: 'Pedro Ramirez',
-            items: [
-                { id: 5, name: 'Refrigerante R410A (litro)', quantity: 3 },
-                { id: 6, name: 'Capacitor 40/5 MFD', quantity: 2 },
-                { id: 7, name: 'Termostato digital', quantity: 1 }
-            ]
-        },
-        'mobile-unit-2': {
-            id: 'mobile-unit-2',
-            name: 'Unidad Móvil 2',
-            type: 'mobile',
-            placa: 'DEF-456',
-            encargado: 'Ana López',
-            items: [
-                { id: 8, name: 'Refrigerante R410A (litro)', quantity: 4 },
-                { id: 9, name: 'Filtro de aire 16x25', quantity: 5 },
-                { id: 10, name: 'Contactora 24V', quantity: 3 }
-            ]
-        }
-    };
-
-    let movementHistory = [];
-    let allItems = [];
-    let selectedItemId = null;
-    let nextWarehouseId = 3;
-
-    const technicians = [
-        'Juan Pérez',
-        'Pedro Ramirez',
-        'Ana López',
-        'Carlos Morales',
-        'Sofia Vargas'
-    ];
-
-    const sourceLocationSelect = document.getElementById('source-location');
-    const destinationLocationSelect = document.getElementById('destination-location');
-    const movementItemSelect = document.getElementById('movement-item');
-    const movementTypeSelect = document.getElementById('movement-type');
-    const itemDetailsSection = document.getElementById('item-details');
-    const reportOutput = document.getElementById('report-output');
-
-    // Funciones para la Vista de Inventario
-    function aggregateAllItems() {
-        const itemMap = new Map();
-        for (const locId in inventories) {
-            inventories[locId].items.forEach(item => {
-                if (itemMap.has(item.id)) {
-                    itemMap.get(item.id).quantity += item.quantity;
-                } else {
-                    itemMap.set(item.id, { ...item });
-                }
-            });
-        }
-        allItems = Array.from(itemMap.values()).sort((a, b) => a.name.localeCompare(b.name));
-    }
-
-    function renderMasterInventory() {
-        const tableBody = document.getElementById('master-inventory-list');
-        tableBody.innerHTML = '';
-        allItems.forEach(item => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.id}</td>
-                <td>${item.name}</td>
-                <td>${item.quantity}</td>
-            `;
-            row.onclick = () => selectItem(item.id);
-            tableBody.appendChild(row);
-        });
-    }
-
-    function selectItem(itemId) {
-        if (selectedItemId) {
-            document.querySelector(`#master-inventory-list tr.selected`)?.classList.remove('selected');
-        }
-        selectedItemId = itemId;
-        document.querySelector(`#master-inventory-list tr:nth-child(${allItems.findIndex(i => i.id === itemId) + 1})`).classList.add('selected');
-
-        const item = allItems.find(i => i.id === itemId);
-        if (item) {
-            document.getElementById('selected-item-name').innerText = item.name;
-            renderItemLocations(itemId);
-            renderItemHistory(itemId);
-            itemDetailsSection.style.display = 'block';
-        }
-    }
-
-    function renderItemLocations(itemId) {
-        const tableBody = document.getElementById('item-locations-table').querySelector('tbody');
-        tableBody.innerHTML = '';
-        for (const locId in inventories) {
-            const item = inventories[locId].items.find(i => i.id === itemId);
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${inventories[locId].name}</td>
-                <td>${item ? item.quantity : 0}</td>
-            `;
-            tableBody.appendChild(row);
-        }
-    }
-
-    function renderItemHistory(itemId) {
-        const historyList = document.getElementById('item-history-list');
-        historyList.innerHTML = '';
-        const filteredHistory = movementHistory.filter(m => m.itemId === itemId).slice().reverse();
-        
-        if (filteredHistory.length === 0) {
-            historyList.innerHTML = '<li>No hay movimientos para este artículo.</li>';
-            return;
-        }
-
-        filteredHistory.forEach(movement => {
-            const listItem = document.createElement('li');
-            listItem.innerHTML = `
-                **${movement.type}** de ${movement.quantity} de ${movement.itemName} 
-                <br>De: ${movement.source ? inventories[movement.source].name : 'N/A'} 
-                A: ${movement.destination ? inventories[movement.destination].name : 'N/A'}
-                <br>Fecha: ${movement.date}
-            `;
-            historyList.appendChild(listItem);
-        });
-    }
-
-    function updateMovementFormOptions() {
-        const type = movementTypeSelect.value;
-        const sourceLabel = document.querySelector('label[for="source-location"]');
-        const destLabel = document.querySelector('label[for="destination-location"]');
-
-        sourceLocationSelect.innerHTML = '';
-        destinationLocationSelect.innerHTML = '';
-        movementItemSelect.innerHTML = '';
-
-        const locations = Object.values(inventories);
-
-        if (type === 'entry') {
-            sourceLocationSelect.style.display = 'none';
-            sourceLabel.style.display = 'none';
-            destinationLocationSelect.style.display = 'block';
-            destLabel.style.display = 'block';
-            locations.forEach(loc => {
-                destinationLocationSelect.innerHTML += `<option value="${loc.id}">${loc.name}</option>`;
-            });
-            allItems.forEach(item => {
-                movementItemSelect.innerHTML += `<option value="${item.id}">${item.name}</option>`;
-            });
-        } else if (type === 'exit') {
-            sourceLocationSelect.style.display = 'block';
-            sourceLabel.style.display = 'block';
-            destinationLocationSelect.style.display = 'none';
-            destLabel.style.display = 'none';
-            locations.forEach(loc => {
-                sourceLocationSelect.innerHTML += `<option value="${loc.id}">${loc.name}</option>`;
-            });
-            updateItemsForLocation(sourceLocationSelect.value);
-        } else if (type === 'transfer') {
-            sourceLocationSelect.style.display = 'block';
-            sourceLabel.style.display = 'block';
-            destinationLocationSelect.style.display = 'block';
-            destLabel.style.display = 'block';
-            locations.forEach(loc => {
-                sourceLocationSelect.innerHTML += `<option value="${loc.id}">${loc.name}</option>`;
-                destinationLocationSelect.innerHTML += `<option value="${loc.id}">${loc.name}</option>`;
-            });
-            updateItemsForLocation(sourceLocationSelect.value);
-        }
-    }
-
-    function updateItemsForLocation(locationId) {
-        movementItemSelect.innerHTML = '';
-        inventories[locationId].items.forEach(item => {
-            movementItemSelect.innerHTML += `<option value="${item.id}">${item.name}</option>`;
-        });
-    }
-
-    function registerMovement() {
-        const type = movementTypeSelect.value;
-        const source = sourceLocationSelect.value;
-        const destination = destinationLocationSelect.value;
-        const itemId = parseInt(movementItemSelect.value);
-        const quantity = parseInt(document.getElementById('movement-quantity').value);
-
-        if (isNaN(quantity) || quantity <= 0) {
-            alert('Por favor, ingrese una cantidad válida.');
-            return;
-        }
-        
-        const itemName = allItems.find(i => i.id === itemId)?.name;
-        if (!itemName) {
-            alert('El ítem no existe en el sistema.');
-            return;
-        }
-        
-        const date = new Date().toLocaleString('es-CR');
-        let success = false;
-
-        if (type === 'entry') {
-            const destInventory = inventories[destination].items;
-            const itemInDest = destInventory.find(i => i.id === itemId);
-            if (itemInDest) {
-                itemInDest.quantity += quantity;
-            } else {
-                destInventory.push({ id: itemId, name: itemName, quantity: quantity });
-            }
-            movementHistory.push({ type: 'Entrada', itemId, itemName, quantity, destination, date });
-            success = true;
-        } else if (type === 'exit') {
-            const sourceInventory = inventories[source].items;
-            const itemInSource = sourceInventory.find(i => i.id === itemId);
-            if (itemInSource && itemInSource.quantity >= quantity) {
-                itemInSource.quantity -= quantity;
-                movementHistory.push({ type: 'Salida', itemId, itemName, quantity, source, date });
-                success = true;
-            } else {
-                alert('Inventario insuficiente para la salida.');
-            }
-        } else if (type === 'transfer') {
-            if (source === destination) {
-                alert('La ubicación de origen y destino no pueden ser las mismas.');
-                return;
-            }
-            const sourceInventory = inventories[source].items;
-            const destInventory = inventories[destination].items;
-            const itemInSource = sourceInventory.find(i => i.id === itemId);
-
-            if (itemInSource && itemInSource.quantity >= quantity) {
-                itemInSource.quantity -= quantity;
-                const itemInDest = destInventory.find(i => i.id === itemId);
-                if (itemInDest) {
-                    itemInDest.quantity += quantity;
-                } else {
-                    destInventory.push({ id: itemId, name: itemName, quantity: quantity });
-                }
-                movementHistory.push({ type: 'Traslado', itemId, itemName, quantity, source, destination, date });
-                success = true;
-            } else {
-                alert('Inventario insuficiente para el traslado.');
-            }
-        }
-
-        if (success) {
-            aggregateAllItems();
-            renderMasterInventory();
-            renderGlobalHistory();
-            if (selectedItemId) {
-                selectItem(selectedItemId);
-            }
-            alert('Movimiento registrado con éxito.');
-        }
-    }
-
-    function renderGlobalHistory() {
-        const historyList = document.getElementById('global-history-list');
-        historyList.innerHTML = '';
-        const reversedHistory = movementHistory.slice().reverse();
-        reversedHistory.forEach(m => {
-            const listItem = document.createElement('li');
-            let text = `${m.date}: **${m.type}** de ${m.quantity} de "${m.itemName}". `;
-            if (m.type === 'Entrada') {
-                text += `A la "${inventories[m.destination].name}"`;
-            } else if (m.type === 'Salida') {
-                text += `De la "${inventories[m.source].name}"`;
-            } else if (m.type === 'Traslado') {
-                text += `De "${inventories[m.source].name}" a "${inventories[m.destination].name}"`;
-            }
-            listItem.innerHTML = text;
-            historyList.appendChild(listItem);
-        });
-    }
-
-    // Funciones para la Vista de Gestión de Bodegas
-    function renderWarehouses() {
-        const warehousesList = document.getElementById('warehouses-list');
-        warehousesList.innerHTML = '';
-        for (const id in inventories) {
-            const warehouse = inventories[id];
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${id}</td>
-                <td>${warehouse.name}</td>
-                <td>${warehouse.type === 'main' ? 'Principal' : 'Móvil'}</td>
-                <td>${warehouse.placa}</td>
-                <td>${warehouse.encargado}</td>
-            `;
-            warehousesList.appendChild(row);
-        }
-    }
-
-    function renderEncargadoOptions() {
-        const select = document.getElementById('encargado-select');
-        select.innerHTML = '';
-        technicians.forEach(tech => {
-            select.innerHTML += `<option value="${tech}">${tech}</option>`;
-        });
-    }
-
-    function toggleNewWarehouseForm() {
-        const form = document.getElementById('new-warehouse-form');
-        form.style.display = form.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function createNewWarehouse() {
-        const name = document.getElementById('warehouse-name').value;
-        const type = document.getElementById('warehouse-type').value;
-        const placa = document.getElementById('placa').value;
-        const encargado = document.getElementById('encargado-select').value;
-        
-        if (!name || (type === 'mobile' && !placa)) {
-            alert('Por favor, complete todos los campos requeridos.');
-            return;
-        }
-
-        const newId = `warehouse-${Date.now()}`;
-        inventories[newId] = {
-            id: newId,
-            name: name,
-            type: type,
-            placa: type === 'mobile' ? placa : 'N/A',
-            encargado: encargado,
-            items: []
-        };
-
-        renderWarehouses();
-        document.getElementById('warehouse-name').value = '';
-        document.getElementById('placa').value = '';
-        toggleNewWarehouseForm();
-        updateMovementFormOptions();
-        alert('Bodega creada con éxito.');
-    }
-    
-    // Funciones para la Vista de Informes
-    function showReport(reportType) {
-        let content = '';
-        switch(reportType) {
-            case 'stock':
-                content = `
-                    <div class="section-header">Informe de Stock Actual por Bodega</div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Artículo</th>
-                                ${Object.values(inventories).map(loc => `<th>${loc.name}</th>`).join('')}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${allItems.map(item => `
-                                <tr>
-                                    <td>${item.name}</td>
-                                    ${Object.values(inventories).map(loc => `<td>${(loc.items.find(i => i.id === item.id)?.quantity || 0)}</td>`).join('')}
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                `;
-                break;
-            case 'movements':
-                content = `
-                    <div class="section-header">Historial de Movimientos Global</div>
-                    <ul id="report-movements-list" style="list-style: none; padding: 0;">
-                        ${movementHistory.length > 0 ? movementHistory.slice().reverse().map(m => `
-                            <li>
-                                <strong>${m.date}:</strong> ${m.type} de ${m.quantity} de "${m.itemName}". 
-                                De: ${m.source ? inventories[m.source].name : 'N/A'} 
-                                A: ${m.destination ? inventories[m.destination].name : 'N/A'}
-                            </li>
-                        `).join('') : '<li>No hay movimientos registrados.</li>'}
-                    </ul>
-                `;
-                break;
-            default:
-                content = `<p>El informe de **${reportType.toUpperCase()}** se encuentra en desarrollo. Este sistema permite generar reportes personalizados según sus necesidades.</p>`;
-                break;
-        }
-        reportOutput.innerHTML = content;
-    }
-
-    // Navegación de Vistas
-    function showView(view) {
-        document.getElementById('inventory-view').style.display = 'none';
-        document.getElementById('warehouses-view').style.display = 'none';
-        document.getElementById('reports-view').style.display = 'none';
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
-        document.getElementById(`${view}-view`).style.display = 'flex';
-        document.querySelector(`[onclick="showView('${view}')"]`).classList.add('active');
-        
-        if (view === 'warehouses') {
-            renderWarehouses();
-        }
-        if (view === 'reports') {
-            showReport('stock'); // Mostrar informe por defecto
-        }
-    }
-
-    // Event Listeners
-    document.addEventListener('DOMContentLoaded', () => {
-        aggregateAllItems();
-        renderMasterInventory();
-        updateMovementFormOptions();
-        renderGlobalHistory();
-        renderEncargadoOptions();
-
-        document.getElementById('warehouse-type').addEventListener('change', (e) => {
-            const placaContainer = document.getElementById('placa-container');
-            placaContainer.style.display = e.target.value === 'mobile' ? 'block' : 'none';
-        });
-
-        // Asegurar que la vista inicial sea la de inventario
-        showView('inventory');
-    });
-
-    movementTypeSelect.addEventListener('change', updateMovementFormOptions);
-    sourceLocationSelect.addEventListener('change', (event) => {
-        updateItemsForLocation(event.target.value);
-    });
-</script>
+<script src="static/js/inventario.js"></script>
 
 </body>
 </html>

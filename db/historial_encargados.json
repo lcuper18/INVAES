@@ -1,0 +1,17 @@
+
+[
+  {
+    "id_historial": "HE-001",
+    "id_bodega": "bodega-principal",
+    "id_personal": "PER004",
+    "fecha_inicio": "2024-01-01T08:00:00Z",
+    "fecha_fin": null
+  },
+  {
+    "id_historial": "HE-002",
+    "id_bodega": "movil-01",
+    "id_personal": "PER001",
+    "fecha_inicio": "2024-01-01T08:00:00Z",
+    "fecha_fin": null
+  }
+]

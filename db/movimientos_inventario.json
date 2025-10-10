@@ -1,0 +1,107 @@
+
+[
+  {
+    "id": "MOV-1728550001",
+    "id_articulo": "ART-001",
+    "cantidad": 12,
+    "fecha": "2025-10-01T10:00:00Z",
+    "tipo": "entry",
+    "id_bodega_origen": null,
+    "id_bodega_destino": "bodega-principal",
+    "documento_referencia": "FACTURA-COMPRA-001",
+    "id_usuario_creacion": "PER007",
+    "id_usuario_aceptacion": null,
+    "estado": "completado"
+  },
+  {
+    "id": "MOV-1728550002",
+    "id_articulo": "ART-002",
+    "cantidad": 5,
+    "fecha": "2025-10-01T10:01:00Z",
+    "tipo": "entry",
+    "id_bodega_origen": null,
+    "id_bodega_destino": "bodega-principal",
+    "documento_referencia": "FACTURA-COMPRA-001",
+    "id_usuario_creacion": "PER007",
+    "id_usuario_aceptacion": null,
+    "estado": "completado"
+  },
+  {
+    "id": "MOV-1728550003",
+    "id_articulo": "ART-003",
+    "cantidad": 110,
+    "fecha": "2025-10-02T11:30:00Z",
+    "tipo": "entry",
+    "id_bodega_origen": null,
+    "id_bodega_destino": "bodega-principal",
+    "documento_referencia": "FACTURA-COMPRA-002",
+    "id_usuario_creacion": "PER007",
+    "id_usuario_aceptacion": null,
+    "estado": "completado"
+  },
+  {
+    "id": "MOV-1728550004",
+    "id_articulo": "ART-004",
+    "cantidad": 30,
+    "fecha": "2025-10-02T11:31:00Z",
+    "tipo": "entry",
+    "id_bodega_origen": null,
+    "id_bodega_destino": "bodega-principal",
+    "documento_referencia": "FACTURA-COMPRA-002",
+    "id_usuario_creacion": "PER007",
+    "id_usuario_aceptacion": null,
+    "estado": "completado"
+  },
+  {
+    "id": "MOV-1728550005",
+    "id_articulo": "ART-001",
+    "cantidad": 2,
+    "fecha": "2025-10-05T08:00:00Z",
+    "tipo": "transfer",
+    "id_bodega_origen": "bodega-principal",
+    "id_bodega_destino": "movil-01",
+    "documento_referencia": "TRASLADO-INTERNO-01",
+    "id_usuario_creacion": "PER004",
+    "id_usuario_aceptacion": "PER001",
+    "estado": "completado"
+  },
+  {
+    "id": "MOV-1728550006",
+    "id_articulo": "ART-003",
+    "cantidad": 10,
+    "fecha": "2025-10-05T08:01:00Z",
+    "tipo": "transfer",
+    "id_bodega_origen": "bodega-principal",
+    "id_bodega_destino": "movil-01",
+    "documento_referencia": "TRASLADO-INTERNO-01",
+    "id_usuario_creacion": "PER004",
+    "id_usuario_aceptacion": "PER001",
+    "estado": "completado"
+  },
+  {
+    "id": "MOV-1728550007",
+    "id_articulo": "ART-004",
+    "cantidad": 5,
+    "fecha": "2025-10-05T08:02:00Z",
+    "tipo": "transfer",
+    "id_bodega_origen": "bodega-principal",
+    "id_bodega_destino": "movil-01",
+    "documento_referencia": "TRASLADO-INTERNO-01",
+    "id_usuario_creacion": "PER004",
+    "id_usuario_aceptacion": "PER001",
+    "estado": "completado"
+  },
+  {
+    "id": "MOV-1728550008",
+    "id_articulo": "ART-004",
+    "cantidad": 1,
+    "fecha": "2025-10-08T14:00:00Z",
+    "tipo": "exit",
+    "id_bodega_origen": "movil-01",
+    "id_bodega_destino": null,
+    "documento_referencia": "BOLETA-SERVICIO-B0123",
+    "id_usuario_creacion": "PER001",
+    "id_usuario_aceptacion": null,
+    "estado": "completado"
+  }
+]

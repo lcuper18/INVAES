@@ -1,0 +1,46 @@
+
+[
+  {
+    "id": "ART-001",
+    "nombre": "Compresor 12K BTU",
+    "descripcion": "Compresor para unidades de aire acondicionado de 12,000 BTU.",
+    "costo": 150,
+    "punto_reorden": 5,
+    "stock": [
+      { "id_bodega": "bodega-principal", "cantidad": 10 },
+      { "id_bodega": "movil-01", "cantidad": 2 }
+    ]
+  },
+  {
+    "id": "ART-002",
+    "nombre": "Refrigerante R410A (galón)",
+    "descripcion": "Galón de gas refrigerante tipo R410A.",
+    "costo": 75,
+    "punto_reorden": 5,
+    "stock": [
+      { "id_bodega": "bodega-principal", "cantidad": 5 }
+    ]
+  },
+  {
+    "id": "ART-003",
+    "nombre": "Filtro de aire 24x24",
+    "descripcion": "Filtro de aire de fibra de vidrio, medidas 24x24 pulgadas.",
+    "costo": 5,
+    "punto_reorden": 50,
+    "stock": [
+      { "id_bodega": "bodega-principal", "cantidad": 100 },
+      { "id_bodega": "movil-01", "cantidad": 10 }
+    ]
+  },
+  {
+    "id": "ART-004",
+    "nombre": "Capacitor 40/5 MFD",
+    "descripcion": "Capacitor de arranque y marcha de 40/5 MFD.",
+    "costo": 15,
+    "punto_reorden": 10,
+    "stock": [
+      { "id_bodega": "bodega-principal", "cantidad": 25 },
+      { "id_bodega": "movil-01", "cantidad": 4 }
+    ]
+  }
+]

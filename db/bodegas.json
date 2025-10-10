@@ -1,0 +1,17 @@
+
+[
+  {
+    "id": "bodega-principal",
+    "nombre": "Bodega Principal",
+    "tipo": "principal",
+    "placa": null,
+    "id_encargado_actual": "PER004"
+  },
+  {
+    "id": "movil-01",
+    "nombre": "Unidad Móvil 01",
+    "tipo": "movil",
+    "placa": "CL-123456",
+    "id_encargado_actual": "PER001"
+  }
+]
