@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Contrato de Cliente</title>
-    <link rel="stylesheet" href="./static/css/styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,21 +18,30 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        /* Se ajusta el título para que no esté centrado */
         h1 {
-            text-align: center;
+            text-align: left;
             color: #333;
+            font-size: 24px;
+            margin-bottom: 25px;
         }
         .form-group {
             margin-bottom: 15px;
+            /* Se utiliza Flexbox para alinear etiqueta e input en la misma línea */
+            display: flex;
+            align-items: center;
         }
         .form-group label {
-            display: block;
-            margin-bottom: 5px;
+            /* Ancho fijo para las etiquetas para que los inputs se alineen verticalmente */
+            min-width: 150px; 
+            margin-right: 10px;
             color: #555;
+            font-weight: bold;
         }
         .form-group input,
         .form-group select {
-            width: 100%;
+            /* El input crece para ocupar el espacio disponible */
+            flex-grow: 1;
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
@@ -48,26 +56,45 @@
             border-radius: 4px;
             cursor: pointer;
             text-align: center;
+            margin-top: 20px;
         }
         .btn:hover {
             background: #0b7a6e;
+        }
+        /* --- Estilos para la nueva tabla --- */
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        .details-table th,
+        .details-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        .details-table thead {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Gestión de Contrato de Cliente</h1>
+        <h1>Contrato: #</h1>
+        
         <form id="contratoForm">
             <div class="form-group">
-                <label for="datosCliente">Datos de Cliente</label>
-                <input type="text" id="datosCliente" name="datosCliente" required>
+                <label for="cliente">Cliente:</label>
+                <select id="cliente" name="cliente" required>
+                    <option value="" disabled selected>Seleccione un cliente</option>
+                    <option value="cliente1">Cliente A</option>
+                    <option value="cliente2">Cliente B</option>
+                    <option value="cliente3">Cliente C</option>
+                </select>
             </div>
+
             <div class="form-group">
-                <label for="numeroContratacion">Número de Contratación</label>
-                <input type="text" id="numeroContratacion" name="numeroContratacion" required>
-            </div>
-            <div class="form-group">
-                <label for="tipoContratacion">Tipos de Contratación</label>
+                <label for="tipoContratacion">Tipo de contratación:</label>
                 <select id="tipoContratacion" name="tipoContratacion">
                     <option value="demanda">Según demanda</option>
                     <option value="frecuencia">Frecuencia establecida</option>
@@ -75,24 +102,60 @@
                     <option value="equipos_especificos">Equipos específicos</option>
                 </select>
             </div>
+
             <div class="form-group">
-                <label for="linkDropbox">Link a carpeta de Dropbox</label>
-                <input type="url" id="linkDropbox" name="linkDropbox">
+                <label for="linkArchivos">Link de archivos:</label>
+                <input type="url" id="linkArchivos" name="linkArchivos" placeholder="http://www.mis_archivos.com/datos-de-contrato">
             </div>
-            <div class="form-group">
-                <label for="frecuenciaMantenimiento">Frecuencia de Mantenimiento</label>
-                <select id="frecuenciaMantenimiento" name="frecuenciaMantenimiento">
-                    <option value="trimestral">Trimestral</option>
-                    <option value="cuatrimestral">Cuatrimestral</option>
-                    <option value="semestral">Semestral</option>
-                    <option value="anual">Anual</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="ticketLogistica">Tarea de Ticket en Logística</label>
-                <input type="text" id="ticketLogistica" name="ticketLogistica" placeholder="ID o referencia del ticket">
-            </div>
-            <button type="submit" class="btn">Guardar Contrato</button>
+
+            <table class="details-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Descripción</th>
+                        <th>Sede</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Anotaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <button type="submit" class="btn">Guardar</button>
         </form>
     </div>
 </body>
