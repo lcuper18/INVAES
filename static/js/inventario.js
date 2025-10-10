@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- STATE MANAGEMENT ---
     let bodegas = [], personal = [], articulos = [], movimientos = [];
@@ -14,10 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const encargadoSelect = document.getElementById('encargado-select');
     const pendingTransfersList = document.getElementById('pending-transfers-list');
     const views = {
-        inventory: document.getElementById('inventory-view'),
-        warehouses: document.getElementById('warehouses-view'),
-        reports: document.getElementById('reports-view'),
-        pendingTransfers: document.getElementById('pending-transfers-view')
+        'inventory': document.getElementById('inventory-view'),
+        'warehouses': document.getElementById('warehouses-view'),
+        'reports': document.getElementById('reports-view'),
+        'pending-transfers': document.getElementById('pending-transfers-view')
     };
 
     const TIPO_MOVIMIENTO_ES = { entry: 'Entrada', exit: 'Salida', transfer: 'Traslado' };
@@ -308,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
         views[view].style.display = 'flex';
         document.querySelector(`[onclick="showView('${view}')"]`).classList.add('active');
         if (view === 'reports') showReport('stock');
-        if (view === 'pendingTransfers') renderPendingTransfers();
+        if (view === 'pending-transfers') renderPendingTransfers();
     };
 
     // --- EVENT LISTENERS ---

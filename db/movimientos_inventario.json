@@ -1,4 +1,3 @@
-
 [
   {
     "id": "MOV-1728550001",
@@ -62,8 +61,8 @@
     "id_bodega_destino": "movil-01",
     "documento_referencia": "TRASLADO-INTERNO-01",
     "id_usuario_creacion": "PER004",
-    "id_usuario_aceptacion": "PER001",
-    "estado": "completado"
+    "id_usuario_aceptacion": null,
+    "estado": "pendiente"
   },
   {
     "id": "MOV-1728550006",
