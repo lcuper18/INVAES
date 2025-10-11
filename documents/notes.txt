@@ -42,5 +42,11 @@ Reunión 01-10-2025
             **Tipos de contratación: Según demanda, frecuencia establecida, cantidad de equipos,
                 equipos especificos.
             **Link referencia a carpeta DROPBOX.
-            **Frecuencia de mantenimiento: Ejemplo Tristre, Cuatrimestre, etc.
+            **Frecuencia de mantenimiento: Ejemplo Trimestral, Semestral, Anual, Cuatrimestre, etc.
             **Tarea de Ticket en logística puede estar amarrado a un contrato de cliente.
+
+    11-10-2025
+
+    Inventario:
+    ***Movimiento salida: referencia a boleta para justificar salida de inventario.
+    ***Foto de muestra en inventario.
