@@ -49,4 +49,4 @@ Reunión 01-10-2025
 
     Inventario:
     ***Movimiento salida: referencia a boleta para justificar salida de inventario.
-    ***Foto de muestra en inventario.
+    ***Foto/Archivo de muestra en inventario.
